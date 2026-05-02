@@ -19,7 +19,7 @@ jobs:
          key: ${{secrets.SSH_KEY}}
          script: |
        
-          cd /var/www/Fristclassflight
+          /var/www/globaltravel-holdings
 
           git pull origin main
 
