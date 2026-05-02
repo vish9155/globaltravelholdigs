@@ -17,7 +17,7 @@ export default function ProfileHome() {
   let fetchdata = async () => {
     try {
       let resp = await fetch(
-        "http://localhost:5000/user/profile/" + id,
+        "https://globaltravel-holdings.com/user/profile/" + id,
         {
           method: "GET",
           credentials: "include",

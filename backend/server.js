@@ -28,7 +28,11 @@ app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: [
+        "http://localhost:5173",
+        "https://globaltravel-holdings.com",
+        "https://www.globaltravel-holdings.com"
+    ],
     credentials: true,
     methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"]
 }))

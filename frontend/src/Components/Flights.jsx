@@ -62,7 +62,7 @@ export default function Flights() {
 
     let searchLocation = async (value, type) => {
         console.log(value)
-        let resp = await fetch(`http://localhost:5000/api/flight/location?query=${value}`)
+        let resp = await fetch(`https://globaltravel-holdings.com/api/flight/location?query=${value}`)
         let result = await resp.json()
         console.log(result, result.data, result.data.data)
         if (type == 'from') {

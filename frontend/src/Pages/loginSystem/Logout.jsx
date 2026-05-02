@@ -16,7 +16,7 @@ export default function Logout() {
   const logout = async () => {
     try {
       let resp = await fetch(
-        "http://localhost:5000/user/logout",
+        "https://globaltravel-holdings.com/user/logout",
         {
           method: "GET",
           credentials: "include",
