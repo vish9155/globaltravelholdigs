@@ -29,7 +29,7 @@ export const fetchFlights = createAsyncThunk(
       });
 
       const resp = await fetch(
-        `http://localhost:5000/api/flights?${query}`,
+        `https://globaltravel-holdings.com/api/flights?${query}`,
         {
           method: "POST",
           headers: {

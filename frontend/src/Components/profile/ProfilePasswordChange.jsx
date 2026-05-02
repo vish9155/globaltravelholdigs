@@ -42,7 +42,7 @@ export default function ChangePassword() {
 
            
 
-            let resp = await fetch("http://localhost:5000/user/password-reset/" + id, {
+            let resp = await fetch("https://globaltravel-holdings.com/user/password-reset/" + id, {
                 method: "POST",
                 credentials: "include",
                 headers: {

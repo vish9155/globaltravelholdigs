@@ -28,7 +28,7 @@ export default function EmailLogin() {
         try {
             e.preventDefault();
             setLoading(true)
-            let resp = await fetch("http://localhost:5000/user/email-login", {
+            let resp = await fetch("https://globaltravel-holdings.com/user/email-login", {
                 method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form)
             })
             let data = await resp.json()
@@ -50,13 +50,13 @@ export default function EmailLogin() {
     }
 
     let googleLogin = () => {
-        window.location.href = "http://localhost:5000/auth/google"
+        window.location.href = "https://globaltravel-holdings.com/auth/google"
     }
     let gitLogin = () => {
-        window.location.href = "http://localhost:5000/auth/github"
+        window.location.href = "https://globaltravel-holdings.com/auth/github"
     }
     let facebookLogin = () => {
-        window.location.href = "http://localhost:5000/auth/facebook"
+        window.location.href = "https://globaltravel-holdings.com/auth/facebook"
     }
 
     return (
