@@ -19,7 +19,7 @@ jobs:
          key: ${{secrets.SSH_KEY}}
          script: |
        
-          /var/www/globaltravel-holdings
+          cd /var/www/globaltravel-holdings
 
           git pull origin main
 
