@@ -157,7 +157,7 @@ export let fligtsDatas = async (req, res) => {
 
           return result;
         },
-        60
+        600
       )
     );
 

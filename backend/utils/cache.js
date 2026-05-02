@@ -1,7 +1,7 @@
 import client from "../config/redisConfig.js";
 
 // Stale While Revalidate Cache
-export let getCacheSWR = async (key, fetchFn, ttl = 60) => {
+export let getCacheSWR = async (key, fetchFn, ttl = 600) => {
   let cached = await client.get(key);
 
   if (cached) {
