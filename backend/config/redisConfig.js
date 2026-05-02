@@ -12,7 +12,7 @@ let isDocker = process.env.DOCKER === "true";
 
 let redisUrl = process.env.REDIS_URL || 
   (isDocker
-    ? "redis://process.env.REDIS_HOST:process.env.REDIS_PORT"
+    ? `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
     : "redis://127.0.0.1:6379");
 
 let client = createClient({
