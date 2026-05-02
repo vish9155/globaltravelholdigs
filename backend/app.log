@@ -1,0 +1,49 @@
+{"level":"error","message":"It appears you have done something like `app.use(helmet)`, but it should be `app.use(helmet())`."}
+{"level":"error","message":"Cannot set headers after they are sent to the client"}
+{"level":"error","message":"Cannot set headers after they are sent to the client"}
+{"level":"error","message":"Cannot set headers after they are sent to the client"}
+{"level":"error","message":"Cannot set headers after they are sent to the client"}
+{"level":"error","message":"Cannot set headers after they are sent to the client"}
+{"level":"error","message":"Cannot set headers after they are sent to the client"}
+{"level":"error","message":"Cannot set headers after they are sent to the client"}
+{"level":"error","message":"Unexpected token '\"', \"\"\\n  {\\n  \"... is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"\\n  {\\n  \"... is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"\\n  {\\n  \"... is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"\\n  {\\n  \"... is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"{\\n  name\"... is not valid JSON"}
+{"level":"error","message":"next is not a function"}
+{"level":"error","message":"next is not a function"}
+{"level":"error","message":"next is not a function"}
+{"level":"error","message":"next is not a function"}
+{"level":"error","message":"next is not a function"}
+{"level":"error","message":"next is not a function"}
+{"level":"error","message":"Unknown authentication strategy \"facebook\""}
+{"level":"error","message":"Unknown authentication strategy \"github\""}
+{"level":"error","message":"Unknown authentication strategy \"google\""}
+{"level":"error","message":"Unknown authentication strategy \"google\""}
+{"level":"error","message":"Bad Request"}
+{"level":"error","message":"Image file format jpg not allowed"}
+{"level":"error","message":"Image file format jpg not allowed"}
+{"level":"error","message":"Image file format jpg not allowed"}
+{"level":"error","message":"Image file format jpg not allowed"}
+{"level":"error","message":"Image file format jpg not allowed"}
+{"level":"error","message":"Image file format jpg not allowed"}
+{"level":"error","message":"Image file format jpg not allowed"}
+{"level":"error","message":"Cannot set headers after they are sent to the client"}
+{"level":"error","message":"Unexpected token 'n', \"null\" is not valid JSON"}
+{"level":"error","message":"Unexpected token 'n', \"null\" is not valid JSON"}
+{"level":"error","message":"Unexpected token 'n', \"null\" is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"null\"\" is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"[object Object]\"\" is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"null\"\" is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"[object Object]\"\" is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"[object Object]\"\" is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"null\"\" is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"null\"\" is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"[object Object]\"\" is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"[object Object]\"\" is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"[object Object]\"\" is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"[object Object]\"\" is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"[object Object]\"\" is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"[object Object]\"\" is not valid JSON"}
+{"level":"error","message":"Unexpected token '\"', \"\"[object Object]\"\" is not valid JSON"}
