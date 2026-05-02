@@ -1,0 +1,35 @@
+name: Global Travel Auto Deploy
+
+on:
+ push:
+   branches:
+     - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ssh deploy
+        uses: appleboy/ssh-action@v1.0.3
+
+        with:  
+         host: ${{secrets.SSH_HOST}}
+         username: root  
+         key: ${{secrets.SSH_KEY}}
+         script: |
+       
+          cd /var/www/Fristclassflight
+
+          git pull origin main
+
+          docker-compose down
+
+          docker system prune -f
+
+          docker-compose build --no-cache
+
+          docker-compose up -d
+
+          docker ps -a 
+ 
