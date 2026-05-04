@@ -10,7 +10,7 @@ router.get("/google", passport.authenticate("google", { scope: ["profile", "emai
 
 router.get("/google/callback", passport.authenticate("google", {
     session: false,
-    failureRedirect: "http://localhost:5173/login"
+    failureRedirect: "https://globaltravel-holdings.com/login"
 }),
     async (req, resp) => {
         try {
@@ -32,10 +32,10 @@ router.get("/google/callback", passport.authenticate("google", {
                 maxAge: 5 * 24 * 60 * 60 * 1000
             })
 
-            resp.redirect("http://localhost:5173/google-success")
+            resp.redirect("https://globaltravel-holdings.com/google-success")
 
         } catch (error) {
-            resp.redirect("http://localhost:5173/login")
+            resp.redirect("https://globaltravel-holdings.com/login")
         }
     }
 
@@ -45,7 +45,7 @@ router.get("/github",passport.authenticate("github",{scope:["user:email"]}))
 
 router.get("/github/callback",passport.authenticate("github",{
     session:false,
-    failureRedirect:"http://localhost:5173/login"
+    failureRedirect:"https://globaltravel-holdings.com/login"
 }),
  async (req, resp) => {
         try {
@@ -66,17 +66,17 @@ router.get("/github/callback",passport.authenticate("github",{
                 maxAge: 5 * 24 * 60 * 60 * 1000
             })
 
-            resp.redirect("http://localhost:5173/github-success")
+            resp.redirect("https://globaltravel-holdings.com/github-success")
         } catch (error) {
-            resp.redirect("http://localhost:5173/login")
+            resp.redirect("https://globaltravel-holdings.com/login")
         }
     }
 )
-router.get("/facebook",passport.authenticate("facebook",{scope:["email"]}))
+router.get("/facebook",passport.authenticate("facebook",{scope: ["email", "public_profile"]}))
 
 router.get("/facebook/callback",passport.authenticate("facebook",{
     session:false,
-    failureRedirect:"http://localhost:5173/login"
+    failureRedirect:"https://globaltravel-holdings.com/login"
 }),
  async (req, resp) => {
         try {
@@ -92,14 +92,14 @@ router.get("/facebook/callback",passport.authenticate("facebook",{
 
             resp.cookie("token", token, {
                 httpOnly: true,
-                secure: false,
+                secure: true,
                 sameSite: "lax",
                 maxAge: 5 * 24 * 60 * 60 * 1000
             })
 
-            resp.redirect("http://localhost:5173/facebook-success")
+            resp.redirect("https://globaltravel-holdings.com/facebook-success")
         } catch (error) {
-            resp.redirect("http://localhost:5173/login")
+            resp.redirect("https://globaltravel-holdings.com/login")
         }
     }
 )
