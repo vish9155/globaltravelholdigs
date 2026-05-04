@@ -74,7 +74,6 @@ export default function LoginPage() {
             />
             <div className="w-full max-w-md bg-white shadow-xl rounded-2xl p-6 border border-gray-200">
 
-
                 <div className="text-center mb-6">
                     <h1 className="text-2xl font-semibold text-gray-800">Login</h1>
                     <p className="text-gray-500 text-sm mt-1">Welcome back</p>
