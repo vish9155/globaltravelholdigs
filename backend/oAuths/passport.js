@@ -109,7 +109,9 @@ passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
     callbackURL: "https://globaltravel-holdings.com/auth/facebook/callback",
-    profileFields: ["id", "displayName", "emails", "photos"]
+    profileFields: ["id", "displayName", "emails", "photos"],
+    authorizationURL: "https://www.facebook.com/dialog/oauth",
+    tokenURL: "https://graph.facebook.com/oauth/access_token"
 },
     async (accessToken, refreshToken, profile, done) => {
         try {
