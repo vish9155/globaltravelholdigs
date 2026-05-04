@@ -80,6 +80,7 @@ router.get("/facebook/callback",passport.authenticate("facebook",{
 }),
  async (req, resp) => {
         try {
+            
             let token = jwt.sign(
                 {
                     id: req.user._id,
