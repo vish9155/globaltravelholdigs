@@ -9,7 +9,7 @@ export let flightOffer = createAsyncThunk(
       if (!offerId) throw new Error("Offer ID not found");
       console.log(offerId)
       let res = await fetch(
-        `https://globaltravel-holdings.com/api/get-offers/${offerId}`,
+        `https://www.globaltravel-holdings.com/api/get-offers/${offerId}`,
         {
           credentials: "include",
           headers: {

@@ -10,7 +10,7 @@ router.get("/google", passport.authenticate("google", { scope: ["profile", "emai
 
 router.get("/google/callback", passport.authenticate("google", {
     session: false,
-    failureRedirect: "https://globaltravel-holdings.com/login"
+    failureRedirect: "https://www.globaltravel-holdings.com/login"
 }),
     async (req, resp) => {
         try {
@@ -32,10 +32,10 @@ router.get("/google/callback", passport.authenticate("google", {
                 maxAge: 5 * 24 * 60 * 60 * 1000
             })
 
-            resp.redirect("https://globaltravel-holdings.com/google-success")
+            resp.redirect("https://www.globaltravel-holdings.com/google-success")
 
         } catch (error) {
-            resp.redirect("https://globaltravel-holdings.com/login")
+            resp.redirect("https://www.globaltravel-holdings.com/login")
         }
     }
 
@@ -45,7 +45,7 @@ router.get("/github",passport.authenticate("github",{scope:["user:email"]}))
 
 router.get("/github/callback",passport.authenticate("github",{
     session:false,
-    failureRedirect:"https://globaltravel-holdings.com/login"
+    failureRedirect:"https://www.globaltravel-holdings.com/login"
 }),
  async (req, resp) => {
         try {
@@ -66,9 +66,9 @@ router.get("/github/callback",passport.authenticate("github",{
                 maxAge: 5 * 24 * 60 * 60 * 1000
             })
 
-            resp.redirect("https://globaltravel-holdings.com/github-success")
+            resp.redirect("https://www.globaltravel-holdings.com/github-success")
         } catch (error) {
-            resp.redirect("https://globaltravel-holdings.com/login")
+            resp.redirect("https://www.globaltravel-holdings.com/login")
         }
     }
 )
@@ -76,7 +76,7 @@ router.get("/facebook",passport.authenticate("facebook",{scope: ["email", "publi
 
 router.get("/facebook/callback",passport.authenticate("facebook",{
     session:false,
-    failureRedirect:"https://globaltravel-holdings.com/login"
+    failureRedirect:"https://www.globaltravel-holdings.com/login"
 }),
  async (req, resp) => {
         try {
@@ -98,9 +98,9 @@ router.get("/facebook/callback",passport.authenticate("facebook",{
                 maxAge: 5 * 24 * 60 * 60 * 1000
             })
 
-            resp.redirect("https://globaltravel-holdings.com/facebook-success")
+            resp.redirect("https://www.globaltravel-holdings.com/facebook-success")
         } catch (error) {
-            resp.redirect("https://globaltravel-holdings.com/login")
+            resp.redirect("https://www.globaltravel-holdings.com/login")
         }
     }
 )

@@ -98,7 +98,7 @@ export default function PassengerForm() {
 
       // now create the the payment
 
-      let createPayemnt = await fetch("https://globaltravel-holdings.com/payment/create-payment", {
+      let createPayemnt = await fetch("https://www.globaltravel-holdings.com/payment/create-payment", {
         method: "POST", credentials: "include", headers: {
           "Content-Type": "application/json"
         }, body: JSON.stringify({
@@ -121,7 +121,7 @@ export default function PassengerForm() {
         name: "Flight Booking",
         description: "Secure Payment",
         handler: async function (response) {
-          let verifySig = await fetch("https://globaltravel-holdings.com/payment/verify-payment", {
+          let verifySig = await fetch("https://www.globaltravel-holdings.com/payment/verify-payment", {
             method: "POST", credentials: "include", headers: {
               "Content-Type": "application/json"
             },
