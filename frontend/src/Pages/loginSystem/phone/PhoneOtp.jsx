@@ -24,7 +24,7 @@ export default function PhoneOtp() {
                 phone: value
             }
             setLoading(true)
-            let resp = await fetch("https://globaltravel-holdings.com/user/phone-otp", {
+            let resp = await fetch("https://www.globaltravel-holdings.com/user/phone-otp", {
                 method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
             })
             let data = await resp.json()
@@ -44,13 +44,13 @@ export default function PhoneOtp() {
     }
 
     let googleLogin = () => {
-        window.location.href = "https://globaltravel-holdings.com/auth/google"
+        window.location.href = "https://www.globaltravel-holdings.com/auth/google"
     }
     let gitLogin = () => {
-        window.location.href = "https://globaltravel-holdings.com/auth/github"
+        window.location.href = "https://www.globaltravel-holdings.com/auth/github"
     }
     let facebookLogin = () => {
-        window.location.href = "https://globaltravel-holdings.com/auth/facebook"
+        window.location.href = "https://www.globaltravel-holdings.com/auth/facebook"
     }
 
     return (

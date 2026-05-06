@@ -21,7 +21,7 @@ export default function ProfileUpdate() {
         }
         let formData = new FormData();
         formData.append("myfile", file);
-        let resp = await fetch("https://globaltravel-holdings.com/user/update-image/"+id, {
+        let resp = await fetch("https://www.globaltravel-holdings.com/user/update-image/"+id, {
             method: "PUT",
             credentials: "include",
             body: formData 
@@ -73,7 +73,7 @@ export default function ProfileUpdate() {
                 country: country || form.country
             };
 
-            let resp = await fetch("https://globaltravel-holdings.com/user/profile/update/" + id, {
+            let resp = await fetch("https://www.globaltravel-holdings.com/user/profile/update/" + id, {
                 method: "PUT",
                 credentials: "include",
                 headers: {
@@ -98,7 +98,7 @@ export default function ProfileUpdate() {
     };
     let fetchdata = async () => {
         try {
-            let resp = await fetch("https://globaltravel-holdings.com/user/profile/" + id, {
+            let resp = await fetch("https://www.globaltravel-holdings.com/user/profile/" + id, {
                 method: "GET", credentials: "include"
             })
             resp = await resp.json()

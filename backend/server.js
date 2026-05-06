@@ -31,7 +31,7 @@ app.use(helmet({
 app.use(cors({
     origin: [
         "http://localhost:5173",
-        "https://globaltravel-holdings.com",
+        "https://www.globaltravel-holdings.com",
         "https://www.globaltravel-holdings.com"
     ],
     credentials: true,

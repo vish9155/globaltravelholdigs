@@ -52,7 +52,7 @@ export default function SignupPage() {
         phone: value
       };
 
-      let resp = await fetch("https://globaltravel-holdings.com/user/create", {
+      let resp = await fetch("https://www.globaltravel-holdings.com/user/create", {
         method: "POST",
         credentials: "include",
         headers: {

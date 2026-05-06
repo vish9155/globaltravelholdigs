@@ -9,7 +9,7 @@ export default function FacebookSuccess() {
     useEffect(() => {
         let handleFacebookLogin = async () => {
             try {
-                let resp = await fetch("https://globaltravel-holdings.com/user/me", {
+                let resp = await fetch("https://www.globaltravel-holdings.com/user/me", {
                     method: "GET",
                     credentials: "include"
                 });

@@ -10,7 +10,7 @@ import Users from '../models/Users.js'
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: `https://globaltravel-holdings.com/auth/google/callback`
+    callbackURL: `https://www.globaltravel-holdings.com/auth/google/callback`
 },
     async (accessToken, refreshToken, profile, done) => {
 
@@ -62,7 +62,7 @@ passport.use(new GoogleStrategy({
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: "https://globaltravel-holdings.com/auth/github/callback",
+    callbackURL: "https://www.globaltravel-holdings.com/auth/github/callback",
     scope: ["user:email"]
 },
     async (accessToken, refreshToken, profile, done) => {
@@ -108,7 +108,7 @@ passport.use(new GitHubStrategy({
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "https://globaltravel-holdings.com/auth/facebook/callback",
+    callbackURL: "https://www.globaltravel-holdings.com/auth/facebook/callback",
     profileFields: ["id", "displayName", "emails", "photos"],
     authorizationURL: "https://www.facebook.com/dialog/oauth",
     tokenURL: "https://graph.facebook.com/oauth/access_token"

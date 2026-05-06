@@ -30,7 +30,7 @@ export default function ReesetPassword() {
         try {
             e.preventDefault();
             setLoading(true)
-            let resp = await fetch("https://globaltravel-holdings.com/user/reset-password", {
+            let resp = await fetch("https://www.globaltravel-holdings.com/user/reset-password", {
                 method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form)
             })
             let data = await resp.json()
@@ -50,13 +50,13 @@ export default function ReesetPassword() {
     }
 
     let googleLogin = () => {
-        window.location.href = "https://globaltravel-holdings.com/auth/google"
+        window.location.href = "https://www.globaltravel-holdings.com/auth/google"
     }
     let gitLogin = () => {
-        window.location.href = "https://globaltravel-holdings.com/auth/github"
+        window.location.href = "https://www.globaltravel-holdings.com/auth/github"
     }
     let facebookLogin = () => {
-        window.location.href = "https://globaltravel-holdings.com/auth/facebook"
+        window.location.href = "https://www.globaltravel-holdings.com/auth/facebook"
     }
 
     return (
