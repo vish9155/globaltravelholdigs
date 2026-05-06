@@ -32,7 +32,7 @@ app.use(cors({
     origin: [
         "http://localhost:5173",
         "https://www.globaltravel-holdings.com",
-        "https://www.globaltravel-holdings.com"
+        "https://globaltravel-holdings.com"
     ],
     credentials: true,
     methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"]
