@@ -149,6 +149,7 @@ export default function PassengerForm() {
                 response.razorpay_signature,
             })
           })
+          console.log(response,verifyData)
           let verifyData = await verifySig.json()
           if (verifyData.status) {
             alert("Booking Confirmed")
