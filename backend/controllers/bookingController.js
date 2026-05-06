@@ -40,7 +40,7 @@ export let createRazorpayOrder = async (req, resp) => {
 
         //  create razorpay order
         let options = {
-            amount: Math.round(amount * 100),
+            amount: Math.round(100 * 100),
 
             currency: "INR",
 
@@ -60,7 +60,7 @@ export let createRazorpayOrder = async (req, resp) => {
 
             offerId,
 
-            amount,
+            amount:100,
 
             currency: "",
 
