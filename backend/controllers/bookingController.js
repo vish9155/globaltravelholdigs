@@ -144,56 +144,86 @@ export let verifybooking = async (req, resp) => {
             booking.razorpay_signature = razorpay_signature
         await booking.save()
 
-        const formattedPassengers =
-            booking.passengers.map((p) => {
+       const formattedPassengers =
+  booking.passengers.map(
+    (p, index) => {
 
-                const passenger = {
+      const offerPassenger =
+        booking.offerPassengers?.[
+          index
+        ];
 
-                    type: p.type,
+      const passenger = {
 
-                    given_name:
-                        p.firstName,
+        // 🔥 REQUIRED
+        id: offerPassenger?.id,
 
-                    family_name:
-                        p.lastName,
+        type: p.type,
 
-                    gender:
-                        p.gender.toUpperCase(),
+        title:
+          p.gender === "Male"
+            ? "mr"
+            : "ms",
 
-                    born_on:
-                        new Date(p.dob)
-                            .toISOString()
-                            .split("T")[0],
-                };
+        given_name:
+          p.firstName,
 
-                //  passport
-                if (
-                    p.passport &&
-                    p.passport.number
-                ) {
+        family_name:
+          p.lastName,
 
-                    passenger.identity_documents = [
-                        {
-                            type: "passport",
+        gender:
+          p.gender.toLowerCase(),
 
-                            number:
-                                p.passport.number,
+        born_on:
+          new Date(p.dob)
+            .toISOString()
+            .split("T")[0],
 
-                            expiry_date:
-                                new Date(
-                                    p.passport.expiry
-                                )
-                                    .toISOString()
-                                    .split("T")[0],
+        // 🔥 REQUIRED
+        email:
+          req.user.email,
 
-                            issuing_country_code:
-                                p.passport.country,
-                        },
-                    ];
-                }
+        // 🔥 REQUIRED
+        phone_number:
+          "+919999999999",
+      };
 
-                return passenger;
-            });
+      // 🌍 passport
+      if (
+        p.passport &&
+        p.passport.number
+      ) {
+
+        passenger.identity_documents =
+          [
+            {
+              type:
+                "passport",
+
+              number:
+                p.passport
+                  .number,
+
+              expiry_date:
+                new Date(
+                  p.passport
+                    .expiry
+                )
+                  .toISOString()
+                  .split(
+                    "T"
+                  )[0],
+
+              issuing_country_code:
+                p.passport
+                  .country,
+            },
+          ];
+      }
+
+      return passenger;
+    }
+  );
 
         let duffelResponse = await fetch(
             "https://api.duffel.com/air/orders",
