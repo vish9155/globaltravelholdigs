@@ -128,7 +128,9 @@ const bookingSchema = new mongoose.Schema(
       type: String,
       default: "INR",
     },
-
+offerPassengers:{
+  type:Array
+},
     paymentStatus: {
       type: String,
 

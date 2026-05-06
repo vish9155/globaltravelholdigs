@@ -11,7 +11,7 @@ export let createRazorpayOrder = async (req, resp) => {
 
         let { passengers, offerId } = req.body;
 
-       console.log(passengers,offerId)
+        console.log(passengers, offerId)
 
         //  revalidate offer
         let response = await fetch(
@@ -57,12 +57,14 @@ export let createRazorpayOrder = async (req, resp) => {
         // save temp booking in database
         let paymentData = await Booking.create({
             userId: req.user.id,
+            offerPassengers:
+                response.data.passengers,
 
             offerId,
 
-            amount:100,
+            amount: 100,
 
-            currency: "",
+            currency: "INR",
 
             razorpay_order_id: order.id,
 
@@ -97,7 +99,7 @@ export let createRazorpayOrder = async (req, resp) => {
     } catch (error) {
 
         resp.status(500).json({
-            status:false,
+            status: false,
             message: "Failed to create payment",
             error: error.message,
         });
@@ -123,8 +125,8 @@ export let verifybooking = async (req, resp) => {
                 status: false
             })
         }
- 
-        let expectedSignature =  razorpay_order_id + "|" + razorpay_payment_id
+
+        let expectedSignature = razorpay_order_id + "|" + razorpay_payment_id
         let sign = crypto
             .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
             .update(expectedSignature)
@@ -144,86 +146,86 @@ export let verifybooking = async (req, resp) => {
             booking.razorpay_signature = razorpay_signature
         await booking.save()
 
-       const formattedPassengers =
-  booking.passengers.map(
-    (p, index) => {
+        const formattedPassengers =
+            booking.passengers.map(
+                (p, index) => {
 
-      const offerPassenger =
-        booking.offerPassengers?.[
-          index
-        ];
+                    const offerPassenger =
+                        booking.offerPassengers?.[
+                        index
+                        ];
 
-      const passenger = {
+                    const passenger = {
 
-        // 🔥 REQUIRED
-        id: offerPassenger?.id,
+                        // 🔥 REQUIRED
+                        id: offerPassenger?.id,
 
-        type: p.type,
+                        type: p.type,
 
-        title:
-          p.gender === "Male"
-            ? "mr"
-            : "ms",
+                        title:
+                            p.gender === "Male"
+                                ? "mr"
+                                : "ms",
 
-        given_name:
-          p.firstName,
+                        given_name:
+                            p.firstName,
 
-        family_name:
-          p.lastName,
+                        family_name:
+                            p.lastName,
 
-        gender:
-          p.gender.toLowerCase(),
+                        gender:
+                            p.gender.toLowerCase(),
 
-        born_on:
-          new Date(p.dob)
-            .toISOString()
-            .split("T")[0],
+                        born_on:
+                            new Date(p.dob)
+                                .toISOString()
+                                .split("T")[0],
 
-        // 🔥 REQUIRED
-        email:
-          req.user.email,
+                        // 🔥 REQUIRED
+                        email:
+                            req.user.email,
 
-        // 🔥 REQUIRED
-        phone_number:
-          "+919999999999",
-      };
+                        // 🔥 REQUIRED
+                        phone_number:
+                            "+919999999999",
+                    };
 
-      // 🌍 passport
-      if (
-        p.passport &&
-        p.passport.number
-      ) {
+                    // 🌍 passport
+                    if (
+                        p.passport &&
+                        p.passport.number
+                    ) {
 
-        passenger.identity_documents =
-          [
-            {
-              type:
-                "passport",
+                        passenger.identity_documents =
+                            [
+                                {
+                                    type:
+                                        "passport",
 
-              number:
-                p.passport
-                  .number,
+                                    number:
+                                        p.passport
+                                            .number,
 
-              expiry_date:
-                new Date(
-                  p.passport
-                    .expiry
-                )
-                  .toISOString()
-                  .split(
-                    "T"
-                  )[0],
+                                    expiry_date:
+                                        new Date(
+                                            p.passport
+                                                .expiry
+                                        )
+                                            .toISOString()
+                                            .split(
+                                                "T"
+                                            )[0],
 
-              issuing_country_code:
-                p.passport
-                  .country,
-            },
-          ];
-      }
+                                    issuing_country_code:
+                                        p.passport
+                                            .country,
+                                },
+                            ];
+                    }
 
-      return passenger;
-    }
-  );
+                    return passenger;
+                }
+            );
 
         let duffelResponse = await fetch(
             "https://api.duffel.com/air/orders",
@@ -264,7 +266,7 @@ export let verifybooking = async (req, resp) => {
             await booking.save();
 
             return resp.status(400).json({
-                status:false,
+                status: false,
                 message: "Duffel booking failed",
                 errors: duffelResponse.errors,
             });
@@ -295,7 +297,7 @@ export let verifybooking = async (req, resp) => {
         // ==========================================
 
         resp.status(200).json({
-            status:true,
+            status: true,
 
             message:
                 "Flight booked successfully",
@@ -311,7 +313,7 @@ export let verifybooking = async (req, resp) => {
 
     } catch (error) {
         resp.status(500).json({
-            status:false,
+            status: false,
             message: "Failed to create payment",
             error: error.message,
         });
