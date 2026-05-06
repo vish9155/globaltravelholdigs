@@ -12,6 +12,7 @@ import RedisStore from "rate-limit-redis";
 import flightRoutes from './routes/flightsRoute.js'
 import hotelsRoutes from './routes/hotelsRoutes.js'
 import carsRoutes from './routes/carsRoutes.js'
+import bookingRoutes from './routes/bookingRoutes.js'
 import dbconnect from './config/db.js'
 import { errormidd } from './middlewares/errormiddleware.js'
 import client, { connectRedis } from './config/redisConfig.js'
@@ -62,6 +63,7 @@ dbconnect()
 app.use("/api", flightRoutes)
 app.use("/api", hotelsRoutes)
 app.use("/api", carsRoutes)
+app.use("/payment", bookingRoutes)
 app.use("/user", userRoutes)
 app.use("/auth", oAuthRoutes)
 app.use(errormidd)

@@ -91,7 +91,7 @@ export default function ProfilePage() {
       </div>
 
       <div
-        className={`md:hidden fixed left-0 w-full bg-white shadow px-4 py-4 flex justify-between items-center z-[9999] transition-all duration-300 ${isScrolled ? "top-0" : "top-15"
+        className={`md:hidden fixed left-0 w-full bg-white shadow px-4 py-4 flex justify-between items-center  transition-all duration-300 ${isScrolled ? "top-0" : "top-15"
           }`}
       >
         <Menu

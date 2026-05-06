@@ -93,8 +93,8 @@ export let createUser = async (req, resp, next) => {
 
         resp.cookie("token", token, {
             httpOnly: true,
-            secure: false,
-            sameSite: "Strict",
+            secure: true,
+            sameSite: "none",
             maxAge: 5 * 24 * 60 * 60 * 1000
         });
 
@@ -409,8 +409,8 @@ export let login = async (req, resp) => {
         let tokens = jwt.sign({ id: user._id, email: user.email, role: user.role }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' })
         resp.cookie("token", tokens, {
             httpOnly: true,
-            secure: false,
-            sameSite: "Strict",
+            secure: true,
+            sameSite: "none",
             maxAge: 5 * 24 * 60 * 60 * 1000
         })
         return resp.json({
@@ -581,8 +581,8 @@ export let emaillogin = async (req, resp) => {
         let tokens = jwt.sign({ id: user._id, email: user.email, role: user.role }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' })
         resp.cookie("token", tokens, {
             httpOnly: true,
-            secure: false,
-            sameSite: "Strict",
+            secure: true,
+            sameSite: "none",
             maxAge: 5 * 24 * 60 * 60 * 1000
         })
         return resp.json({
@@ -719,8 +719,8 @@ export let phonelogin = async (req, resp) => {
         let tokens = jwt.sign({ id: user._id, email: user.email, role: user.role }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' })
         resp.cookie("token", tokens, {
             httpOnly: true,
-            secure: false,
-            sameSite: "Strict",
+            secure: true,
+            sameSite: "none",
             maxAge: 5 * 24 * 60 * 60 * 1000
         })
         return resp.json({
@@ -883,7 +883,7 @@ export let logout = async (req, resp) => {
     try {
         resp.clearCookie("token", {
             httpOnly: true,
-            secure: false,
+            secure: true,
             sameSite: "lax"
         })
         resp.send({ message: "user logout", status: true })

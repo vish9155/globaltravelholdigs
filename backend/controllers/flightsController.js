@@ -26,13 +26,12 @@ export let fligtsDatas = async (req, res) => {
        VALIDATION
     ===================================================== */
 
-    if (!from || !to || !departDate) {
+    if (!from || !to || !departDate || adult === 0 && (children > 0 || infant > 0)) {
       return res.status(400).json({
-        success: false,
-        message: "from, to and departDate are required",
+        status: false,
+        message: "from, to and departDate, adult are required",
       });
     }
-
 
 
     let isRoundTrip =
@@ -76,6 +75,7 @@ export let fligtsDatas = async (req, res) => {
           for (let i = 0; i < Number(children || 0); i++) {
             passengers.push({
               type: "child",
+
             });
           }
 
@@ -393,6 +393,38 @@ export let searchLocation = async (req, res) => {
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: "Location search error" })
+  }
+}
+
+
+export let offerData =async (req, res) => {
+  try {
+    let { offerId } = req.params;
+
+    let response = await fetch(
+      `https://api.duffel.com/air/offers/${offerId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.DUFFEL_API}`,
+          "Content-Type": "application/json",
+          "Duffel-Version": "v2"
+        },
+      }
+    );
+    response=await response.json()
+    
+  return  res.json({
+      success: true,
+      data: response.data,
+    });
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch offer",
+      error: error.response?.data || error.message,
+    });
   }
 }
 

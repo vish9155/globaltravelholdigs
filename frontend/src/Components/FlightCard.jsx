@@ -1,4 +1,5 @@
 import React from "react";
+import {NavLink, useNavigate} from 'react-router-dom'
 import {
   Wifi,
   Briefcase,
@@ -22,90 +23,100 @@ Based on your real Duffel response :contentReference[oaicite:0]{index=0}
 */
 
 export default function FlightCard({ item }) {
-  const slices = item?.slices || [];
+  let slices = item?.slices || [];
+
+
 
   if (!slices.length) return null;
+let offerId=item.id
+  let isRoundTrip = slices.length === 2;
 
-  const isRoundTrip = slices.length === 2;
+  let firstSlice = slices[0];
+  let secondSlice = slices[1];
 
-  const firstSlice = slices[0];
-  const secondSlice = slices[1];
+  let firstSegment = firstSlice?.segments?.[0];
+  let secondSegment = secondSlice?.segments?.[0];
 
-  const firstSegment = firstSlice?.segments?.[0];
-  const secondSegment = secondSlice?.segments?.[0];
-
-  const airlineName = item?.owner?.name || "Airline";
-  const airlineCode = item?.owner?.iata_code || "XX";
-
-  const airlineLogo =
+  let airlineName = item?.owner?.name || "Airline";
+  let airlineCode = item?.owner?.iata_code || "XX";
+   let navigate=useNavigate()
+  let airlineLogo =
     item?.owner?.logo_symbol_url ||
     `https://images.kiwi.com/airlines/64/${airlineCode}.png`;
 
-  const price =
+  let price =
     item?.total_amount ||
     item?.intended_total_amount ||
     "0";
 
-  const currency =
+  let currency =
     item?.total_currency || "USD";
 
-  const refundable =
+  let refundable =
     item?.conditions?.refund_before_departure?.allowed;
 
-  const changeAllowed =
+  let changeAllowed =
     item?.conditions?.change_before_departure?.allowed;
 
-  const emissions =
+  let emissions =
     item?.total_emissions_kg || "N/A";
 
-  const wifiAvailable =
+  let wifiAvailable =
     firstSegment?.passengers?.[0]?.cabin?.amenities?.wifi?.available;
 
-  const checkedBag =
+  let checkedBag =
     firstSegment?.passengers?.[0]?.baggages?.find(
       (b) => b.type === "checked"
     );
-  const carryOn = firstSegment?.passengers?.[0]?.baggages?.find(
+  let carryOn = firstSegment?.passengers?.[0]?.baggages?.find(
     (b) => b.type === "carry_on"
   );
 
-  const renderSlice = (slice, label) => {
-    const segment = slice?.segments?.[0];
+    let handleSelect = () => {
+  //  pura item (offer) save karo
+  localStorage.setItem("selectedOffer", JSON.stringify(item));
+
+  //  navigate karo
+  navigate(`/passengers/${offerId}`);
+};
+
+  let renderSlice = (slice, label) => {
+    let segment = slice?.segments?.[0];
 
     if (!slice || !segment) return null;
 
-    const departureTime = new Date(
+    let departureTime = new Date(
       segment?.departing_at
     );
 
-    const arrivalTime = new Date(
+    let arrivalTime = new Date(
       segment?.arriving_at
     );
 
-    const originCode =
+    let originCode =
       slice?.origin?.iata_code || "N/A";
 
-    const destinationCode =
+    let destinationCode =
       slice?.destination?.iata_code || "N/A";
 
-    const originCity =
+    let originCity =
       slice?.origin?.city_name || "";
 
-    const destinationCity =
+    let destinationCity =
       slice?.destination?.city_name || "";
 
-    const duration =
+    let duration =
       slice?.duration || "N/A";
 
-    const fareBrand =
+    let fareBrand =
       slice?.fare_brand_name || "Basic";
 
-    const cabinClass =
+    let cabinClass =
       segment?.passengers?.[0]
         ?.cabin_class_marketing_name || "Economy";
 
-    const segments = slice?.segments || [];
-
+    let segments = slice?.segments || [];
+ 
     let layovers =
       segments.length > 1
         ? segments
@@ -113,6 +124,7 @@ export default function FlightCard({ item }) {
           .map(
             (seg) =>
               seg?.destination?.iata_code
+
           )
         : [];
 
@@ -303,7 +315,7 @@ export default function FlightCard({ item }) {
             taxes included
           </p>
 
-          <button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-2xl font-semibold shadow-lg hover:scale-[1.02] transition">
+          <button onClick={handleSelect} className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-2xl font-semibold shadow-lg hover:scale-[1.02] transition">
             Select Flight
           </button>
         </div>

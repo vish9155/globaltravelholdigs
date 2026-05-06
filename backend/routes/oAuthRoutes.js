@@ -27,8 +27,8 @@ router.get("/google/callback", passport.authenticate("google", {
 
             resp.cookie("token", token, {
                 httpOnly: true,
-                secure: false,
-                sameSite: "lax",
+                secure: true,
+                sameSite: "none",
                 maxAge: 5 * 24 * 60 * 60 * 1000
             })
 
@@ -61,8 +61,8 @@ router.get("/github/callback",passport.authenticate("github",{
 
             resp.cookie("token", token, {
                 httpOnly: true,
-                secure: false,
-                sameSite: "lax",
+                secure: true,
+                sameSite: "none",
                 maxAge: 5 * 24 * 60 * 60 * 1000
             })
 
@@ -94,7 +94,7 @@ router.get("/facebook/callback",passport.authenticate("facebook",{
             resp.cookie("token", token, {
                 httpOnly: true,
                 secure: true,
-                sameSite: "lax",
+                sameSite: "none",
                 maxAge: 5 * 24 * 60 * 60 * 1000
             })
 

@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { Toaster } from "react-hot-toast";
 import Navbar from './Components/Navbar'
 import Footer from './Components/Footer'
 import HomePage from './Pages/HomePage'
@@ -19,6 +20,7 @@ import PhoneLogin from './Pages/loginSystem/phone/PhoneLogin';
 import FacebookSuccess from './Pages/loginSystem/facebook/FacebookSuccess';
 import ForgotPassword from './Pages/loginSystem/password/ForgotPassword';
 import ReesetPassword from './Pages/loginSystem/password/ResetPassword';
+import ProtectedRoute from './Components/ProtectedRoutes';
 
 
 export default function App() {
@@ -38,6 +40,7 @@ export default function App() {
   let BlogDetail = lazy(() => import('./Pages/blog/BlogDetails'))
   let BlogList = lazy(() => import('./Pages/blog/BlogList'))
   let FlightResult = lazy(() => import('./Components/FlightResult'))
+  let Passengers = lazy(() => import('./Components/Passengers'))
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
     let timer = setTimeout(() => setLoading(false), 3000);
@@ -47,6 +50,7 @@ export default function App() {
 
   return (
     <>
+      <Toaster position="top-right" />
       <BrowserRouter>
         <Navbar />
         <Suspense fallback={Loader}>
@@ -61,8 +65,9 @@ export default function App() {
             <Route path='/flights' element={<Flights />} />
             <Route path='/hotels' element={<Hotels />} />
             <Route path='/cars' element={<Cars />} />
-            <Route path='/profile' element={<ProfilePage />} />
+            <Route path='/profile' element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
             <Route path='/cruise' element={<Cruises />} />
+            <Route path='/passengers/:offerId' element={<Passengers />} />
             <Route path='/packages' element={<Package />} />
             <Route path='/services' element={<Services />} />
             <Route path='/signup' element={<SingupPage />} />

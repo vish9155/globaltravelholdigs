@@ -192,3 +192,11 @@ iframe.skiptranslate {
 .Toastify__toast--info {
   background: linear-gradient(135deg, #3b82f6, #2563eb);
 }
+/* global css */
+.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
