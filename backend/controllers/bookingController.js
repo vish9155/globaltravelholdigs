@@ -123,7 +123,7 @@ export let verifybooking = async (req, resp) => {
                 status: false
             })
         }
-
+ 
         let expectedSignature =  razorpay_order_id + "|" + razorpay_payment_id
         let sign = crypto
             .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
@@ -135,7 +135,7 @@ export let verifybooking = async (req, resp) => {
         if (!isValid) {
             return resp.json({
                 status: false,
-                message: "Invalid Payment Signature"
+                message: `Invalid Payment Signature ${process.env.RAZORPAY_KEY_SECRET}`
             })
         }
 
