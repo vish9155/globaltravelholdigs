@@ -201,7 +201,7 @@ export let verifybooking = async (req, resp) => {
                 method: "POST",
 
                 headers: {
-                    Authorization: `Bearer  ${process.env.DUFFEL_API}`,
+                    Authorization: `Bearer ${process.env.DUFFEL_API}`,
 
                     "Duffel-Version": "v2",
 
