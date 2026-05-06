@@ -12,7 +12,7 @@ export default function PassengerForm() {
   let [issuingCountry, setCountryCode] = useState("IN")
   const offerData = useSelector((s) => s.offer.items);
   const passengers = offerData?.passengers || [];
-  console.log(offerData.id,"co")
+  console.log(offerData.id, "co")
   let childLength = passengers.filter(i => i.type === "child").length;
   let adultLength = passengers.filter(i => i.type === "adult").length;
   let isInternational = useMemo(() => {
@@ -120,6 +120,16 @@ export default function PassengerForm() {
         order_id: data.orderId,
         name: "Flight Booking",
         description: "Secure Payment",
+        method: {
+
+          upi: true,
+
+          card: true,
+
+          netbanking: true,
+
+          wallet: true,
+        },
         handler: async function (response) {
           let verifySig = await fetch("https://www.globaltravel-holdings.com/payment/verify-payment", {
             method: "POST", credentials: "include", headers: {
