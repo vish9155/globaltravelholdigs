@@ -124,7 +124,7 @@ export let verifybooking = async (req, resp) => {
             })
         }
 
-        let expectedSignature = razorpay_payment_id + "|" + razorpay_order_id
+        let expectedSignature =  razorpay_order_id + "|" + razorpay_payment_id
         let sign = crypto
             .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
             .update(expectedSignature)
