@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { MapPin, Calendar, Users, ChevronDown, Plus, Minus } from 'lucide-react';
 import TrainRoutes from './TrainRoutes';
 import { useDispatch } from 'react-redux';
+
 import { fetchFlights } from '../redux/FlightSlice';
 
 export default function Flights() {
@@ -78,6 +79,10 @@ export default function Flights() {
     let dispatch = useDispatch()
     let handleSubmit = async (e) => {
         e.preventDefault()
+        if (adult === 0 && (children > 0 || infant > 0)) {
+  alert("At least 1 adult is required");
+  return;
+}
         let payload = {
             ...form,
             tripType: trip,

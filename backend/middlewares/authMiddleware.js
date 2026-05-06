@@ -5,11 +5,12 @@ export let authmidd=async(req,resp,next)=>{
     try {
         
         let token=req.cookies['token'];
-        console.log(token)
+        console.log(req.cookies.token,"no token",token)
         if(!token){
             return resp.send({
-                message:"token not found",
-                status:false
+                message:"token not found in auth",
+                status:false,
+                token
             })
         }
 

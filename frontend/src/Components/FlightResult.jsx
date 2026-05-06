@@ -232,63 +232,62 @@ export default function FlightResult() {
         </div>
 
         {/* Airlines */}
-        <div className="mb-6">
-          <h3 className="font-semibold mb-3">
-            Airlines
-          </h3>
+            <div className="mb-6">
+  <h3 className="font-semibold mb-3 text-gray-800">
+    Airlines
+  </h3>
 
-          <div className="space-y-2">
-            {visibleAirline.map((item, i) => (
-              <label
-                key={i}
-                className="flex items-center gap-2 text-sm"
-              >
-                <input
-                  type="checkbox"
-                  checked={filters.airlines.includes(item)}
-                  className="accent-blue-600"
-                  onChange={(e) => {
-                    let updated =
-                      e.target.checked
-                        ? [
-                          ...filters.airlines,
-                          item,
-                        ]
-                        : filters.airlines.filter(
-                          (x) => x !== item
-                        );
+  {/* Scroll Container */}
+  <div className="max-h-60 overflow-y-auto pr-2 space-y-2 custom-scroll">
+    {visibleAirline.map((item, i) => (
+      <label
+        key={i}
+        className="flex items-center justify-between gap-2 px-3 py-2 rounded-lg cursor-pointer hover:bg-gray-100 transition"
+      >
+        <div className="flex items-center gap-3">
+          <input
+            type="checkbox"
+            checked={filters.airlines.includes(item)}
+            onChange={(e) => {
+              const updated = e.target.checked
+                ? [...filters.airlines, item]
+                : filters.airlines.filter((x) => x !== item);
 
-                    setFilters((prev) => ({
-                      ...prev,
-                      airlines: updated,
-                    }));
-                  }}
-                />
+              setFilters((prev) => ({
+                ...prev,
+                airlines: updated,
+              }));
+            }}
+            className="w-4 h-4 accent-blue-600 cursor-pointer"
+          />
 
-                {item}
-              </label>
-            ))}
-          </div>
-          {airlines.length > 12 && (
-            <button
-              onClick={() =>
-                setAirlineShow(
-                  !airlineShow
-                )
-              }
-              className="
-      text-blue-600
-      text-sm
-      mt-2
-      font-medium
-    "
-            >
-              {airlineShow
-                ? "Show Less"
-                : `Load More (${airlines.length - 12})`}
-            </button>
-          )}
+          <span className="text-sm text-gray-700">
+            {item}
+          </span>
         </div>
+
+        {/* Optional badge */}
+        {filters.airlines.includes(item) && (
+          <span className="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full">
+            Selected
+          </span>
+        )}
+      </label>
+    ))}
+  </div>
+
+  {/* Load More / Less */}
+  {airlines.length > 12 && (
+    <button
+      onClick={() => setAirlineShow(!airlineShow)}
+      className="mt-3 text-sm font-medium text-blue-600 hover:text-blue-800 transition"
+    >
+      {airlineShow
+        ? "Show Less"
+        : `Load More (${airlines.length - 12})`}
+    </button>
+  )}
+</div>
 
         <div className="mb-6">
           <h3 className="font-semibold mb-3">
@@ -520,7 +519,7 @@ export default function FlightResult() {
             Layovers
           </h3>
 
-          <div className="space-y-2">
+          <div className="max-h-60 overflow-y-auto pr-2 space-y-2 custom-scroll">
 
             {visibleLayovers.map((item, i) => (
 
@@ -649,64 +648,62 @@ export default function FlightResult() {
             </div>
 
             {/* Airlines */}
-            <div className="mb-6">
-              <h3 className="font-semibold mb-3">
-                Airlines
-              </h3>
+          <div className="mb-6">
+  <h3 className="font-semibold mb-3 text-gray-800">
+    Airlines
+  </h3>
 
-              <div className="space-y-2">
-                {visibleAirline.map((item, i) => (
-                  <label
-                    key={i}
-                    className="flex items-center gap-2 text-sm"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={filters.airlines.includes(item)}
-                      className="accent-blue-600"
-                      onChange={(e) => {
-                        let updated =
-                          e.target.checked
-                            ? [
-                              ...filters.airlines,
-                              item,
-                            ]
-                            : filters.airlines.filter(
-                              (x) => x !== item
-                            );
+  {/* Scroll Container */}
+  <div className="max-h-50 overflow-y-auto pr-2 space-y-2 custom-scroll">
+    {visibleAirline.map((item, i) => (
+      <label
+        key={i}
+        className="flex items-center justify-between gap-2 px-3 py-2 rounded-lg cursor-pointer hover:bg-gray-100 transition"
+      >
+        <div className="flex items-center gap-3">
+          <input
+            type="checkbox"
+            checked={filters.airlines.includes(item)}
+            onChange={(e) => {
+              const updated = e.target.checked
+                ? [...filters.airlines, item]
+                : filters.airlines.filter((x) => x !== item);
 
-                        setFilters((prev) => ({
-                          ...prev,
-                          airlines: updated,
-                        }));
-                      }}
-                    />
+              setFilters((prev) => ({
+                ...prev,
+                airlines: updated,
+              }));
+            }}
+            className="w-4 h-4 accent-blue-600 cursor-pointer"
+          />
 
-                    {item}
-                  </label>
-                ))}
-              </div>
-              {airlines.length > 12 && (
-                <button
-                  onClick={() =>
-                    setAirlineShow(
-                      !airlineShow
-                    )
-                  }
-                  className="
-      text-blue-600
-      text-sm
-      mt-2
-      font-medium
-    "
-                >
-                  {airlineShow
-                    ? "Show Less"
-                    : `Load More (${airlines.length - 12})`}
-                </button>
-              )}
-            </div>
+          <span className="text-sm text-gray-700">
+            {item}
+          </span>
+        </div>
 
+        {/* Optional badge */}
+        {filters.airlines.includes(item) && (
+          <span className="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full">
+            Selected
+          </span>
+        )}
+      </label>
+    ))}
+  </div>
+
+  {/* Load More / Less */}
+  {airlines.length > 12 && (
+    <button
+      onClick={() => setAirlineShow(!airlineShow)}
+      className="mt-3 text-sm font-medium text-blue-600 hover:text-blue-800 transition"
+    >
+      {airlineShow
+        ? "Show Less"
+        : `Load More (${airlines.length - 12})`}
+    </button>
+  )}
+</div>
             <div className="mb-6">
               <h3 className="font-semibold mb-3">
                 Cabin Class
@@ -937,7 +934,7 @@ export default function FlightResult() {
                 Layovers
               </h3>
 
-              <div className="space-y-2">
+              <div className="max-h-60 overflow-y-auto pr-2 space-y-2 custom-scroll">
 
                 {visibleLayovers.map((item, i) => (
 
