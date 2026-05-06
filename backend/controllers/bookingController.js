@@ -243,13 +243,26 @@ export let verifybooking = async (req, resp) => {
 
                 body: JSON.stringify({
                     data: {
+
                         type: "instant",
 
                         selected_offers: [
                             booking.offerId,
                         ],
 
-                        passengers: formattedPassengers,
+                        passengers:
+                            formattedPassengers,
+
+                        payments: [
+                            {
+                                type: "balance",
+
+                                amount:
+                                    booking.amount.toString(),
+
+                                currency: "INR",
+                            },
+                        ],
                     },
                 }),
             }
