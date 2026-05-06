@@ -30,7 +30,7 @@ export let createRazorpayOrder = async (req, resp) => {
         //  expired
         if (!response.data) {
             return resp.status(400).json({
-                success: false,
+                status: false,
                 message: "Offer expired",
             });
         }
@@ -79,7 +79,7 @@ export let createRazorpayOrder = async (req, resp) => {
 
         //  response
         resp.status(200).json({
-            success: true,
+            status: true,
 
             key: process.env.RAZORPAY_KEY_ID,
 
@@ -97,7 +97,7 @@ export let createRazorpayOrder = async (req, resp) => {
     } catch (error) {
 
         resp.status(500).json({
-            success: false,
+            status:false,
             message: "Failed to create payment",
             error: error.message,
         });
@@ -234,7 +234,7 @@ export let verifybooking = async (req, resp) => {
             await booking.save();
 
             return resp.status(400).json({
-                success: false,
+                status:false,
                 message: "Duffel booking failed",
                 errors: duffelResponse.errors,
             });
@@ -265,7 +265,7 @@ export let verifybooking = async (req, resp) => {
         // ==========================================
 
         resp.status(200).json({
-            success: true,
+            status:true,
 
             message:
                 "Flight booked successfully",
@@ -281,7 +281,7 @@ export let verifybooking = async (req, resp) => {
 
     } catch (error) {
         resp.status(500).json({
-            success: false,
+            status:false,
             message: "Failed to create payment",
             error: error.message,
         });

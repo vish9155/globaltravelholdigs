@@ -158,7 +158,7 @@ export default function PassengerForm() {
       console.log(error);
 
       alert(
-        "Booking failed"
+        `Booking failed:${error.message}`
       );
     }
 
