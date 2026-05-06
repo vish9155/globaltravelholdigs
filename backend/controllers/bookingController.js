@@ -42,7 +42,7 @@ export let createRazorpayOrder = async (req, resp) => {
         let options = {
             amount: Math.round(amount * 100),
 
-            currency: response.data.total_currency,
+            currency: "INR",
 
             receipt: `receipt_${Date.now()}`,
 
@@ -62,7 +62,7 @@ export let createRazorpayOrder = async (req, resp) => {
 
             amount,
 
-            currency: response.data.total_currency,
+            currency: "",
 
             razorpay_order_id: order.id,
 
