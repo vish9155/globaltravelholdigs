@@ -223,15 +223,10 @@ let getDeviceInfo = (req) => {
     return {
 
         ip:
-         req.headers["cf-connecting-ip"] ||
+            req.headers["x-forwarded-for"]?.split(",")[0] ||
+            req.socket?.remoteAddress ||
+            req.ip,
 
-        req.headers["x-real-ip"] ||
-
-        req.headers["x-forwarded-for"]?.split(",")[0] ||
-
-        req.socket?.remoteAddress ||
-
-        req.ip,
         browser:
             `${result.browser.name || ""} ${result.browser.version || ""}`,
 
