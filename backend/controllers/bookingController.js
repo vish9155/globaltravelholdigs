@@ -79,7 +79,6 @@ export let createRazorpayOrder = async (req, resp) => {
             ),
         });
 
-        //  response
         resp.status(200).json({
             status: true,
 
