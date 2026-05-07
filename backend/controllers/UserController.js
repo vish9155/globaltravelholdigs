@@ -13,6 +13,9 @@ import { Audit } from '../models/Audit.js';
 import twilioClient from '../utils/twilio.js';
 import cloudinary from '../utils/cloudinary.js';
 import client from '../config/redisConfig.js';
+import DeviceDetector from "device-detector-js";
+
+let detector = new DeviceDetector();
 
 let registerValidate = Joi.object({
     name: Joi.string()
@@ -201,232 +204,273 @@ export let verifyEmail = async (req, resp) => {
     }
 }
 
+
+
+
+
+
+// DEVICE INFO
 let getDeviceInfo = (req) => {
+
     let ua = req.headers["user-agent"];
 
     let parser = new UAParser(ua);
+
     let result = parser.getResult();
 
+    let deviceDetect = detector.parse(ua);
+
     return {
+
         ip:
             req.headers["x-forwarded-for"]?.split(",")[0] ||
             req.socket?.remoteAddress ||
             req.ip,
-        userAgent: ua,
-        browser: result.browser.name,
-        os: result.os.name,
-        device: result.device.type || "desktop"
+
+        browser:
+            `${result.browser.name || ""} ${result.browser.version || ""}`,
+
+        os:
+            `${result.os.name || ""} ${result.os.version || ""}`,
+
+        device:
+            deviceDetect.device?.type || "desktop",
+
+        brand:
+            deviceDetect.device?.brand || "Unknown",
+
+        model:
+            deviceDetect.device?.model || "Unknown",
+
+        cpu:
+            result.cpu.architecture || "Unknown"
     };
 };
-//  LOCATION
-let getLocation = async (ip) => {
-    try {
-        let res = await fetch(`http://ip-api.com/json/${ip}`);
-        let data = await res.json();
 
-        if (data.status === "success") {
-            return {
-                country: data.country,
-                city: data.city,
-                lat: data.lat,
-                lng: data.lon
-            };
-        }
-        return null;
+
+
+
+// IP LOCATION
+let getIPLocation = async (ip) => {
+
+    try {
+
+        let response = await fetch(
+            `https://ipinfo.io/${ip}?token=${process.env.IPINFO_TOKEN}`
+        );
+
+        let data = await response.json();
+
+        return {
+
+            city: data.city,
+
+            state: data.region,
+
+            country: data.country,
+
+            zip: data.postal,
+
+            timezone: data.timezone,
+
+            isp: data.org,
+
+            location: data.loc
+        };
 
     } catch (err) {
-        console.log("Location error:", err.message);
+
+        console.log(err.message);
+
         return null;
     }
 };
 
+
+
+
+// LOGIN
 export let login = async (req, resp) => {
+
     try {
-        let { email, password } = req.body;
 
-        let user = await Users.findOne({ email })
+        let {
+
+            email,
+            password,
+
+            latitude,
+            longitude,
+
+            accuracy
+
+        } = req.body;
+
+
+
+        // USER
+        let user = await Users.findOne({ email });
+
         if (!user) {
-            return resp.json({
-                message: "user not found",
-                status: false
-            })
-        }
-        if (!user.emailVerified) {
-            return resp.json({ message: "Please Verify Email First", status: false })
-        }
-        let isMatch = await bcrypt.compare(password, user.password)
-        if (!isMatch) {
-            return resp.json({
-                message: "Enter password is invalid",
-                status: false
-            })
-        }
-        //  DEVICE CHECK STARTS HERE
-        let device = getDeviceInfo(req);
-        //  LOCATION
-        let location = await getLocation(device.ip);
-        let mapImage = location
-            ? `https://maps.googleapis.com/maps/api/staticmap?center=${location.lat},${location.lng}&zoom=13&size=600x300&markers=color:red%7C${location.lat},${location.lng}`
-            : "";
-        let mapLink = location
-            ? `https://www.google.com/maps?q=${location.lat},${location.lng}`
-            : "Not Available";
 
-        if (!user.devices) {
-            user.devices = [];
+            return resp.json({
+
+                message: "User not found",
+
+                status: false
+            });
         }
-        let existingDeviceIndex = user.devices?.findIndex(
-            d => d.userAgent === device.userAgent && d.ip === device.ip
+
+
+
+        // PASSWORD
+        let isMatch = await bcrypt.compare(
+            password,
+            user.password
+        );
+
+        if (!isMatch) {
+
+            return resp.json({
+
+                message: "Invalid password",
+
+                status: false
+            });
+        }
+
+
+
+        // DEVICE
+        let device = getDeviceInfo(req);
+
+
+
+        // IP LOCATION
+        let ipLocation =
+            await getIPLocation(device.ip);
+
+
+
+        // LOGIN TIME
+        let loginTime =
+            new Date().toLocaleString();
+
+
+
+        // EMAIL
+        await transport.sendMail({
+
+            to: email,
+
+            subject: "⚠️ New Login Detected",
+
+            html: `
+
+<div style="font-family:Arial;padding:20px">
+
+<h2>⚠️ New Login Detected</h2>
+
+<h3>📍 Exact Location</h3>
+
+<p><b>Latitude:</b> ${latitude || "Not Allowed"}</p>
+
+<p><b>Longitude:</b> ${longitude || "Not Allowed"}</p>
+
+<p><b>GPS Accuracy:</b> ${accuracy || "Unknown"} meters</p>
+
+
+<h3>🌍 Network Location</h3>
+
+<p><b>IP Address:</b> ${device.ip}</p>
+
+<p><b>City:</b> ${ipLocation?.city || ""}</p>
+
+<p><b>State:</b> ${ipLocation?.state || ""}</p>
+
+<p><b>ZIP Code:</b> ${ipLocation?.zip || ""}</p>
+
+<p><b>Country:</b> ${ipLocation?.country || ""}</p>
+
+<p><b>Timezone:</b> ${ipLocation?.timezone || ""}</p>
+
+<p><b>ISP:</b> ${ipLocation?.isp || ""}</p>
+
+
+<h3>💻 Device Information</h3>
+
+<p><b>Browser:</b> ${device.browser}</p>
+
+<p><b>Operating System:</b> ${device.os}</p>
+
+<p><b>Device Type:</b> ${device.device}</p>
+
+<p><b>Brand:</b> ${device.brand}</p>
+
+<p><b>Model:</b> ${device.model}</p>
+
+<p><b>CPU:</b> ${device.cpu}</p>
+
+
+<h3>🕒 Login Activity</h3>
+
+<p><b>Login Time:</b> ${loginTime}</p>
+
+</div>
+
+`
+        });
+
+
+
+        // JWT
+        let token = jwt.sign(
+
+            {
+                id: user._id
+            },
+
+            process.env.JWT_SECRET_KEY,
+
+            {
+                expiresIn: "5d"
+            }
         );
 
 
-        let isNewDevice = existingDeviceIndex === -1;
 
-        //  SAVE / UPDATE DEVICE
-        if (isNewDevice) {
+        resp.cookie("token", token, {
 
-            if (user.devices.length >= 5) {
-                user.devices.shift(); // remove oldest
-            }
-
-            user.devices.push({
-                ip: device.ip,
-                userAgent: device.userAgent,
-                browser: device.browser,
-                os: device.os,
-                deviceType: device.device,
-                lastLogin: new Date()
-            });
-
-        }
-        else {
-
-            user.devices[existingDeviceIndex].lastLogin = new Date();
-            user.devices[existingDeviceIndex].ip = device.ip;
-        }
-
-        await user.save();
-
-        //  LOGIN ALERT (only for new device)
-        if (isNewDevice) {
-            await transport.sendMail({
-                to: email,
-                subject: "⚠️ New Login Detected",
-                html: `
-  <div style="margin:0; padding:0; background:#f4f6f8; font-family:Arial, sans-serif;">
-    
-    <table width="100%" cellpadding="0" cellspacing="0" style="padding:20px 0;">
-      <tr>
-        <td align="center">
-
-          <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,0.08);">
-
-            <!-- HEADER IMAGE -->
-            <tr>
-              <td>
-                <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c"
-                     width="100%" height="200"
-                     style="object-fit:cover;">
-              </td>
-            </tr>
-
-            <!-- TITLE -->
-            <tr>
-              <td style="background:#ff4d4f; color:#fff; text-align:center; padding:20px;">
-                <h2 style="margin:0;">⚠️ New Login Alert</h2>
-              </td>
-            </tr>
-
-            <!-- CONTENT -->
-            <tr>
-              <td style="padding:25px; color:#333;">
-
-                <p style="font-size:16px;">We detected a new login to your account.</p>
-
-                <!-- LOCATION -->
-                <h3>📍 Location Details</h3>
-                <p><b>IP:</b> ${device.ip}</p>
-                <p><b>City:</b> ${location?.city || "Unknown"}</p>
-                <p><b>Country:</b> ${location?.country || "Unknown"}</p>
-
-                <!-- MAP IMAGE -->
-                ${mapImage
-                        ? `<img src="${mapImage}" style="width:100%; border-radius:10px; margin:10px 0;" />`
-                        : ""
-                    }
-
-                <!-- DEVICE -->
-                <h3>💻 Device Info</h3>
-                <p><b>Browser:</b> ${device.browser}</p>
-                <p><b>OS:</b> ${device.os}</p>
-                <p><b>Device:</b> ${device.device}</p>
-
-                <!-- BUTTON -->
-                <div style="text-align:center; margin:30px 0;">
-                  <a href="${mapLink}"
-                     style="background:#1890ff; color:#fff; padding:14px 25px; border-radius:6px; text-decoration:none; font-size:16px; font-weight:bold;">
-                     📍 View on Map
-                  </a>
-                </div>
-
-                <!-- WARNING BOX -->
-                <div style="background:#fff3cd; padding:15px; border-left:5px solid #ffa502; border-radius:6px;">
-                  <p style="margin:0;">
-                    If this wasn't you, secure your account immediately by resetting your password.
-                  </p>
-                </div>
-
-              </td>
-            </tr>
-
-            <!-- FOOTER -->
-            <tr>
-              <td style="background:#fafafa; text-align:center; padding:15px; font-size:12px; color:#999;">
-                <p style="margin:0;">This is an automated security alert.</p>
-              </td>
-            </tr>
-
-          </table>
-
-        </td>
-      </tr>
-    </table>
-
-  </div>
-  `
-            });
-
-        }
-
-        //  AUDIT LOG ke liye use karte hai isko 
-        await Audit.create({
-            userId: user._id,
-            action: "LOGIN_SUCCESS",
-            ip: device.ip,
-            device: device.userAgent,
-            location
-        });
-        let tokens = jwt.sign({ id: user._id, email: user.email, role: user.role }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' })
-        resp.cookie("token", tokens, {
             httpOnly: true,
+
             secure: true,
+
             sameSite: "none",
+
             maxAge: 5 * 24 * 60 * 60 * 1000
-        })
+        });
+
+
+
         return resp.json({
-            message: "User Login Successfully ",
-            status: true,
+
+            message: "Login Success",
             user,
-        })
+            status: true
+        });
 
     } catch (error) {
-        resp.json({
-            message: "Error in user Email Login",
+
+        return resp.json({
+
+            message: "Login Error",
+
             error: error.message,
+
             status: false
-        })
+        });
     }
-}
+};
 
 export let emailOtp = async (req, resp) => {
     try {
