@@ -72,8 +72,8 @@ export default function PassengerForm() {
 
           gender:
             p.gender === "male"
-              ? "Male"
-              : "Female",
+              ? "M"
+              : "F",
 
           dob: p.dob,
 
