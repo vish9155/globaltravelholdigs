@@ -40,9 +40,9 @@ export let createRazorpayOrder = async (req, resp) => {
 
         //  create razorpay order
         let options = {
-            amount: Math.round(100 * 100),
+            amount: Math.round(amount * 100),
 
-            currency: "INR",
+            currency: response.data.total_currency,
 
             receipt: `receipt_${Date.now()}`,
 
@@ -64,7 +64,7 @@ export let createRazorpayOrder = async (req, resp) => {
 
             amount: 100,
 
-            currency: "INR",
+            currency: response.data.total_currency,
 
             razorpay_order_id: order.id,
 
@@ -163,7 +163,7 @@ export let verifybooking = async (req, resp) => {
                         type: p.type,
 
                         title:
-                            p.gender === "Male"
+                            p.gender === "M"
                                 ? "mr"
                                 : "ms",
 
@@ -190,7 +190,7 @@ export let verifybooking = async (req, resp) => {
                             "+919999999999",
                     };
 
-                    // 🌍 passport
+                    //  passport
                     if (
                         p.passport &&
                         p.passport.number
@@ -260,7 +260,7 @@ export let verifybooking = async (req, resp) => {
                                 amount:
                                     booking.amount.toString(),
 
-                                currency: "INR",
+                                currency: booking.currency,
                             },
                         ],
                     },
