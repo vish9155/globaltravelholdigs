@@ -28,7 +28,7 @@ const passengerSchema = new mongoose.Schema(
     gender: {
       type: String,
       required: true,
-      enum: ["Male", "Female", "Other"],
+      enum: ["M", "F", "O"],
     },
 
     dob: {
