@@ -280,7 +280,6 @@ export default function LoginPage() {
                         </div>
                     </div>
 
-
                     <button className="w-full py-3 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition">
                         Login
                     </button>
