@@ -71,7 +71,7 @@ export default function PhoneLogin() {
    
                                    email: form.email,
    
-                                   password: form.password,
+                                   otp: form.otp,
    
                                    latitude,
    

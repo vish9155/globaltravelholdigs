@@ -12,6 +12,7 @@ export default function Flights() {
 
     let [fromSearch, setFromSearch] = useState([])
     let [toSearch, setToSearch] = useState([])
+    let [debounce, setDebounce] = useState("")
 
     let [trip, setTrip] = useState("oneway")
     let [departDate, setDepartDate] = useState(new Date());
@@ -80,9 +81,9 @@ export default function Flights() {
     let handleSubmit = async (e) => {
         e.preventDefault()
         if (adult === 0 && (children > 0 || infant > 0)) {
-  alert("At least 1 adult is required");
-  return;
-}
+            alert("At least 1 adult is required");
+            return;
+        }
         let payload = {
             ...form,
             tripType: trip,
@@ -93,7 +94,7 @@ export default function Flights() {
 
             classe: classe.toUpperCase()
         };
-       localStorage.setItem("payload",JSON.stringify(payload))
+        localStorage.setItem("payload", JSON.stringify(payload))
         navigate("/flight-results", {
             state: payload
         });
