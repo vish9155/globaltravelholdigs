@@ -1,6 +1,6 @@
 import { Menu, X, User, ChevronDown } from "lucide-react";
 import React, { useState, useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Navbar() {
   let [open, setOpen] = useState(false);
@@ -222,11 +222,13 @@ export default function Navbar() {
       onClick={() => setOpen(true)}
     />
     <div className="flex items-center">
+      <Link to="/">
       <img 
         src="/images/Global logo final.png" 
         alt="Logo"  
         className="h-16 w-auto object-contain hover:scale-105 transition-transform duration-300 filter drop-shadow-[0px_4px_20px_rgba(0,31,63,0.1)]"
       />
+      </Link>
     </div>
   </div>
 

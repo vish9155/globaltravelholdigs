@@ -110,9 +110,9 @@ export let fligtsDatas = async (req, res) => {
             });
           }
 
-          console.log("Trip Type:", tripType);
-          console.log("Is Round Trip:", isRoundTrip);
-          console.log("Slices:", slices);
+          // console.log("Trip Type:", tripType);
+          // console.log("Is Round Trip:", isRoundTrip);
+          // console.log("Slices:", slices);
 
           /* =====================================================
             DUFFEL API CALL
@@ -144,15 +144,15 @@ export let fligtsDatas = async (req, res) => {
           ===================================================== */
 
           if (!response.ok) {
-            console.log(result);
+            // console.log(result);
 
             throw new Error(
               result?.errors?.[0]?.message ||
               "Duffel API Error"
             );
           }
-          console.log("Duffel Offers Count:",
-            result?.data?.offers?.length);
+          // console.log("Duffel Offers Count:",
+            // result?.data?.offers?.length);
 
 
           return result;

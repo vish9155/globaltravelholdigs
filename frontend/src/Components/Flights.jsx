@@ -62,10 +62,10 @@ export default function Flights() {
     }, [adult, children, infant, classe]);
 
     let searchLocation = async (value, type) => {
-        console.log(value)
+        // console.log(value)
         let resp = await fetch(`https://www.globaltravel-holdings.com/api/flight/location?query=${value}`)
         let result = await resp.json()
-        console.log(result, result.data, result.data.data)
+        // console.log(result, result.data, result.data.data)
         if (type == 'from') {
             setFromSearch(result.data.data || [])
         }

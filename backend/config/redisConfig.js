@@ -20,15 +20,15 @@ let client = createClient({
 });
 
 client.on("error", (err) => {
-  console.error(" Redis Error:", err);
+  // console.error(" Redis Error:", err);
 });
 
 client.on("connect", () => {
-  console.log(" Redis connecting...");
+  // console.log(" Redis connecting...");
 });
 
 client.on("ready", () => {
-  console.log(" Redis connected successfully");
+  // console.log(" Redis connected successfully");
 });
 
 let connectRedis = async () => {
@@ -37,7 +37,7 @@ let connectRedis = async () => {
       await client.connect();
     }
   } catch (err) {
-    console.error(" Redis Connection Failed:", err);
+    // console.error(" Redis Connection Failed:", err);
   }
 };
 

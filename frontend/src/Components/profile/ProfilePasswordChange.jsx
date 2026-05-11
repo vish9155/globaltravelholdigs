@@ -57,7 +57,7 @@ export default function ChangePassword() {
                 toast.error(data.message);
                 return
             }
-            console.log(data)
+            // console.log(data)
             toast.success(data.message);
             navigate("/profile")
         } catch (err) {

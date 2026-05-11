@@ -10,7 +10,7 @@ export let hotels = async (req, res) => {
     try {
 
         let token = await getAccessToken()
-        console.log(token)
+        // console.log(token)
 
 
 
@@ -36,7 +36,7 @@ export let hotels = async (req, res) => {
         })
 
         let hotelList = await hotelResp.json()
-      console.log(hotelList)
+      // console.log(hotelList)
         // let hotelIds = hotelList.data.slice(0,5).map(h => h.hotelId).join(',')
 
   
@@ -79,7 +79,7 @@ export let hotels = async (req, res) => {
     })
 
     } catch (error) {
-        console.error(error)
+        // console.error(error)
         res.status(500).json({ error: "Something went wrong in hotels api" })
     }
 }

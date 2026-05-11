@@ -7,7 +7,7 @@ export let flightOffer = createAsyncThunk(
   async (offerId, { rejectWithValue }) => {
     try {
       if (!offerId) throw new Error("Offer ID not found");
-      console.log(offerId)
+      // console.log(offerId)
       let res = await fetch(
         `https://www.globaltravel-holdings.com/api/get-offers/${offerId}`,
         {
@@ -20,7 +20,7 @@ export let flightOffer = createAsyncThunk(
 
       let data = await res.json();
 
-      console.log("API RESPONSE:", data);
+      // console.log("API RESPONSE:", data);
 
       return data.data; 
     } catch (error) {
