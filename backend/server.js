@@ -59,7 +59,6 @@ app.use("/api",limiter);
 dbconnect()
 
 
-
 app.use("/api", flightRoutes)
 app.use("/api", hotelsRoutes)
 app.use("/api", carsRoutes)
