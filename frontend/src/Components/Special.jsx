@@ -26,7 +26,7 @@ export default function PremiumSpecials() {
           <div className="absolute inset-0 p-4 flex flex-col justify-between text-white  bg-white/10">
             <div>
               <h3 className="font-semibold text-lg text-shadow-black text-shadow-2xs">
-               Spiritual Tours in India
+               Spiritual Tour in India
               </h3>
               <p className="text-sm opacity-90  text-shadow-black text-shadow-2xs">
                 Explore sacred destinations like Varanasi, Kedarnath, and Tirupati with customized travel packages designed for a peaceful and meaningful journey.
