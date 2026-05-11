@@ -16,7 +16,7 @@ export default function FlightDetails() {
     let navigate = useNavigate();
 
     let flightOffersData = useSelector(s => s.offer.items)
-    console.log(flightOffersData)
+    // console.log(flightOffersData)
     let dispatch = useDispatch()
   let {offerId}=useParams()
     useEffect(() => {

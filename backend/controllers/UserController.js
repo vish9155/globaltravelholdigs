@@ -280,7 +280,7 @@ let getIPLocation = async (ip) => {
 
     } catch (err) {
 
-        console.log(err.message);
+        // console.log(err.message);
 
         return null;
     }
@@ -1056,7 +1056,7 @@ export let forgotPassOtp = async (req, resp) => {
         let otp = generateOtp()
 
         await saveOtp("email", email, otp)
-        console.log(await getOtp("email", email))
+        // console.log(await getOtp("email", email))
         await transport.sendMail({
             to: email,
             subject: "Reset Your Password - Secure OTP",
@@ -1285,7 +1285,7 @@ export let restpass = async (req, resp) => {
 
 export let profile = async (req, resp) => {
     try {
-        console.log(req.user.id , req.params.id)
+        // console.log(req.user.id , req.params.id)
         if (req.user.id !== req.params.id) {
             return resp.send({
                 message: "Invalid credentials",

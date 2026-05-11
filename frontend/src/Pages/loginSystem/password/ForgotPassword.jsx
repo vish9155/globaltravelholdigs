@@ -31,7 +31,7 @@ export default function ForgotPassword() {
                 method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form)
             })
             let data = await resp.json()
-            console.log(data)
+            // console.log(data)
             if (!data.status) {
                 toast.error(data.message)
                 return

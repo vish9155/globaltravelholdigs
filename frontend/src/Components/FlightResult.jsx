@@ -38,7 +38,7 @@ export default function FlightResult() {
   let pagination = useSelector((s) => s.flights.pagination);
   let loading = useSelector((s) => s.flights.loading);
 
-  console.log(offers, pagination)
+  // console.log(offers, pagination)
 
 
   useEffect(() => {
@@ -145,10 +145,10 @@ export default function FlightResult() {
         parseDuration(
           b?.slices?.[0]?.duration || ""
         );
-      console.log(
-        a?.slices?.[0]?.duration,
-        parseDuration(a?.slices?.[0]?.duration)
-      );
+      // console.log(
+      //   a?.slices?.[0]?.duration,
+      //   parseDuration(a?.slices?.[0]?.duration)
+      // );
       return bDuration - aDuration;
     }
     if (filters.sort === "short layover") {

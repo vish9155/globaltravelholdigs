@@ -15,7 +15,7 @@ export default function FacebookSuccess() {
                 });
 
                 let data = await resp.json();
-                console.log(data);
+                // console.log(data);
 
                 if (data.user || data.status) {
                     localStorage.setItem("login", "true");
@@ -29,7 +29,7 @@ export default function FacebookSuccess() {
                     navigate("/login");
                 }
             } catch (error) {
-                console.log(error);
+                // console.log(error);
                 navigate("/login");
             }
         };
