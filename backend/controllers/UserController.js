@@ -1191,13 +1191,13 @@ export let phoneOtp = async (req, resp) => {
 
         let user = await Users.findOne({ phone });
         if (!user) {
-            return res.json({ message: "User not found", status: false });
+            return resp.json({ message: "User not found", status: false });
         }
 
         // Rate limit check (see next section)
         let count = await client.get(`otp_count:${phone}`);
         if (count && count >= 3) {
-            return res.json({
+            return resp.json({
                 message: "Too many OTP requests. Try later.",
                 status: false
             });
