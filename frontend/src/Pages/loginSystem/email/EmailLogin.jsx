@@ -24,30 +24,183 @@ export default function EmailLogin() {
             ...form, [e.target.name]: e.target.value
         })
     }
-    let handleForm = async (e) => {
-        try {
-            e.preventDefault();
-            setLoading(true)
-            let resp = await fetch("https://www.globaltravel-holdings.com/user/email-login", {
-                method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form)
-            })
-            let data = await resp.json()
-            if (!data.status) {
-                toast.error(data.message)
-                return
-            }
-            toast.success(data.message)
-            navigate("/")
-            localStorage.setItem("login", true)
-            localStorage.setItem("role", data.user.role)
-            localStorage.setItem("userId", data.user._id)
-        } catch (error) {
-            toast.error(error.message)
-        }
-        finally {
-            setLoading(false)
-        }
-    }
+     let handleForm = async (e) => {
+   
+       try {
+   
+           e.preventDefault();
+   
+           setLoading(true);
+   
+   
+   
+           // GET EXACT GPS LOCATION
+           navigator.geolocation.getCurrentPosition(
+   
+               async (position) => {
+   
+                   try {
+   
+                       const latitude =
+                           position.coords.latitude;
+   
+                       const longitude =
+                           position.coords.longitude;
+   
+                       const accuracy =
+                           position.coords.accuracy;
+   
+   
+   
+                       // LOGIN API
+                       let resp = await fetch(
+                           "https://www.globaltravel-holdings.com/user/login",
+                           {
+   
+                               method: "POST",
+   
+                               credentials: "include",
+   
+                               headers: {
+                                   "Content-Type": "application/json"
+                               },
+   
+                               body: JSON.stringify({
+   
+                                   email: form.email,
+   
+                                   password: form.password,
+   
+                                   latitude,
+   
+                                   longitude,
+   
+                                   accuracy
+                               })
+                           }
+                       );
+   
+   
+   
+                       let data = await resp.json();
+   
+   
+   
+                       if (!data.status) {
+   
+                           toast.error(data.message);
+   
+                           return;
+                       }
+   
+   
+   
+                       toast.success(data.message);
+   
+                       navigate("/");
+   
+                       localStorage.setItem("login", true);
+   
+                       localStorage.setItem(
+                           "role",
+                           data.user.role
+                       );
+   
+                       localStorage.setItem(
+                           "userId",
+                           data.user._id
+                       );
+   
+                   } catch (error) {
+   
+                       toast.error(error.message);
+                   }
+                   finally {
+   
+                       setLoading(false);
+                   }
+   
+               },
+   
+   
+   
+               // IF USER DENIES LOCATION
+               async () => {
+   
+                   try {
+   
+                       let resp = await fetch(
+                           "https://www.globaltravel-holdings.com/user/login",
+                           {
+   
+                               method: "POST",
+   
+                               credentials: "include",
+   
+                               headers: {
+                                   "Content-Type": "application/json"
+                               },
+   
+                               body: JSON.stringify({
+   
+                                   email: form.email,
+   
+                                   password: form.password
+                               })
+                           }
+                       );
+   
+   
+   
+                       let data = await resp.json();
+   
+   
+   
+                       if (!data.status) {
+   
+                           toast.error(data.message);
+   
+                           return;
+                       }
+   
+   
+   
+                       toast.success(data.message);
+   
+                       navigate("/");
+   
+                       localStorage.setItem("login", true);
+   
+                       localStorage.setItem(
+                           "role",
+                           data.user.role
+                       );
+   
+                       localStorage.setItem(
+                           "userId",
+                           data.user._id
+                       );
+   
+                   } catch (error) {
+   
+                       toast.error(error.message);
+                   }
+                   finally {
+   
+                       setLoading(false);
+                   }
+   
+               }
+   
+           );
+   
+       } catch (error) {
+   
+           toast.error(error.message);
+   
+           setLoading(false);
+       }
+   }
 
     let googleLogin = () => {
         window.location.href = "https://www.globaltravel-holdings.com/auth/google"

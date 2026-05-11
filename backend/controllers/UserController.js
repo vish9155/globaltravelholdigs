@@ -804,7 +804,10 @@ export let emailOtp = async (req, resp) => {
 
 export let emaillogin = async (req, resp) => {
     try {
-        let { email, otp } = req.body;
+        let { email, otp, latitude,
+            longitude,
+
+            accuracy } = req.body;
 
         let storedOtp = await getOtp("email", email);
         if (!storedOtp) {
@@ -819,53 +822,338 @@ export let emaillogin = async (req, resp) => {
 
         let user = await Users.findOne({ email });
 
-        //  DEVICE CHECK STARTS HERE
+          // DEVICE
         let device = getDeviceInfo(req);
-        //  LOCATION
-        let location = await getLocation(device.ip);
-
-        let mapLink = location
-            ? `https://www.google.com/maps?q=${location.lat},${location.lng}`
-            : "Not Available";
-        if (!user.devices) {
-            user.devices = [];
-        }
-        let existingDeviceIndex = user.devices.findIndex(
-            d => d.userAgent === device.userAgent && d.ip === device.ip
-        );
 
 
-        let isNewDevice = existingDeviceIndex === -1;
 
-        //  SAVE / UPDATE DEVICE
-        if (isNewDevice) {
+        // IP LOCATION
+        let ipLocation =
+            await getIPLocation(device.ip);
 
-            if (user.devices.length >= 5) {
-                user.devices.shift(); // remove oldest
-            }
 
-            user.devices.push({
-                ip: device.ip,
-                userAgent: device.userAgent,
-                browser: device.browser,
-                os: device.os,
-                deviceType: device.device,
-                lastLogin: new Date()
-            });
 
-        }
-        else {
+        // LOGIN TIME
+        let loginTime =
+            new Date().toLocaleString();
 
-            user.devices[existingDeviceIndex].lastLogin = new Date();
-            user.devices[existingDeviceIndex].ip = device.ip;
-        }
 
-        await user.save();
 
-        //  LOGIN ALERT (only for new device)
-        if (isNewDevice) {
+        // EMAIL
+        await transport.sendMail({
 
-        }
+            to: email,
+
+            subject: "⚠️ New Login Detected",
+
+            html: `
+
+<div style="margin:0;padding:0;background:#f4f7fb;font-family:Arial,sans-serif;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
+    <tr>
+      <td align="center">
+
+    <table width="700" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:18px;overflow:hidden;box-shadow:0 10px 35px rgba(0,0,0,0.08);">
+
+      <!-- HEADER -->
+      <tr>
+        <td style="background:linear-gradient(135deg,#0f172a,#1e293b);padding:30px;text-align:center;">
+
+          <h1 style="margin:0;color:#ffffff;font-size:30px;font-weight:700;">
+            Global Travel Holdings
+          </h1>
+
+          <p style="margin-top:10px;color:#cbd5e1;font-size:14px;">
+            Advanced Account Security Notification
+          </p>
+
+        </td>
+      </tr>
+
+
+      <!-- ALERT -->
+      <tr>
+        <td style="padding:35px;">
+
+          <div style="background:#fff7ed;border:1px solid #fdba74;padding:18px;border-radius:12px;margin-bottom:25px;">
+
+            <h2 style="margin:0;color:#ea580c;font-size:22px;">
+              ⚠️ New Login Detected
+            </h2>
+
+            <p style="margin-top:10px;color:#7c2d12;font-size:15px;line-height:1.7;">
+              A new sign-in to your account was detected. If this was you, no action is needed.
+              Otherwise, please secure your account immediately.
+            </p>
+
+          </div>
+
+
+          <!-- MAP -->
+          <div style="margin-bottom:30px;">
+
+            <h3 style="margin-bottom:15px;color:#0f172a;">
+              📍 Login Coordinates
+            </h3>
+
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;border-radius:12px;padding:18px;">
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>Latitude:</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${latitude || "Not Available"}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>Longitude:</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${longitude || "Not Available"}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;">
+                  <b>GPS Accuracy:</b>
+                </td>
+
+                <td style="padding:10px;">
+                  ${accuracy || "Unknown"} meters
+                </td>
+              </tr>
+
+            </table>
+
+          </div>
+
+
+          <!-- MAP BUTTON -->
+          <div style="text-align:center;margin-bottom:35px;">
+
+            <a 
+              href="https://www.google.com/maps?q=${latitude},${longitude}"
+              style="
+                display:inline-block;
+                background:linear-gradient(135deg,#2563eb,#1d4ed8);
+                color:#ffffff;
+                padding:14px 28px;
+                border-radius:10px;
+                text-decoration:none;
+                font-size:15px;
+                font-weight:600;
+                box-shadow:0 6px 18px rgba(37,99,235,0.3);
+              "
+            >
+              📍 View Exact Location on Map
+            </a>
+
+          </div>
+
+
+          <!-- NETWORK -->
+          <div style="margin-bottom:30px;">
+
+            <h3 style="margin-bottom:15px;color:#0f172a;">
+              🌍 Network Information
+            </h3>
+
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;border-radius:12px;padding:18px;">
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>IP Address</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${device.ip}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>City</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${ipLocation?.city || "Unknown"}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>State</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${ipLocation?.state || "Unknown"}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>ZIP Code</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${ipLocation?.zip || "Unknown"}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>Country</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${ipLocation?.country || "Unknown"}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;">
+                  <b>Internet Provider</b>
+                </td>
+
+                <td style="padding:10px;">
+                  ${ipLocation?.isp || "Unknown"}
+                </td>
+              </tr>
+
+            </table>
+
+          </div>
+
+
+          <!-- DEVICE -->
+          <div style="margin-bottom:30px;">
+
+            <h3 style="margin-bottom:15px;color:#0f172a;">
+              💻 Device Information
+            </h3>
+
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;border-radius:12px;padding:18px;">
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>Browser</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${device.browser}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>Operating System</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${device.os}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>Device Type</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${device.device}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>Brand</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${device.brand}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;">
+                  <b>Model</b>
+                </td>
+
+                <td style="padding:10px;">
+                  ${device.model}
+                </td>
+              </tr>
+
+            </table>
+
+          </div>
+
+
+          <!-- TIME -->
+          <div style="background:#eff6ff;border:1px solid #bfdbfe;padding:18px;border-radius:12px;">
+
+            <h3 style="margin-top:0;color:#1d4ed8;">
+              🕒 Login Activity
+            </h3>
+
+            <p style="margin:8px 0;font-size:15px;">
+              <b>Login Time:</b> ${loginTime}
+            </p>
+
+          </div>
+
+
+          <!-- SECURITY WARNING -->
+          <div style="margin-top:35px;background:#fef2f2;border:1px solid #fecaca;padding:18px;border-radius:12px;">
+
+            <h3 style="margin-top:0;color:#dc2626;">
+              🔒 Security Recommendation
+            </h3>
+
+            <p style="margin:0;color:#7f1d1d;line-height:1.7;">
+              If you do not recognize this activity, immediately change your password
+              and review your account security settings.
+            </p>
+
+          </div>
+
+        </td>
+      </tr>
+
+
+      <!-- FOOTER -->
+      <tr>
+        <td style="background:#0f172a;padding:22px;text-align:center;">
+
+          <p style="margin:0;color:#cbd5e1;font-size:13px;">
+            © 2026 Global Travel Holdings. All rights reserved.
+          </p>
+
+          <p style="margin-top:8px;color:#94a3b8;font-size:12px;">
+            This is an automated security notification generated by our monitoring system.
+          </p>
+
+        </td>
+      </tr>
+
+    </table>
+
+  </td>
+</tr>
+  </table>
+
+</div> 
+
+
+
+`
+        });
 
         //  AUDIT LOG ke liye use karte hai isko 
         await Audit.create({
@@ -942,7 +1230,10 @@ export let phoneOtp = async (req, resp) => {
 
 export let phonelogin = async (req, resp) => {
     try {
-        let { phone, otp } = req.body;
+        let { phone, otp, latitude,
+            longitude,
+
+            accuracy } = req.body;
 
         let storedOtp = await getOtp("phone", phone);
         if (!storedOtp) {
@@ -957,54 +1248,338 @@ export let phonelogin = async (req, resp) => {
 
         let user = await Users.findOne({ phone });
 
-        //  DEVICE CHECK STARTS HERE
+          // DEVICE
         let device = getDeviceInfo(req);
-        //  LOCATION
-        let location = await getLocation(device.ip);
-
-        let mapLink = location
-            ? `https://www.google.com/maps?q=${location.lat},${location.lng}`
-            : "Not Available";
-        if (!user.devices) {
-            user.devices = [];
-        }
-        let existingDeviceIndex = user.devices.findIndex(
-            d => d.userAgent === device.userAgent && d.ip === device.ip
-        );
 
 
-        let isNewDevice = existingDeviceIndex === -1;
 
-        //  SAVE / UPDATE DEVICE
-        if (isNewDevice) {
+        // IP LOCATION
+        let ipLocation =
+            await getIPLocation(device.ip);
 
-            if (user.devices.length >= 5) {
-                user.devices.shift(); // remove oldest
-            }
 
-            user.devices.push({
-                ip: device.ip,
-                userAgent: device.userAgent,
-                browser: device.browser,
-                os: device.os,
-                deviceType: device.device,
-                lastLogin: new Date()
-            });
 
-        }
-        else {
+        // LOGIN TIME
+        let loginTime =
+            new Date().toLocaleString();
 
-            user.devices[existingDeviceIndex].lastLogin = new Date();
-            user.devices[existingDeviceIndex].ip = device.ip;
-        }
 
-        await user.save();
 
-        //  LOGIN ALERT (only for new device)
-        if (isNewDevice) {
+        // EMAIL
+        await transport.sendMail({
 
-        }
+            to: email,
 
+            subject: "⚠️ New Login Detected",
+
+            html: `
+
+<div style="margin:0;padding:0;background:#f4f7fb;font-family:Arial,sans-serif;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
+    <tr>
+      <td align="center">
+
+    <table width="700" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:18px;overflow:hidden;box-shadow:0 10px 35px rgba(0,0,0,0.08);">
+
+      <!-- HEADER -->
+      <tr>
+        <td style="background:linear-gradient(135deg,#0f172a,#1e293b);padding:30px;text-align:center;">
+
+          <h1 style="margin:0;color:#ffffff;font-size:30px;font-weight:700;">
+            Global Travel Holdings
+          </h1>
+
+          <p style="margin-top:10px;color:#cbd5e1;font-size:14px;">
+            Advanced Account Security Notification
+          </p>
+
+        </td>
+      </tr>
+
+
+      <!-- ALERT -->
+      <tr>
+        <td style="padding:35px;">
+
+          <div style="background:#fff7ed;border:1px solid #fdba74;padding:18px;border-radius:12px;margin-bottom:25px;">
+
+            <h2 style="margin:0;color:#ea580c;font-size:22px;">
+              ⚠️ New Login Detected
+            </h2>
+
+            <p style="margin-top:10px;color:#7c2d12;font-size:15px;line-height:1.7;">
+              A new sign-in to your account was detected. If this was you, no action is needed.
+              Otherwise, please secure your account immediately.
+            </p>
+
+          </div>
+
+
+          <!-- MAP -->
+          <div style="margin-bottom:30px;">
+
+            <h3 style="margin-bottom:15px;color:#0f172a;">
+              📍 Login Coordinates
+            </h3>
+
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;border-radius:12px;padding:18px;">
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>Latitude:</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${latitude || "Not Available"}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>Longitude:</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${longitude || "Not Available"}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;">
+                  <b>GPS Accuracy:</b>
+                </td>
+
+                <td style="padding:10px;">
+                  ${accuracy || "Unknown"} meters
+                </td>
+              </tr>
+
+            </table>
+
+          </div>
+
+
+          <!-- MAP BUTTON -->
+          <div style="text-align:center;margin-bottom:35px;">
+
+            <a 
+              href="https://www.google.com/maps?q=${latitude},${longitude}"
+              style="
+                display:inline-block;
+                background:linear-gradient(135deg,#2563eb,#1d4ed8);
+                color:#ffffff;
+                padding:14px 28px;
+                border-radius:10px;
+                text-decoration:none;
+                font-size:15px;
+                font-weight:600;
+                box-shadow:0 6px 18px rgba(37,99,235,0.3);
+              "
+            >
+              📍 View Exact Location on Map
+            </a>
+
+          </div>
+
+
+          <!-- NETWORK -->
+          <div style="margin-bottom:30px;">
+
+            <h3 style="margin-bottom:15px;color:#0f172a;">
+              🌍 Network Information
+            </h3>
+
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;border-radius:12px;padding:18px;">
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>IP Address</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${device.ip}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>City</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${ipLocation?.city || "Unknown"}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>State</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${ipLocation?.state || "Unknown"}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>ZIP Code</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${ipLocation?.zip || "Unknown"}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>Country</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${ipLocation?.country || "Unknown"}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;">
+                  <b>Internet Provider</b>
+                </td>
+
+                <td style="padding:10px;">
+                  ${ipLocation?.isp || "Unknown"}
+                </td>
+              </tr>
+
+            </table>
+
+          </div>
+
+
+          <!-- DEVICE -->
+          <div style="margin-bottom:30px;">
+
+            <h3 style="margin-bottom:15px;color:#0f172a;">
+              💻 Device Information
+            </h3>
+
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;border-radius:12px;padding:18px;">
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>Browser</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${device.browser}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>Operating System</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${device.os}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>Device Type</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${device.device}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  <b>Brand</b>
+                </td>
+
+                <td style="padding:10px;border-bottom:1px solid #e2e8f0;">
+                  ${device.brand}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="padding:10px;">
+                  <b>Model</b>
+                </td>
+
+                <td style="padding:10px;">
+                  ${device.model}
+                </td>
+              </tr>
+
+            </table>
+
+          </div>
+
+
+          <!-- TIME -->
+          <div style="background:#eff6ff;border:1px solid #bfdbfe;padding:18px;border-radius:12px;">
+
+            <h3 style="margin-top:0;color:#1d4ed8;">
+              🕒 Login Activity
+            </h3>
+
+            <p style="margin:8px 0;font-size:15px;">
+              <b>Login Time:</b> ${loginTime}
+            </p>
+
+          </div>
+
+
+          <!-- SECURITY WARNING -->
+          <div style="margin-top:35px;background:#fef2f2;border:1px solid #fecaca;padding:18px;border-radius:12px;">
+
+            <h3 style="margin-top:0;color:#dc2626;">
+              🔒 Security Recommendation
+            </h3>
+
+            <p style="margin:0;color:#7f1d1d;line-height:1.7;">
+              If you do not recognize this activity, immediately change your password
+              and review your account security settings.
+            </p>
+
+          </div>
+
+        </td>
+      </tr>
+
+
+      <!-- FOOTER -->
+      <tr>
+        <td style="background:#0f172a;padding:22px;text-align:center;">
+
+          <p style="margin:0;color:#cbd5e1;font-size:13px;">
+            © 2026 Global Travel Holdings. All rights reserved.
+          </p>
+
+          <p style="margin-top:8px;color:#94a3b8;font-size:12px;">
+            This is an automated security notification generated by our monitoring system.
+          </p>
+
+        </td>
+      </tr>
+
+    </table>
+
+  </td>
+</tr>
+  </table>
+
+</div> 
+
+
+
+`
+        });
         //  AUDIT LOG ke liye use karte hai isko 
         await Audit.create({
             userId: user._id,
