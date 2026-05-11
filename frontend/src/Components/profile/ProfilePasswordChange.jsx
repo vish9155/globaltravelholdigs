@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import PhoneInput from "react-phone-number-input";
 import 'react-phone-number-input/style.css';
@@ -25,16 +25,12 @@ export default function ChangePassword() {
         oldpass: ""
     })
 
-    let forminput = (e) => {
-        try {
-
-            setLoading(true)
-            setForm({ ...form, [e.target.name]: e.target.value })
-            setLoading(false)
-        } catch (error) {
-
-        }
-    }
+    let formInput =useCallback( (e) => {
+   
+           setForm({
+               ...form, [e.target.name]: e.target.value
+           })
+       },[])
     let formHandle = async (e) => {
         try {
             e.preventDefault();

@@ -42,16 +42,18 @@ export default function PhoneOtp() {
             setLoading(false)
         }
     }
-
-    let googleLogin = () => {
-        window.location.href = "https://www.globaltravel-holdings.com/auth/google"
-    }
-    let gitLogin = () => {
-        window.location.href = "https://www.globaltravel-holdings.com/auth/github"
-    }
-    let facebookLogin = () => {
-        window.location.href = "https://www.globaltravel-holdings.com/auth/facebook"
-    }
+let googleLogin = useCallback(() => {
+           window.location.href = "https://www.globaltravel-holdings.com/auth/google"
+   
+       }, [])
+   
+   
+       let gitLogin = useCallback(() => {
+           window.location.href = "https://www.globaltravel-holdings.com/auth/github"
+       }, [])
+       let facebookLogin = useCallback(() => {
+           window.location.href = "https://www.globaltravel-holdings.com/auth/facebook"
+       }, [])
 
     return (
         <>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -17,12 +17,12 @@ export default function EmailOtp() {
             navigate("/")
         }
     }, [navigate])
-    let formInput = (e) => {
-
-        setForm({
-            ...form, [e.target.name]: e.target.value
-        })
-    }
+     let formInput =useCallback( (e) => {
+   
+           setForm({
+               ...form, [e.target.name]: e.target.value
+           })
+       },[])
     let handleForm = async (e) => {
         try {
             e.preventDefault();
@@ -46,15 +46,18 @@ export default function EmailOtp() {
         }
     }
 
-    let googleLogin = () => {
-        window.location.href = "https://www.globaltravel-holdings.com/auth/google"
-    }
-    let gitLogin = () => {
-        window.location.href = "https://www.globaltravel-holdings.com/auth/github"
-    }
-    let facebookLogin = () => {
-        window.location.href = "https://www.globaltravel-holdings.com/auth/facebook"
-    }
+ let googleLogin = useCallback(() => {
+            window.location.href = "https://www.globaltravel-holdings.com/auth/google"
+    
+        }, [])
+    
+    
+        let gitLogin = useCallback(() => {
+            window.location.href = "https://www.globaltravel-holdings.com/auth/github"
+        }, [])
+        let facebookLogin = useCallback(() => {
+            window.location.href = "https://www.globaltravel-holdings.com/auth/facebook"
+        }, [])
 
     return (
         <>

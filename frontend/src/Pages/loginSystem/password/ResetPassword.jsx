@@ -20,12 +20,12 @@ export default function ReesetPassword() {
             navigate("/")
         }
     }, [navigate])
-    let formInput = (e) => {
-
-        setForm({
-            ...form, [e.target.name]: e.target.value
-        })
-    }
+     let formInput =useCallback( (e) => {
+   
+           setForm({
+               ...form, [e.target.name]: e.target.value
+           })
+       },[])
     let handleForm = async (e) => {
         try {
             e.preventDefault();
@@ -49,15 +49,18 @@ export default function ReesetPassword() {
         }
     }
 
-    let googleLogin = () => {
-        window.location.href = "https://www.globaltravel-holdings.com/auth/google"
-    }
-    let gitLogin = () => {
-        window.location.href = "https://www.globaltravel-holdings.com/auth/github"
-    }
-    let facebookLogin = () => {
-        window.location.href = "https://www.globaltravel-holdings.com/auth/facebook"
-    }
+    let googleLogin = useCallback(() => {
+            window.location.href = "https://www.globaltravel-holdings.com/auth/google"
+    
+        }, [])
+    
+    
+        let gitLogin = useCallback(() => {
+            window.location.href = "https://www.globaltravel-holdings.com/auth/github"
+        }, [])
+        let facebookLogin = useCallback(() => {
+            window.location.href = "https://www.globaltravel-holdings.com/auth/facebook"
+        }, [])
 
     return (
         <>
