@@ -12,7 +12,7 @@ export default function PassengerForm() {
   let [issuingCountry, setCountryCode] = useState("IN")
   const offerData = useSelector((s) => s.offer.items);
   const passengers = offerData?.passengers || [];
-  console.log(offerData.id, "co")
+  // console.log(offerData.id, "co")
   let childLength = passengers.filter(i => i.type === "child").length;
   let adultLength = passengers.filter(i => i.type === "adult").length;
   let isInternational = useMemo(() => {
@@ -149,11 +149,11 @@ export default function PassengerForm() {
                 response.razorpay_signature,
             })
           })
-          console.log(response,verifyData)
+          // console.log(response,verifyData)
           let verifyData = await verifySig.json()
           if (verifyData.status) {
             alert("Booking Confirmed")
-            console.log(verifyData)
+            // console.log(verifyData)
             navigate(`/flights`)
           }
           else {
@@ -166,7 +166,7 @@ export default function PassengerForm() {
       razorpay.open()
     } catch (error) {
 
-      console.log(error);
+      // console.log(error);
 
       alert(
         `Booking failed:${error.message}`

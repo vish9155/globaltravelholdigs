@@ -102,7 +102,7 @@ export default function ProfileUpdate() {
                 method: "GET", credentials: "include"
             })
             resp = await resp.json()
-            console.log(resp)
+            // console.log(resp)
             if (!resp.status) {
                 setForm({
                     name: "",
@@ -136,7 +136,7 @@ export default function ProfileUpdate() {
         fetchdata()
     }, [])
 
-    console.log(form)
+    // console.log(form)
 
 
     return (

@@ -11,7 +11,7 @@ export let createRazorpayOrder = async (req, resp) => {
 
         let { passengers, offerId } = req.body;
 
-        console.log(passengers, offerId)
+        // console.log(passengers, offerId)
 
         //  revalidate offer
         let response = await fetch(

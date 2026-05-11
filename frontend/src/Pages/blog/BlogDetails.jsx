@@ -20,7 +20,7 @@ export default function  BlogDetails() {
   let relatedPosts = blogPosts
     .filter(p => p.category === post.category && p.slug !== post.slug)
     .slice(0, 3);
-    console.log(post.canonical)
+    // console.log(post.canonical)
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 pt-32 relative">
     

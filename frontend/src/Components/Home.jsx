@@ -6,15 +6,16 @@ import PremiumSpecials from './Special'
 import HotelStay from './HotelStay'
 import Testimonials from './Testimonials'
 import Faq from './Faq'
+import BookingForm from './HomeFlightSearch'
 
 export default function Home() {
     const videoRef = useRef(null)
 
-    useEffect(()=>{
-        if(videoRef.current){
+    useEffect(() => {
+        if (videoRef.current) {
             videoRef.current.playbackRate = 1
         }
-    },[])
+    }, [])
 
     return (
         <>
@@ -28,37 +29,31 @@ export default function Home() {
                     className="absolute inset-0 w-full h-full object-cover"
                 />
 
-                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/20"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/20"></div>
 
-                <div className="relative z-10 min-h-screen px-4 text-center flex flex-col justify-center">
 
-                    <div className="flex items-center justify-center">
-                        <h1 className="text-white font-bold text-xl sm:text-2xl md:text-4xl lg:text-5xl max-w-4xl leading-snug">
+                <div className="relative z-10 min-h-screen px-4  flex flex-col justify-center">
+
+                    <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6">
+
+                        <h1 className="text-white font-bold text-xl sm:text-2xl md:text-4xl lg:text-4xl leading-snug text-center lg:text-left max-w-xl">
                             Book Flights, Hotels & Holiday Packages Worldwide
                         </h1>
-                    </div>
 
-                    <div className="mt-8 max-w-md mx-auto flex flex-col sm:flex-row items-center justify-center gap-4">
-
-                        <div>
-                            <NavLink
-                                to={"/flights"}
-                                className="block w-full sm:w-auto px-6 py-3 bg-yellow-600 hover:bg-yellow-800 rounded-xl text-white"
-                            >
-                                Search Flights
-                            </NavLink>
+                        <div className="w-full max-w-md lg:max-w-lg backdrop-blur-sm rounded-2xl p-4 md:p-6 shadow-xl">
+                            <BookingForm />
                         </div>
 
-                        <div>
-                            <NavLink
+                    </div>
+                    <div>
+                        {/* <NavLink
                                 to={"tel:+91 8663075957"}
                                 className="block w-full sm:w-auto px-6 py-3 bg-gray-600 hover:bg-black rounded-xl text-white"
                             >
                                 Call Us Now
-                            </NavLink>
-                        </div>
-
+                            </NavLink> */}
                     </div>
+
                 </div>
             </section>
             <section data-aos="fade-down"
@@ -68,15 +63,15 @@ export default function Home() {
             </section>
 
             <section className='max-w-7xl mx-auto px-3 py-14'>
-                    
+
                 <div className='gap-2 items-center '>
-              <span className="h-[2px] w-8 bg-orange-600/80"></span>
-                <span className='text-orange-600/80 font-bold tracking-[0.2em] uppercase text-md    '>Your Trusted Travel Booking Platform for<br/> </span>
-            <h2 className='text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight'>
-                Flights <span className="text-orange-600/80">& Hotels</span>
-            </h2>
-            </div>
-            
+                    <span className="h-[2px] w-8 bg-orange-600/80"></span>
+                    <span className='text-orange-600/80 font-bold tracking-[0.2em] uppercase text-md'>Your Trusted Travel Booking Platform for<br /> </span>
+                    <h2 className='text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight'>
+                        Flights <span className="text-orange-600/80">& Hotels</span>
+                    </h2>
+                </div>
+
 
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mt-8'>
                     <div className='order-1 md:order-1'>

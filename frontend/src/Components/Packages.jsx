@@ -8,7 +8,7 @@ export default function Packages() {
     let [show2, setshow2] = useState(false)
     let worldpackage = show ? worldwidepackage : worldwidepackage.slice(0, 5)
     let honnymoonpackage = show2 ? honymoonpackage : honymoonpackage.slice(0, 5)
-    console.log(worldpackage)
+    // console.log(worldpackage)
     return (
         <>
 <section className="relative w-full h-[70vh] md:h-[85vh] overflow-hidden">

@@ -149,7 +149,7 @@ passport.use(new FacebookStrategy({
                 user.emailVerified = true;
                 await user.save();
             }
-            console.log(user)
+            // console.log(user)
             return done(null, user);
 
         } catch (error) {
