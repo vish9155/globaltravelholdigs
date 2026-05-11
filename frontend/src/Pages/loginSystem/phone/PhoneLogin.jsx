@@ -31,6 +31,8 @@ export default function PhoneLogin() {
        try {
    
            e.preventDefault();
+
+         
    
            setLoading(true);
    
@@ -69,7 +71,7 @@ export default function PhoneLogin() {
    
                                body: JSON.stringify({
    
-                                   email: form.email,
+                                   phone: value,
    
                                    otp: form.otp,
    
@@ -145,9 +147,9 @@ export default function PhoneLogin() {
    
                                body: JSON.stringify({
    
-                                   email: form.email,
+                                         phone: value,
    
-                                   password: form.password
+                                   otp: form.otp,
                                })
                            }
                        );
