@@ -1161,7 +1161,7 @@ export let emaillogin = async (req, resp) => {
             action: "LOGIN_SUCCESS",
             ip: device.ip,
             device: device.userAgent,
-            location
+            location:ipLocation
         });
         let tokens = jwt.sign({ id: user._id, email: user.email, role: user.role }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' })
         resp.cookie("token", tokens, {
@@ -1202,7 +1202,7 @@ export let phoneOtp = async (req, resp) => {
                 status: false
             });
         }
-
+        console.log(process.env.TWILIO_NUMBER)
         let otp = generateOtp();
 
         await saveOtp("phone", phone, otp);
@@ -1586,7 +1586,7 @@ export let phonelogin = async (req, resp) => {
             action: "LOGIN_SUCCESS",
             ip: device.ip,
             device: device.userAgent,
-            location
+           location:ipLocation
         });
         let tokens = jwt.sign({ id: user._id, email: user.email, role: user.role }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' })
         resp.cookie("token", tokens, {
