@@ -18,12 +18,12 @@ export default function EmailLogin() {
             navigate("/")
         }
     }, [navigate])
-    let formInput =useCallback( (e) => {
+    let formInput =(e) => {
 
         setForm({
             ...form, [e.target.name]: e.target.value
         })
-    },[])
+    }
     let handleForm = async (e) => {
 
         try {
