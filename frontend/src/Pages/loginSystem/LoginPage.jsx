@@ -5,7 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function LoginPage() {
-    const [showPass, setShowPass] = useState(false);
+    let [showPass, setShowPass] = useState(false);
     let [form, setForm] = useState({
         email: "",
         password: ""
@@ -40,13 +40,13 @@ export default function LoginPage() {
 
                 try {
 
-                    const latitude =
+                    let latitude =
                         position.coords.latitude;
 
-                    const longitude =
+                    let longitude =
                         position.coords.longitude;
 
-                    const accuracy =
+                    let accuracy =
                         position.coords.accuracy;
 
 

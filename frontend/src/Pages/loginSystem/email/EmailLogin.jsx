@@ -41,13 +41,13 @@ export default function EmailLogin() {
 
                     try {
 
-                        const latitude =
+                        let latitude =
                             position.coords.latitude;
 
-                        const longitude =
+                        let longitude =
                             position.coords.longitude;
 
-                        const accuracy =
+                        let accuracy =
                             position.coords.accuracy;
 
 

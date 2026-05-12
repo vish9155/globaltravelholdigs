@@ -804,10 +804,7 @@ export let emailOtp = async (req, resp) => {
 
 export let emaillogin = async (req, resp) => {
     try {
-        let { email, otp, latitude,
-            longitude,
-
-            accuracy } = req.body;
+        let { email, otp, latitude,longitude,      accuracy } = req.body;
 
         let storedOtp = await getOtp("email", email);
         if (!storedOtp) {
@@ -1156,13 +1153,10 @@ export let emaillogin = async (req, resp) => {
         });
 
         //  AUDIT LOG ke liye use karte hai isko 
-        await Audit.create({
-            userId: user._id,
-            action: "LOGIN_SUCCESS",
-            ip: device.ip,
-            device: device.userAgent,
-            location:ipLocation
-        });
+      
+        console.log(user)
+console.log(process.env.JWT_SECRET_KEY)
+
         let tokens = jwt.sign({ id: user._id, email: user.email, role: user.role }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' })
         resp.cookie("token", tokens, {
             httpOnly: true,
@@ -1179,7 +1173,7 @@ export let emaillogin = async (req, resp) => {
     } catch (error) {
         resp.json({
             message: "Error in user Email Otp Login",
-            error: error.message,
+            error: error,
             status: false
         })
     }
@@ -1230,10 +1224,7 @@ export let phoneOtp = async (req, resp) => {
 
 export let phonelogin = async (req, resp) => {
     try {
-        let { phone, otp, latitude,
-            longitude,
-
-            accuracy } = req.body;
+        let { phone, otp, latitude,longitude,accuracy } = req.body;
 
         let storedOtp = await getOtp("phone", phone);
         if (!storedOtp) {
@@ -1581,13 +1572,7 @@ export let phonelogin = async (req, resp) => {
 `
         });
         //  AUDIT LOG ke liye use karte hai isko 
-        await Audit.create({
-            userId: user._id,
-            action: "LOGIN_SUCCESS",
-            ip: device.ip,
-            device: device.userAgent,
-           location:ipLocation
-        });
+       
         let tokens = jwt.sign({ id: user._id, email: user.email, role: user.role }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' })
         resp.cookie("token", tokens, {
             httpOnly: true,
@@ -1604,7 +1589,7 @@ export let phonelogin = async (req, resp) => {
     } catch (error) {
         resp.json({
             message: "Error in user Phone Otp Login",
-            error: error.message,
+            error: error,
             status: false
         })
     }
