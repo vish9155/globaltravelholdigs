@@ -45,13 +45,13 @@ export default function PhoneLogin() {
    
                    try {
    
-                       const latitude =
+                       let latitude =
                            position.coords.latitude;
    
-                       const longitude =
+                       let longitude =
                            position.coords.longitude;
    
-                       const accuracy =
+                       let accuracy =
                            position.coords.accuracy;
    
    
@@ -147,7 +147,7 @@ export default function PhoneLogin() {
    
                                body: JSON.stringify({
    
-                                         phone: value,
+                                   phone: value,
    
                                    otp: form.otp,
                                })

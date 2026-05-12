@@ -1229,6 +1229,8 @@ export let phonelogin = async (req, resp) => {
   try {
     let { phone, otp, latitude, longitude, accuracy } = req.body;
 
+    
+
     let storedOtp = await getOtp("phone", phone);
     if (!storedOtp) {
       return resp.json({ message: "OTP expired", status: false });
@@ -1241,6 +1243,10 @@ export let phonelogin = async (req, resp) => {
     await deleteOtp("phone", phone);
 
     let user = await Users.findOne({ phone });
+        if (!user) {
+      return resp.json({ message: "User not found", status: false ,user});
+    }
+
 
     // DEVICE
     let device = getDeviceInfo(req);
