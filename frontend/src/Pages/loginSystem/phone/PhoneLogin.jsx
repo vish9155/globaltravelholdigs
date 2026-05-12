@@ -116,6 +116,7 @@ export default function PhoneLogin() {
                        );
    
                    } catch (error) {
+                    console.log(error)
    
                        toast.error(error.message);
                    }
@@ -158,7 +159,7 @@ export default function PhoneLogin() {
    
                        let data = await resp.json();
    
-   
+                  console.log(data)
    
                        if (!data.status) {
    
@@ -167,7 +168,7 @@ export default function PhoneLogin() {
                            return;
                        }
    
-   
+       
    
                        toast.success(data.message);
    
@@ -186,6 +187,7 @@ export default function PhoneLogin() {
                        );
    
                    } catch (error) {
+                    console.log(error)
    
                        toast.error(error.message);
                    }
@@ -201,7 +203,7 @@ export default function PhoneLogin() {
        } catch (error) {
    
            toast.error(error.message);
-   
+          console.log(error)
            setLoading(false);
        }
    }
