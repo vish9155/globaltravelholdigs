@@ -1,5 +1,4 @@
-import dotenv from 'dotenv'
-dotenv.config()
+
 import Joi from "joi";
 import Users from "../models/Users.js";
 import { UAParser } from "ua-parser-js";
@@ -18,96 +17,96 @@ import DeviceDetector from "device-detector-js";
 let detector = new DeviceDetector();
 
 let registerValidate = Joi.object({
-    name: Joi.string()
-        .min(3)
-        .max(60)
-        .required()
-        .messages({
-            "string.empty": "Name is required",
-            "string.min": "Name must be at least 3 characters",
-            "string.max": "Name must be less than 60 characters",
-        }),
+  name: Joi.string()
+    .min(3)
+    .max(60)
+    .required()
+    .messages({
+      "string.empty": "Name is required",
+      "string.min": "Name must be at least 3 characters",
+      "string.max": "Name must be less than 60 characters",
+    }),
 
-    email: Joi.string()
-        .email({ tlds: { allow: false } })
-        .required()
-        .messages({
-            "string.empty": "Email is required",
-            "string.email": "Enter a valid email address",
-        }),
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required()
+    .messages({
+      "string.empty": "Email is required",
+      "string.email": "Enter a valid email address",
+    }),
 
-    password: Joi.string()
-        .min(6)
-        .max(16)
-        .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@!.#$&%^*+=\/-]).+$/)
-        .required()
-        .messages({
-            "string.empty": "Password is required",
-            "string.min": "Password must be at least 6 characters",
-            "string.max": "Password must be less than 16 characters",
-            "string.pattern.base":
-                "Password must contain uppercase, lowercase, number and special character",
-        }),
+  password: Joi.string()
+    .min(6)
+    .max(16)
+    .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@!.#$&%^*+=\/-]).+$/)
+    .required()
+    .messages({
+      "string.empty": "Password is required",
+      "string.min": "Password must be at least 6 characters",
+      "string.max": "Password must be less than 16 characters",
+      "string.pattern.base":
+        "Password must contain uppercase, lowercase, number and special character",
+    }),
 
 
-    phone: Joi.string()
-        .pattern(/^\+[1-9]\d{6,14}$/)
-        .required()
-        .messages({
-            "string.empty": "Phone number is required",
-            "string.pattern.base":
-                "Phone must be valid with country code (e.g. +919876543210)",
-        }),
+  phone: Joi.string()
+    .pattern(/^\+[1-9]\d{6,14}$/)
+    .required()
+    .messages({
+      "string.empty": "Phone number is required",
+      "string.pattern.base":
+        "Phone must be valid with country code (e.g. +919876543210)",
+    }),
 
-    role: Joi.string()
-        .valid("user", "admin", "superAdmin")
-        .default("user")
-        .messages({
-            "any.only": "Role must be user, admin or superAdmin",
-        }),
+  role: Joi.string()
+    .valid("user", "admin", "superAdmin")
+    .default("user")
+    .messages({
+      "any.only": "Role must be user, admin or superAdmin",
+    }),
 });
 export let createUser = async (req, resp, next) => {
-    try {
-        let { name, email, phone, password } = req.body
-        let { error } = registerValidate.validate({ name, email, phone, password }, { abortEarly: false })
-        if (error) {
-            return resp.status(400).json({
-                message: error.details[0].message,
-                status: false,
-                field: error.details[0].path[0]
-            });
-        }
-        let exist = await Users.findOne({ email })
-        if (exist) {
-            return resp.json({
-                message: "user already exist please login",
-                status: false,
-                exist
-            })
-        }
-        let hasPassword = await bcrypt.hash(password, 10)
-        let result = await Users.create({ name, email, phone, password: hasPassword })
+  try {
+    let { name, email, phone, password } = req.body
+    let { error } = registerValidate.validate({ name, email, phone, password }, { abortEarly: false })
+    if (error) {
+      return resp.status(400).json({
+        message: error.details[0].message,
+        status: false,
+        field: error.details[0].path[0]
+      });
+    }
+    let exist = await Users.findOne({ email })
+    if (exist) {
+      return resp.json({
+        message: "user already exist please login",
+        status: false,
+        exist
+      })
+    }
+    let hasPassword = await bcrypt.hash(password, 10)
+    let result = await Users.create({ name, email, phone, password: hasPassword })
 
-        let token = jwt.sign(
-            { id: result._id, role: result.role, email: result.email },
-            process.env.JWT_SECRET_KEY,
-            { expiresIn: "5d" }
-        );
+    let token = jwt.sign(
+      { id: result._id, role: result.role, email: result.email },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: "5d" }
+    );
 
-        resp.cookie("token", token, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "none",
-            maxAge: 5 * 24 * 60 * 60 * 1000
-        });
+    resp.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 5 * 24 * 60 * 60 * 1000
+    });
 
-        let link = `http://192.168.1.88:5000/user/verify?token=${token}`
-        await transport.sendMail({
-            from: `"Global Travel Holdings" <${process.env.USER_EMAIL}>`,
-            to: result.email,
-            subject: "Verify Your Email - Global Travel Holdings",
-            text: `Please verify your email: ${link}`,
-            html: `
+    let link = `http://192.168.1.88:5000/user/verify?token=${token}`
+    await transport.sendMail({
+      from: `"Global Travel Holdings" <${process.env.USER_EMAIL}>`,
+      to: result.email,
+      subject: "Verify Your Email - Global Travel Holdings",
+      text: `Please verify your email: ${link}`,
+      html: `
   <div style="font-family: Arial, sans-serif; background:#f4f6f9; padding:20px;">
     
     <div style="max-width:600px; margin:auto; background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
@@ -148,60 +147,60 @@ export let createUser = async (req, resp, next) => {
 
   </div>
   `
-        });
+    });
 
 
-        return resp.json({
-            message: "New User Successfully Registered",
-            status: true,
-            result,
-            link
-        })
+    return resp.json({
+      message: "New User Successfully Registered",
+      status: true,
+      result,
+      link
+    })
 
-    } catch (error) {
-        resp.send({
-            message: "Error in New User  Register",
-            status: false,
-            error: error.message
-        })
-    }
+  } catch (error) {
+    resp.send({
+      message: "Error in New User  Register",
+      status: false,
+      error: error.message
+    })
+  }
 }
 
 export let verifyEmail = async (req, resp) => {
-    try {
+  try {
 
-        let token = req.query.token;
-        if (!token) return resp.json({ message: "Token not exist", status: false })
-        jwt.verify(token, process.env.JWT_SECRET_KEY, async (error, decode) => {
-            if (error) return resp.send({ message: "Token is Invalid", error: error.message })
-            let user = await Users.findOne({ email: decode.email })
-            if (!user) return resp.status(404).send({ message: "user not found", success: false })
-            if (user.emailVerified) {
-                return resp.status(409).send({ message: "Email already verified" });
-            }
+    let token = req.query.token;
+    if (!token) return resp.json({ message: "Token not exist", status: false })
+    jwt.verify(token, process.env.JWT_SECRET_KEY, async (error, decode) => {
+      if (error) return resp.send({ message: "Token is Invalid", error: error.message })
+      let user = await Users.findOne({ email: decode.email })
+      if (!user) return resp.status(404).send({ message: "user not found", success: false })
+      if (user.emailVerified) {
+        return resp.status(409).send({ message: "Email already verified" });
+      }
 
-            user.emailVerified = true
-            await user.save()
-            if (user.emailVerified) {
-                return resp.status(200).send({ message: "Email verified successfull", success: true })
+      user.emailVerified = true
+      await user.save()
+      if (user.emailVerified) {
+        return resp.status(200).send({ message: "Email verified successfull", success: true })
 
-            }
-            else {
-                return resp.status(403).send({ message: "email not verified", success: false })
-            }
-
-
-        })
+      }
+      else {
+        return resp.status(403).send({ message: "email not verified", success: false })
+      }
 
 
+    })
 
-    } catch (error) {
-        resp.json({
-            message: "Error in user Email Verification",
-            error: error.message,
-            status: false
-        })
-    }
+
+
+  } catch (error) {
+    resp.json({
+      message: "Error in user Email Verification",
+      error: error.message,
+      status: false
+    })
+  }
 }
 
 
@@ -212,39 +211,39 @@ export let verifyEmail = async (req, resp) => {
 // DEVICE INFO
 let getDeviceInfo = (req) => {
 
-    let ua = req.headers["user-agent"];
+  let ua = req.headers["user-agent"];
 
-    let parser = new UAParser(ua);
+  let parser = new UAParser(ua);
 
-    let result = parser.getResult();
+  let result = parser.getResult();
 
-    let deviceDetect = detector.parse(ua);
+  let deviceDetect = detector.parse(ua);
 
-    return {
+  return {
 
-        ip:
-            req.headers["x-forwarded-for"]?.split(",")[0] ||
-            req.socket?.remoteAddress ||
-            req.ip,
+    ip:
+      req.headers["x-forwarded-for"]?.split(",")[0] ||
+      req.socket?.remoteAddress ||
+      req.ip,
 
-        browser:
-            `${result.browser.name || ""} ${result.browser.version || ""}`,
+    browser:
+      `${result.browser.name || ""} ${result.browser.version || ""}`,
 
-        os:
-            `${result.os.name || ""} ${result.os.version || ""}`,
+    os:
+      `${result.os.name || ""} ${result.os.version || ""}`,
 
-        device:
-            deviceDetect.device?.type || "desktop",
+    device:
+      deviceDetect.device?.type || "desktop",
 
-        brand:
-            deviceDetect.device?.brand || "Unknown",
+    brand:
+      deviceDetect.device?.brand || "Unknown",
 
-        model:
-            deviceDetect.device?.model || "Unknown",
+    model:
+      deviceDetect.device?.model || "Unknown",
 
-        cpu:
-            result.cpu.architecture || "Unknown"
-    };
+    cpu:
+      result.cpu.architecture || "Unknown"
+  };
 };
 
 
@@ -253,37 +252,37 @@ let getDeviceInfo = (req) => {
 // IP LOCATION
 let getIPLocation = async (ip) => {
 
-    try {
+  try {
 
-        let response = await fetch(
-            `https://ipinfo.io/${ip}?token=${process.env.IPINFO_TOKEN}`
-        );
+    let response = await fetch(
+      `https://ipinfo.io/${ip}?token=${process.env.IPINFO_TOKEN}`
+    );
 
-        let data = await response.json();
+    let data = await response.json();
 
-        return {
+    return {
 
-            city: data.city,
+      city: data.city,
 
-            state: data.region,
+      state: data.region,
 
-            country: data.country,
+      country: data.country,
 
-            zip: data.postal,
+      zip: data.postal,
 
-            timezone: data.timezone,
+      timezone: data.timezone,
 
-            isp: data.org,
+      isp: data.org,
 
-            location: data.loc
-        };
+      location: data.loc
+    };
 
-    } catch (err) {
+  } catch (err) {
 
-        // console.log(err.message);
+    // console.log(err.message);
 
-        return null;
-    }
+    return null;
+  }
 };
 
 
@@ -292,80 +291,80 @@ let getIPLocation = async (ip) => {
 // LOGIN
 export let login = async (req, resp) => {
 
-    try {
+  try {
 
-        let {
+    let {
 
-            email,
-            password,
+      email,
+      password,
 
-            latitude,
-            longitude,
+      latitude,
+      longitude,
 
-            accuracy
+      accuracy
 
-        } = req.body;
-
-
-
-        // USER
-        let user = await Users.findOne({ email });
-
-        if (!user) {
-
-            return resp.json({
-
-                message: "User not found",
-
-                status: false
-            });
-        }
+    } = req.body;
 
 
 
-        // PASSWORD
-        let isMatch = await bcrypt.compare(
-            password,
-            user.password
-        );
+    // USER
+    let user = await Users.findOne({ email });
 
-        if (!isMatch) {
+    if (!user) {
 
-            return resp.json({
+      return resp.json({
 
-                message: "Invalid password",
+        message: "User not found",
 
-                status: false
-            });
-        }
+        status: false
+      });
+    }
 
 
 
-        // DEVICE
-        let device = getDeviceInfo(req);
+    // PASSWORD
+    let isMatch = await bcrypt.compare(
+      password,
+      user.password
+    );
+
+    if (!isMatch) {
+
+      return resp.json({
+
+        message: "Invalid password",
+
+        status: false
+      });
+    }
 
 
 
-        // IP LOCATION
-        let ipLocation =
-            await getIPLocation(device.ip);
+    // DEVICE
+    let device = getDeviceInfo(req);
 
 
 
-        // LOGIN TIME
-        let loginTime =
-            new Date().toLocaleString();
+    // IP LOCATION
+    let ipLocation =
+      await getIPLocation(device.ip);
 
 
 
-        // EMAIL
-        await transport.sendMail({
+    // LOGIN TIME
+    let loginTime =
+      new Date().toLocaleString();
 
-            to: email,
 
-            subject: "⚠️ New Login Detected",
 
-            html: `
+    // EMAIL
+    await transport.sendMail({
+
+      to: email,
+
+      subject: "⚠️ New Login Detected",
+
+      html: `
 
 <div style="margin:0;padding:0;background:#f4f7fb;font-family:Arial,sans-serif;">
 
@@ -672,89 +671,89 @@ export let login = async (req, resp) => {
 
 
 `
-        });
+    });
 
 
 
-        // JWT
-        let token = jwt.sign(
+    // JWT
+    let token = jwt.sign(
 
-            {
-                id: user._id
-            },
+      {
+        id: user._id
+      },
 
-            process.env.JWT_SECRET_KEY,
+      process.env.JWT_SECRET_KEY,
 
-            {
-                expiresIn: "5d"
-            }
-        );
-
-
-
-        resp.cookie("token", token, {
-
-            httpOnly: true,
-
-            secure: true,
-
-            sameSite: "none",
-
-            maxAge: 5 * 24 * 60 * 60 * 1000
-        });
+      {
+        expiresIn: "5d"
+      }
+    );
 
 
 
-        return resp.json({
+    resp.cookie("token", token, {
 
-            message: "Login Success",
-            user,
-            status: true
-        });
+      httpOnly: true,
 
-    } catch (error) {
+      secure: true,
 
-        return resp.json({
+      sameSite: "none",
 
-            message: "Login Error",
+      maxAge: 5 * 24 * 60 * 60 * 1000
+    });
 
-            error: error.message,
 
-            status: false
-        });
-    }
+
+    return resp.json({
+
+      message: "Login Success",
+      user,
+      status: true
+    });
+
+  } catch (error) {
+
+    return resp.json({
+
+      message: "Login Error",
+
+      error: error.message,
+
+      status: false
+    });
+  }
 };
 
 export let emailOtp = async (req, resp) => {
-    try {
-        let { email } = req.body;
+  try {
+    let { email } = req.body;
 
-        let user = await Users.findOne({ email });
-        if (!user) {
-            return res.json({ message: "User not found", status: false });
-        }
+    let user = await Users.findOne({ email });
+    if (!user) {
+      return res.json({ message: "User not found", status: false });
+    }
 
-        // Rate limit check (see next section)
-        let count = await client.get(`otp_count:${email}`);
-        if (count && count >= 3) {
-            return res.json({
-                message: "Too many OTP requests. Try later.",
-                status: false
-            });
-        }
+    // Rate limit check (see next section)
+    let count = await client.get(`otp_count:${email}`);
+    if (count && count >= 3) {
+      return res.json({
+        message: "Too many OTP requests. Try later.",
+        status: false
+      });
+    }
 
-        let otp = generateOtp();
+    let otp = generateOtp();
 
-        await saveOtp("email", email, otp);
+    await saveOtp("email", email, otp);
 
-        // count increment
-        await client.incr(`otp_count:${email}`);
-        await client.expire(`otp_count:${email}`, 300);
-        transport.sendMail({
-            to: email,
-            subject: "Your OTP for Secure Login - Global Travel Holding",
-            text: `Your OTP is ${otp}`,
-            html: `
+    // count increment
+    await client.incr(`otp_count:${email}`);
+    await client.expire(`otp_count:${email}`, 300);
+    transport.sendMail({
+      to: email,
+      subject: "Your OTP for Secure Login - Global Travel Holding",
+      text: `Your OTP is ${otp}`,
+      html: `
     <div style="font-family: Arial, sans-serif; background-color:#f4f6f8; padding:20px;">
         <div style="max-width:600px; margin:auto; background:#ffffff; border-radius:10px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
             
@@ -790,60 +789,60 @@ export let emailOtp = async (req, resp) => {
         </div>
     </div>
     `
-        })
-        resp.send({ message: "Otp Send Successfull", status: true, user })
+    })
+    resp.send({ message: "Otp Send Successfull", status: true, user })
 
-    } catch (error) {
-        resp.json({
-            message: "Error in Send Otp For Email Login",
-            error: error.message,
-            status: false
-        })
-    }
+  } catch (error) {
+    resp.json({
+      message: "Error in Send Otp For Email Login",
+      error: error.message,
+      status: false
+    })
+  }
 }
 
 export let emaillogin = async (req, resp) => {
-    try {
-        let { email, otp, latitude,longitude,      accuracy } = req.body;
+  try {
+    let { email, otp, latitude, longitude, accuracy } = req.body;
 
-        let storedOtp = await getOtp("email", email);
-        if (!storedOtp) {
-            return resp.json({ message: "OTP expired", status: false });
-        }
+    let storedOtp = await getOtp("email", email);
+    if (!storedOtp) {
+      return resp.json({ message: "OTP expired", status: false });
+    }
 
-        if (storedOtp !== otp) {
-            return resp.json({ message: "Invalid OTP", status: false });
-        }
+    if (storedOtp !== otp) {
+      return resp.json({ message: "Invalid OTP", status: false });
+    }
 
-        await deleteOtp("email", email);
+    await deleteOtp("email", email);
 
-        let user = await Users.findOne({ email });
+    let user = await Users.findOne({ email });
 
-          // DEVICE
-        let device = getDeviceInfo(req);
-
-
-
-        // IP LOCATION
-        let ipLocation =
-            await getIPLocation(device.ip);
+    // DEVICE
+    let device = getDeviceInfo(req);
 
 
 
-        // LOGIN TIME
-        let loginTime =
-            new Date().toLocaleString();
+    // IP LOCATION
+    let ipLocation =
+      await getIPLocation(device.ip);
 
 
 
-        // EMAIL
-        await transport.sendMail({
+    // LOGIN TIME
+    let loginTime =
+      new Date().toLocaleString();
 
-            to: email,
 
-            subject: "⚠️ New Login Detected",
 
-            html: `
+    // EMAIL
+    await transport.sendMail({
+
+      to: email,
+
+      subject: "⚠️ New Login Detected",
+
+      html: `
 
 <div style="margin:0;padding:0;background:#f4f7fb;font-family:Arial,sans-serif;">
 
@@ -1150,120 +1149,124 @@ export let emaillogin = async (req, resp) => {
 
 
 `
-        });
+    });
 
-        //  AUDIT LOG ke liye use karte hai isko 
-      
-        console.log(user)
-console.log(process.env.JWT_SECRET_KEY)
+    //  AUDIT LOG ke liye use karte hai isko 
 
-        let tokens = jwt.sign({ id: user._id, email: user.email, role: user.role }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' })
-        resp.cookie("token", tokens, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "none",
-            maxAge: 5 * 24 * 60 * 60 * 1000
-        })
-        return resp.json({
-            message: "User Login Successfully ",
-            status: true,
-            user,
-        })
+    console.log(user)
+    console.log(process.env.JWT_SECRET_KEY)
 
-    } catch (error) {
-        resp.json({
-            message: "Error in user Email Otp Login",
-            error: error,
-            status: false
-        })
-    }
+    let tokens = jwt.sign({ id: user._id, email: user.email, role: user.role }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' })
+    resp.cookie("token", tokens, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 5 * 24 * 60 * 60 * 1000
+    })
+    return resp.json({
+      message: "User Login Successfully ",
+      status: true,
+      user,
+    })
+
+  } catch (error) {
+    resp.json({
+      message: "Error in user Email Otp Login",
+      error: error,
+      status: false
+    })
+  }
 }
 
 export let phoneOtp = async (req, resp) => {
-    try {
-        let { phone } = req.body;
+  try {
+    let { phone } = req.body;
 
-        let user = await Users.findOne({ phone });
-        if (!user) {
-            return resp.json({ message: "User not found", status: false });
-        }
-
-        // Rate limit check (see next section)
-        let count = await client.get(`otp_count:${phone}`);
-        if (count && count >= 3) {
-            return resp.json({
-                message: "Too many OTP requests. Try later.",
-                status: false
-            });
-        }
-        console.log(process.env.TWILIO_NUMBER)
-        let otp = generateOtp();
-
-        await saveOtp("phone", phone, otp);
-
-        // count increment
-        await client.incr(`otp_count:${phone}`);
-        await client.expire(`otp_count:${phone}`, 300);
-
-        await twilioClient.messages.create({
-            to: phone,
-            from: process.env.TWILIO_NUMBER,
-            body: `Your OTP is ${otp}. It is valid for 5 minutes.`
-        })
-
-        resp.send({ message: "Otp Send Successfull", status: true, user })
-
-    } catch (error) {
-        resp.json({
-            message: "Error in Send Otp For Phone Login",
-            error: error.message,
-            status: false
-        })
+    let user = await Users.findOne({ phone });
+    if (!user) {
+      return resp.json({ message: "User not found", status: false });
     }
+
+    // Rate limit check (see next section)
+    let count = await client.get(`otp_count:${phone}`);
+    if (count && count >= 3) {
+      return resp.json({
+        message: "Too many OTP requests. Try later.",
+        status: false
+      });
+    }
+    console.log(process.env.TWILIO_NUMBER)
+    let otp = generateOtp();
+
+    await saveOtp("phone", phone, otp);
+
+    // count increment
+    await client.incr(`otp_count:${phone}`);
+    await client.expire(`otp_count:${phone}`, 300);
+
+    await twilioClient.messages.create({
+      to: phone,
+      from: process.env.TWILIO_NUMBER,
+      body: `Your OTP is ${otp}. It is valid for 5 minutes.`
+    })
+
+    resp.send({ message: "Otp Send Successfull", status: true, user })
+
+  } catch (error) {
+    console.log(error);
+
+    resp.json({
+      message: "Error in Send Otp For Phone Login",
+      error: error.message,
+      code: error.code,
+      moreInfo: error.moreInfo,
+      status: false
+    });
+  }
 }
 
 export let phonelogin = async (req, resp) => {
-    try {
-        let { phone, otp, latitude,longitude,accuracy } = req.body;
+  try {
+    let { phone, otp, latitude, longitude, accuracy } = req.body;
 
-        let storedOtp = await getOtp("phone", phone);
-        if (!storedOtp) {
-            return resp.json({ message: "OTP expired", status: false });
-        }
+    let storedOtp = await getOtp("phone", phone);
+    if (!storedOtp) {
+      return resp.json({ message: "OTP expired", status: false });
+    }
 
-        if (storedOtp !== otp) {
-            return resp.json({ message: "Invalid OTP", status: false });
-        }
+    if (storedOtp !== otp) {
+      return resp.json({ message: "Invalid OTP", status: false });
+    }
 
-        await deleteOtp("phone", phone);
+    await deleteOtp("phone", phone);
 
-        let user = await Users.findOne({ phone });
+    let user = await Users.findOne({ phone });
 
-          // DEVICE
-        let device = getDeviceInfo(req);
-
-
-
-        // IP LOCATION
-        let ipLocation =
-            await getIPLocation(device.ip);
+    // DEVICE
+    let device = getDeviceInfo(req);
 
 
 
-        // LOGIN TIME
-        let loginTime =
-            new Date().toLocaleString();
+    // IP LOCATION
+    let ipLocation =
+      await getIPLocation(device.ip);
 
 
 
-        // EMAIL
-        await transport.sendMail({
+    // LOGIN TIME
+    let loginTime =
+      new Date().toLocaleString();
 
-            to: email,
 
-            subject: "⚠️ New Login Detected",
 
-            html: `
+    // EMAIL
+    await transport.sendMail({
+
+      to: email,
+
+      subject: "⚠️ New Login Detected",
+
+      html: `
 
 <div style="margin:0;padding:0;background:#f4f7fb;font-family:Arial,sans-serif;">
 
@@ -1570,58 +1573,58 @@ export let phonelogin = async (req, resp) => {
 
 
 `
-        });
-        //  AUDIT LOG ke liye use karte hai isko 
-       
-        let tokens = jwt.sign({ id: user._id, email: user.email, role: user.role }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' })
-        resp.cookie("token", tokens, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "none",
-            maxAge: 5 * 24 * 60 * 60 * 1000
-        })
-        return resp.json({
-            message: "User Login Successfully ",
-            status: true,
-            user,
-        })
+    });
+    //  AUDIT LOG ke liye use karte hai isko 
 
-    } catch (error) {
-        resp.json({
-            message: "Error in user Phone Otp Login",
-            error: error,
-            status: false
-        })
-    }
+    let tokens = jwt.sign({ id: user._id, email: user.email, role: user.role }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' })
+    resp.cookie("token", tokens, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 5 * 24 * 60 * 60 * 1000
+    })
+    return resp.json({
+      message: "User Login Successfully ",
+      status: true,
+      user,
+    })
+
+  } catch (error) {
+    resp.json({
+      message: "Error in user Phone Otp Login",
+      error: error,
+      status: false
+    })
+  }
 }
 
 export let forgotPassOtp = async (req, resp) => {
-    try {
-        let { email } = req.body;
-        let user = await Users.findOne({ email });
-        if (!user) {
-            return resp.json({
-                message: "user not found",
-                staus: false,
-            })
-        }
+  try {
+    let { email } = req.body;
+    let user = await Users.findOne({ email });
+    if (!user) {
+      return resp.json({
+        message: "user not found",
+        staus: false,
+      })
+    }
 
-        if (!user.emailVerified) {
-            return resp.json({
-                message: "Please Verify Email First",
-                status: false
-            })
-        }
+    if (!user.emailVerified) {
+      return resp.json({
+        message: "Please Verify Email First",
+        status: false
+      })
+    }
 
-        let otp = generateOtp()
+    let otp = generateOtp()
 
-        await saveOtp("email", email, otp)
-        // console.log(await getOtp("email", email))
-        await transport.sendMail({
-            to: email,
-            subject: "Reset Your Password - Secure OTP",
-            text: `Your OTP is ${otp}`,
-            html: `
+    await saveOtp("email", email, otp)
+    // console.log(await getOtp("email", email))
+    await transport.sendMail({
+      to: email,
+      subject: "Reset Your Password - Secure OTP",
+      text: `Your OTP is ${otp}`,
+      html: `
     <div style="font-family: Arial, sans-serif; background-color:#f4f6f8; padding:20px;">
         <div style="max-width:600px; margin:auto; background:#ffffff; border-radius:10px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
             
@@ -1660,309 +1663,309 @@ export let forgotPassOtp = async (req, resp) => {
         </div>
     </div>
     `
-        });
-        resp.json({
-            message: "otp send successfull",
-            status: true
-        })
+    });
+    resp.json({
+      message: "otp send successfull",
+      status: true
+    })
 
-    } catch (error) {
-        resp.json({
-            message: error.message,
+  } catch (error) {
+    resp.json({
+      message: error.message,
 
-            status: false
-        })
-    }
+      status: false
+    })
+  }
 }
 
 export let resetPass = async (req, resp) => {
-    try {
-        let { email, newpassword, otp } = req.body;
-      
+  try {
+    let { email, newpassword, otp } = req.body;
 
-        let storedOtp = await getOtp("email", email)
-    
-        if (!storedOtp) {
-            return resp.json({ message: "OTP expired", status: false });
-        }
 
-        if (storedOtp !== otp) {
-            return resp.json({ message: "Invalid OTP", status: false });
-        }
+    let storedOtp = await getOtp("email", email)
 
-        await deleteOtp("email", email);
-
-        let user = await Users.findOne({ email });
-
-        if (!user) {
-            return resp.send({
-                message: "user not found",
-                status: false
-            })
-        }
-
-        if (!user.password) {
-            let hashPass = await bcrypt.hash(newpassword, 10);
-            user.password = hashPass;
-            await user.save();
-
-            await deleteOtp("email", email);
-
-            return resp.json({
-                message: "Password set successfully",
-                status: true
-            });
-        }
-
-        let isMatch = await bcrypt.compare(newpassword, user.password)
-        if (isMatch) {
-            return resp.json({
-                message: "new password and old password is same"
-            })
-        }
-        let hashPass = await bcrypt.hash(newpassword, 10)
-        user.password = hashPass
-        await user.save();
-        resp.json({
-            messsage: "user password reset successfull",
-            status: true
-        })
-
-    } catch (error) {
-        resp.json({
-            messsage: error.message,
-            status: false
-        })
+    if (!storedOtp) {
+      return resp.json({ message: "OTP expired", status: false });
     }
+
+    if (storedOtp !== otp) {
+      return resp.json({ message: "Invalid OTP", status: false });
+    }
+
+    await deleteOtp("email", email);
+
+    let user = await Users.findOne({ email });
+
+    if (!user) {
+      return resp.send({
+        message: "user not found",
+        status: false
+      })
+    }
+
+    if (!user.password) {
+      let hashPass = await bcrypt.hash(newpassword, 10);
+      user.password = hashPass;
+      await user.save();
+
+      await deleteOtp("email", email);
+
+      return resp.json({
+        message: "Password set successfully",
+        status: true
+      });
+    }
+
+    let isMatch = await bcrypt.compare(newpassword, user.password)
+    if (isMatch) {
+      return resp.json({
+        message: "new password and old password is same"
+      })
+    }
+    let hashPass = await bcrypt.hash(newpassword, 10)
+    user.password = hashPass
+    await user.save();
+    resp.json({
+      messsage: "user password reset successfull",
+      status: true
+    })
+
+  } catch (error) {
+    resp.json({
+      messsage: error.message,
+      status: false
+    })
+  }
 }
 
 export let logout = async (req, resp) => {
-    try {
-        resp.clearCookie("token", {
-            httpOnly: true,
-            secure: true,
-            sameSite: "lax"
-        })
-        resp.send({ message: "user logout", status: true })
-    } catch (error) {
-        resp.json({
-            messsage: "error in user logout ",
-            status: false
-        })
-    }
+  try {
+    resp.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "lax"
+    })
+    resp.send({ message: "user logout", status: true })
+  } catch (error) {
+    resp.json({
+      messsage: "error in user logout ",
+      status: false
+    })
+  }
 }
 
 let passwordValidator = Joi.object({
 
-    oldpass: Joi.string().required(),
+  oldpass: Joi.string().required(),
 
-    confirmpass: Joi.string()
-        .min(6)
-        .max(16)
-        .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@!.#$&%^*+=\/-]).+$/)
-        .required()
-        .messages({
-            "string.pattern.base":
-                "Password must contain uppercase, lowercase, number and special character"
-        }),
-    newpass: Joi.string()
-        .min(6)
-        .max(16)
-        .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@!.#$&%^*+=\/-]).+$/)
-        .required()
-        .messages({
-            "string.pattern.base":
-                "Password must contain uppercase, lowercase, number and special character"
-        }),
+  confirmpass: Joi.string()
+    .min(6)
+    .max(16)
+    .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@!.#$&%^*+=\/-]).+$/)
+    .required()
+    .messages({
+      "string.pattern.base":
+        "Password must contain uppercase, lowercase, number and special character"
+    }),
+  newpass: Joi.string()
+    .min(6)
+    .max(16)
+    .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@!.#$&%^*+=\/-]).+$/)
+    .required()
+    .messages({
+      "string.pattern.base":
+        "Password must contain uppercase, lowercase, number and special character"
+    }),
 
 });
 
 export let restpass = async (req, resp) => {
-    try {
-        if (req.user.id !== req.params.id) {
-            return resp.send({
-                message: "Invalid credentials",
-                status: false
-            })
-        }
-            let { confirmpass, newpass, oldpass } = req.body;
-            let { error } = passwordValidator.validate({ confirmpass, newpass, oldpass })
-            if (error) {
-                return resp.status(400).json({
-                    message: error.details[0].message,
-                    status: false
-                });
-            }
-
-            let user = await Users.findById(req.params.id)
-            if (!user) {
-                return resp.json({
-                    message: "user not found",
-                    status: false,
-                })
-            }
-
-            let isMatch = await bcrypt.compare(oldpass, user.password);
-            if (!isMatch) {
-                return resp.send({
-                    message: "current password is invalid",
-                    status: false,
-                })
-            }
-
-            let isSame = await bcrypt.compare(newpass, user.password)
-
-            if (isSame) {
-                return resp.send({
-                    message: "New password is not same old password",
-                    status: false
-                })
-            }
-
-            if (newpass !== confirmpass) {
-                return resp.send({
-                    message: "New password and confirm password can't match"
-                })
-            }
-
-            let hash = await bcrypt.hash(newpass, 10);
-            user.password = hash;
-            await user.save()
-
-            resp.json({
-                message: "password reset successfulll",
-                status: true
-            })
-
-        
-    } catch (error) {
-        resp.json({
-            messsage: "error in user password reset in profile ",
-            status: false
-        })
+  try {
+    if (req.user.id !== req.params.id) {
+      return resp.send({
+        message: "Invalid credentials",
+        status: false
+      })
     }
+    let { confirmpass, newpass, oldpass } = req.body;
+    let { error } = passwordValidator.validate({ confirmpass, newpass, oldpass })
+    if (error) {
+      return resp.status(400).json({
+        message: error.details[0].message,
+        status: false
+      });
+    }
+
+    let user = await Users.findById(req.params.id)
+    if (!user) {
+      return resp.json({
+        message: "user not found",
+        status: false,
+      })
+    }
+
+    let isMatch = await bcrypt.compare(oldpass, user.password);
+    if (!isMatch) {
+      return resp.send({
+        message: "current password is invalid",
+        status: false,
+      })
+    }
+
+    let isSame = await bcrypt.compare(newpass, user.password)
+
+    if (isSame) {
+      return resp.send({
+        message: "New password is not same old password",
+        status: false
+      })
+    }
+
+    if (newpass !== confirmpass) {
+      return resp.send({
+        message: "New password and confirm password can't match"
+      })
+    }
+
+    let hash = await bcrypt.hash(newpass, 10);
+    user.password = hash;
+    await user.save()
+
+    resp.json({
+      message: "password reset successfulll",
+      status: true
+    })
+
+
+  } catch (error) {
+    resp.json({
+      messsage: "error in user password reset in profile ",
+      status: false
+    })
+  }
 }
 
 export let profile = async (req, resp) => {
-    try {
-        // console.log(req.user.id , req.params.id)
-        if (req.user.id !== req.params.id) {
-            return resp.send({
-                message: "Invalid credentials",
-                status: false
-            })
-        }
-        let user = await Users.findById(req.params.id)
-        if (!user) {
-            return resp.send({
-                message: "user not found",
-                status: false
-            })
-        }
-        resp.send({
-            message: "Data fetch for user profile",
-            user,
-            status: true
-        })
-    } catch (error) {
-        resp.json({
-            messsage: "error in user profile fetch ",
-            result: error.message,
-            status: false
-        })
+  try {
+    // console.log(req.user.id , req.params.id)
+    if (req.user.id !== req.params.id) {
+      return resp.send({
+        message: "Invalid credentials",
+        status: false
+      })
     }
+    let user = await Users.findById(req.params.id)
+    if (!user) {
+      return resp.send({
+        message: "user not found",
+        status: false
+      })
+    }
+    resp.send({
+      message: "Data fetch for user profile",
+      user,
+      status: true
+    })
+  } catch (error) {
+    resp.json({
+      messsage: "error in user profile fetch ",
+      result: error.message,
+      status: false
+    })
+  }
 }
 
 export let profileUpdate = async (req, resp) => {
-    try {
-        let data = req.body;
-        if (req.user.id !== req.params.id) {
-            return resp.send({
-                message: "Invalid credentials",
-                status: false
-            })
-        }
-        let user = await Users.findByIdAndUpdate(req.user.id, data, { new: true })
-        if (!user) {
-            return resp.status(404).send({
-                message: 'User not found',
-                status: false
-            });
-        }
-        resp.send({ message: "update user data fetch", user, status: true })
-    } catch (error) {
-        resp.json({
-            messsage: "error in user update in profile ",
-            status: false
-        })
+  try {
+    let data = req.body;
+    if (req.user.id !== req.params.id) {
+      return resp.send({
+        message: "Invalid credentials",
+        status: false
+      })
     }
+    let user = await Users.findByIdAndUpdate(req.user.id, data, { new: true })
+    if (!user) {
+      return resp.status(404).send({
+        message: 'User not found',
+        status: false
+      });
+    }
+    resp.send({ message: "update user data fetch", user, status: true })
+  } catch (error) {
+    resp.json({
+      messsage: "error in user update in profile ",
+      status: false
+    })
+  }
 }
 export let me = async (req, resp) => {
-    try {
-        let user = await Users.findById(req.user.id).select("-password -otp -OtpExpireIn")
+  try {
+    let user = await Users.findById(req.user.id).select("-password -otp -OtpExpireIn")
 
-        if (!user) {
-            return resp.status(404).send({
-                message: "user not found",
-                success: false
-            })
-        }
+    if (!user) {
+      return resp.status(404).send({
+        message: "user not found",
+        success: false
+      })
+    }
 
-        resp.send({
-            message: "current user fetch",
-            status: true,
-            user
-        })
-    }
-    catch (err) {
-        resp.status(500).send({
-            message: "internal server error",
-            status: false,
-            error: err.message
-        })
-    }
+    resp.send({
+      message: "current user fetch",
+      status: true,
+      user
+    })
+  }
+  catch (err) {
+    resp.status(500).send({
+      message: "internal server error",
+      status: false,
+      error: err.message
+    })
+  }
 }
 export let imageUpload = async (req, resp) => {
-    try {
-        if (req.user.id !== req.params.id) {
-            return resp.send({
-                message: "Invalid credentials",
-                status: false
-            })
-        }
-        let user = await Users.findById(req.params.id)
-        if (!user) {
-            return resp.status(404).send({
-                message: 'User not found',
-                success: false
-            });
-        }
-        if (!req.file) {
-            return resp.status(400).send({
-                message: "No image uploaded",
-                success: false
-            });
-        }
-
-
-        if (user.avatarPublicId) {
-            await cloudinary.uploader.destroy(user.avatarPublicId)
-        }
-
-        user.avatar = req.file.path;
-        user.avatarPublicId = req.file.filename;
-      await user.save()
-        resp.status(200).send({
-            message: "Image uploaded successfully",
-            status: true,
-            user,
-            file: req.file.path
-        });
-    } catch (error) {
-        resp.status(500).send({
-            message: "internal server error",
-            status: false,
-            error: err.message
-        })
+  try {
+    if (req.user.id !== req.params.id) {
+      return resp.send({
+        message: "Invalid credentials",
+        status: false
+      })
     }
+    let user = await Users.findById(req.params.id)
+    if (!user) {
+      return resp.status(404).send({
+        message: 'User not found',
+        success: false
+      });
+    }
+    if (!req.file) {
+      return resp.status(400).send({
+        message: "No image uploaded",
+        success: false
+      });
+    }
+
+
+    if (user.avatarPublicId) {
+      await cloudinary.uploader.destroy(user.avatarPublicId)
+    }
+
+    user.avatar = req.file.path;
+    user.avatarPublicId = req.file.filename;
+    await user.save()
+    resp.status(200).send({
+      message: "Image uploaded successfully",
+      status: true,
+      user,
+      file: req.file.path
+    });
+  } catch (error) {
+    resp.status(500).send({
+      message: "internal server error",
+      status: false,
+      error: err.message
+    })
+  }
 }

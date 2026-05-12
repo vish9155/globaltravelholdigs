@@ -1,5 +1,4 @@
-import dotenv from 'dotenv'
-dotenv.config()
+
 import jwt from 'jsonwebtoken'
 export let authmidd=async(req,resp,next)=>{
     try {

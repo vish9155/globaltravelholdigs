@@ -58,7 +58,7 @@ export default function PhoneLogin() {
    
                        // LOGIN API
                        let resp = await fetch(
-                           "https://www.globaltravel-holdings.com/user/login",
+                           "https://www.globaltravel-holdings.com/user/phone-login",
                            {
    
                                method: "POST",
@@ -134,7 +134,7 @@ export default function PhoneLogin() {
                    try {
    
                        let resp = await fetch(
-                           "https://www.globaltravel-holdings.com/user/login",
+                           "https://www.globaltravel-holdings.com/user/phone-login",
                            {
    
                                method: "POST",

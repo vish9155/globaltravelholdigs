@@ -1,7 +1,6 @@
-import dotenv from 'dotenv'
-dotenv.config()
+
 import client from '../config/redisConfig.js';
-import { getAccessToken } from '../oAuths/amadeusToken.js';
+// import { getAccessToken } from '../oAuths/amadeusToken.js';
 import { dedupe } from '../utils/dedupe.js';
 import { getCacheSWR } from '../utils/cache.js';
 

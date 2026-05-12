@@ -54,7 +54,7 @@ export default function EmailLogin() {
 
                         // LOGIN API
                         let resp = await fetch(
-                            "https://www.globaltravel-holdings.com/user/login",
+                            "https://www.globaltravel-holdings.com/user/email-login",
                             {
 
                                 method: "POST",
@@ -130,7 +130,7 @@ export default function EmailLogin() {
                     try {
 
                         let resp = await fetch(
-                            "https://www.globaltravel-holdings.com/user/login",
+                            "https://www.globaltravel-holdings.com/user/email-login",
                             {
 
                                 method: "POST",
