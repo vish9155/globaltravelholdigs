@@ -1230,7 +1230,7 @@ export let phonelogin = async (req, resp) => {
     let { phone, otp, latitude, longitude, accuracy } = req.body;
 
 
-
+ console.log(phone)
     let storedOtp = await getOtp("phone", phone);
     if (!storedOtp) {
       return resp.json({ message: "OTP expired", status: false });
@@ -1603,7 +1603,7 @@ export let phonelogin = async (req, resp) => {
   } catch (error) {
     resp.json({
       message: "Error in user Phone Otp Login",
-      error: error,
+      error: error.message,
       status: false
     })
   }
