@@ -80,7 +80,7 @@ export default function ContactUs() {
 
                 <div className="relative z-10 flex items-center justify-center h-full text-center">
                     <h1 className="text-white text-4xl md:text-6xl font-extrabold tracking-wide animate-fadeIn">
-                        Let’s Connect
+                        Let’s Connect Us
                     </h1>
                 </div>
             </section>
