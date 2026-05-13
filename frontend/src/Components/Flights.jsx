@@ -7,12 +7,13 @@ import TrainRoutes from './TrainRoutes';
 import { useDispatch } from 'react-redux';
 
 import { fetchFlights } from '../redux/FlightSlice';
+import { useMemo } from 'react';
 
 export default function Flights() {
 
     let [fromSearch, setFromSearch] = useState([])
     let [toSearch, setToSearch] = useState([])
-    let [debounce, setDebounce] = useState("")
+
 
     let [trip, setTrip] = useState("oneway")
     let [departDate, setDepartDate] = useState(new Date());
@@ -63,6 +64,16 @@ export default function Flights() {
     }, [adult, children, infant, classe]);
 
     let searchLocation = async (value, type) => {
+        if (!value.trim()) {
+
+            if (type === "from") {
+                setFromSearch([]);
+            } else {
+                setToSearch([]);
+            }
+
+            return;
+        }
         // console.log(value)
         let resp = await fetch(`https://www.globaltravel-holdings.com/api/flight/location?query=${value}`)
         let result = await resp.json()
@@ -75,8 +86,27 @@ export default function Flights() {
                 setToSearch(result.data.data || [])
             }
         }
-
     }
+
+    let debounce = (fn, delay) => {
+
+        let timer;
+
+        return (...args) => {
+
+            clearTimeout(timer);
+
+            timer = setTimeout(() => {
+                fn(...args);
+            }, delay);
+        };
+    };
+    let debouncedSearch = useMemo(() => {
+
+        return debounce(searchLocation, 1200);
+
+    }, []);
+
     let dispatch = useDispatch()
     let handleSubmit = async (e) => {
         e.preventDefault()
@@ -135,7 +165,7 @@ export default function Flights() {
                                 <MapPin size={18} />
                                 <input onChange={(e) => {
                                     setForm({ ...form, from: e.target.value })
-                                    searchLocation(e.target.value, "from")
+                                    debouncedSearch(e.target.value, "from")
                                 }} type="text" placeholder='from' name='from' value={form.from} className='outline-none w-full' />
                                 {fromSearch.length > 0 && (
                                     <div className='absolute top-14 left-0 w-80 bg-white shadow-xl rounded-lg z-[999] h-80 overflow-y-auto'>
@@ -161,7 +191,7 @@ export default function Flights() {
                                 <MapPin size={18} />
                                 <input onChange={(e) => {
                                     setForm({ ...form, to: e.target.value })
-                                    searchLocation(e.target.value, "to")
+                                    debouncedSearch(e.target.value, "to")
                                 }} type="text" placeholder='To' name='to' value={form.to} className='outline-none w-full' />
                                 {toSearch.length > 0 && (
                                     <div className='absolute top-14 left-0 w-80 bg-white shadow-xl rounded-lg z-[999] h-80 overflow-y-auto'>
