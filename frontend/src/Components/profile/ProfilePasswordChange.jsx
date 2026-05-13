@@ -25,12 +25,12 @@ export default function ChangePassword() {
         oldpass: ""
     })
 
-    let formInput =useCallback( (e) => {
+    let forminput = (e) => {
    
            setForm({
                ...form, [e.target.name]: e.target.value
            })
-       },[])
+       }
     let formHandle = async (e) => {
         try {
             e.preventDefault();
