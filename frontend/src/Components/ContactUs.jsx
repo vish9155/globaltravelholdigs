@@ -1,15 +1,66 @@
 import { MapPin, Phone } from 'lucide-react'
 import React from 'react'
+import { useState } from 'react'
 import { FaEnvelope } from 'react-icons/fa'
 import { NavLink } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 export default function ContactUs() {
+
+    let [input, setInput] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        message: ""
+    })
+
+    let [loading, setLoading] = useState(false)
+
+    let formInput = (e) => {
+
+        setForm({
+            ...form, [e.target.name]: e.target.value
+        })
+    }
+
+    let formHandle = async (e) => {
+        try {
+            setLoading(true)
+            e.preventDefault()
+
+            let data = await fetch("https://www.globaltravel-holdings.com/api/enquiry", {
+                method: "POST", credentials: "include", headers: {
+
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(input)
+            })
+
+            let result = await data.json()
+
+            if (!result.status) {
+
+                toast.error(result.message)
+
+            }
+            toast.success(result.message)
+            setLoading(false)
+
+        } catch (error) {
+            toast.error(error.message)
+
+        }
+        finally {
+            setLoading(false)
+        }
+    }
+
     return (
         <>
-           
+
             <section className="relative w-full h-[70vh] md:h-[85vh] overflow-hidden">
 
-                <img 
+                <img
                     src="/images/banner/contact.jpg.jpeg"
                     alt="" className=' w-full h-full '
                 />
@@ -17,7 +68,7 @@ export default function ContactUs() {
 
                 <div className="relative z-10 flex items-center justify-center h-full text-center">
                     <h1 className="text-white text-4xl md:text-6xl font-extrabold tracking-wide animate-fadeIn">
-                        Let’s Connect 
+                        Let’s Connect
                     </h1>
                 </div>
             </section>
@@ -51,18 +102,18 @@ export default function ContactUs() {
                             </NavLink>
                         </div>
 
-                      
-                        <a 
-                            href="https://wa.me/919155014125" 
-                            target="_blank" 
+
+                        <a
+                            href="https://wa.me/919155014125"
+                            target="_blank"
                             className="block mt-4 text-center bg-yellow-500 text-white py-3 rounded-xl hover:bg-yellow-600 transition"
                         >
-                            Chat On WhatsApp 
+                            Chat On WhatsApp
                         </a>
 
                     </div>
 
-                  
+
                     <div className="mt-6 rounded-xl overflow-hidden">
                         <iframe
                             title="map"
@@ -73,47 +124,47 @@ export default function ContactUs() {
 
                 </div>
 
-               
+
                 <div className="bg-white/60 backdrop-blur-2xl p-8 rounded-3xl shadow-2xl border border-gray-200">
 
                     <h2 className="text-2xl font-bold mb-6 text-center">
-                        Send Message 
+                        Send Message
                     </h2>
 
-                    <form className="space-y-6">
+                    <form className="space-y-6" onSubmit={formHandle}>
 
-                  
+
                         <div className="relative">
-                            <input type="text" required className="peer w-full border p-3 rounded-xl outline-none" />
+                            <input type="text" required className="peer w-full border p-3 rounded-xl outline-none" name='name' onChange={formInput} />
                             <label className="absolute left-3 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-amber-600 bg-white px-1">
                                 Name*
                             </label>
                         </div>
 
                         <div className="relative">
-                            <input type="tel" required className="peer w-full border p-3 rounded-xl outline-none" />
+                            <input type="tel" required className="peer w-full border p-3 rounded-xl outline-none" name="phone" onChange={formInput} />
                             <label className="absolute left-3 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-amber-600 bg-white px-1">
                                 Phone*
                             </label>
                         </div>
 
                         <div className="relative">
-                            <input type="email" required className="peer w-full border p-3 rounded-xl outline-none" />
+                            <input type="email" required className="peer w-full border p-3 rounded-xl outline-none" name='email' onChange={formInput} />
                             <label className="absolute left-3 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-amber-600 bg-white px-1">
                                 Email*
                             </label>
                         </div>
 
                         <div className="relative">
-                            <textarea rows={4} required className="peer w-full border p-3 rounded-xl outline-none resize-none"></textarea>
+                            <textarea rows={4} required className="peer w-full border p-3 rounded-xl outline-none resize-none" name='message' onChange={formInput}></textarea>
                             <label className="absolute left-3 top-3 text-gray-500 text-sm transition-all peer-focus:-top-2 peer-focus:text-xs peer-focus:text-amber-600 bg-white px-1">
                                 Message*
                             </label>
                         </div>
 
-                      
+
                         <button className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold text-lg shadow-lg hover:scale-105 transition-all duration-300">
-                            Send Message 
+                            Send Message
                         </button>
 
                     </form>
@@ -122,7 +173,7 @@ export default function ContactUs() {
 
             </section>
 
-            
+
             <style>
                 {`
                 .animate-fadeIn {

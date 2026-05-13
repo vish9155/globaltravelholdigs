@@ -203,11 +203,6 @@ export let verifyEmail = async (req, resp) => {
   }
 }
 
-
-
-
-
-
 // DEVICE INFO
 let getDeviceInfo = (req) => {
 
@@ -245,8 +240,6 @@ let getDeviceInfo = (req) => {
       result.cpu.architecture || "Unknown"
   };
 };
-
-
 
 
 // IP LOCATION
