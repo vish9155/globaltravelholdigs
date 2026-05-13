@@ -4,6 +4,6 @@ import { enquiryForm } from '../controllers/enquiryControllers.js'
 
 let router=express.Router()
 
-router.post("/enquiry",enquiryForm)
+router.post("/user",enquiryForm)
 
 export default router

@@ -58,7 +58,7 @@ let limiter = rateLimit({
 app.use("/api",limiter);
 dbconnect()
 
-app.use("/api",enquiryRoutes)
+app.use("/enquiry",enquiryRoutes)
 
 app.use("/api", flightRoutes)
 

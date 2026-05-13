@@ -29,7 +29,7 @@ export default function ContactUs() {
 
             e.preventDefault()
             setLoading(true)
-            let data = await fetch("https://www.globaltravel-holdings.com/api/enquiry", {
+            let data = await fetch("https://www.globaltravel-holdings.com/enquiry/user", {
                 method: "POST", credentials: "include", headers: {
 
                     "Content-Type": "application/json"
@@ -200,3 +200,4 @@ export default function ContactUs() {
         </>
     )
 }
+
