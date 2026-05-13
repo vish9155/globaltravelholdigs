@@ -21,6 +21,8 @@ import FacebookSuccess from './Pages/loginSystem/facebook/FacebookSuccess';
 import ForgotPassword from './Pages/loginSystem/password/ForgotPassword';
 import ReesetPassword from './Pages/loginSystem/password/ResetPassword';
 import ProtectedRoute from './Components/ProtectedRoutes';
+import EmailVerifiedSuccess from './Pages/loginSystem/SuccessPage';
+import EmailAlreadyVerified from './Pages/loginSystem/AlreadyVerified';
 
 
 export default function App() {
@@ -74,14 +76,22 @@ export default function App() {
             <Route path='/login' element={<LoginPage />} />
             <Route path='/email-otp' element={<EmailOtp />} />
             <Route path='/email-login' element={<EmailLogin />} />
-             <Route path='/phone-login' element={<PhoneLogin />} />
-             <Route path='/phone-otp' element={<PhoneOtp />} />
+            <Route path='/phone-login' element={<PhoneLogin />} />
+            <Route path='/phone-otp' element={<PhoneOtp />} />
             <Route path='/google-success' element={<GoogleSuccess />} />
             <Route path='/github-success' element={<GithubSuccess />} />
-             <Route path='/facebook-success' element={<FacebookSuccess />} />
-             <Route path='/forgot' element={<ForgotPassword />} />
-             <Route path='/reset-password' element={<ReesetPassword />} />
-             
+            <Route path='/facebook-success' element={<FacebookSuccess />} />
+            <Route path='/forgot' element={<ForgotPassword />} />
+            <Route path='/reset-password' element={<ReesetPassword />} />
+            <Route
+              path="/email-verified-success"
+              element={<EmailVerifiedSuccess />}
+            />
+
+            <Route
+              path="/email-already-verified"
+              element={<EmailAlreadyVerified />}
+            />
             <Route path='/blog' element={<BlogList />} />
             <Route path='/blog/:slug' element={<BlogDetail />} />
             <Route path='/flight-results' element={<FlightResult />} />

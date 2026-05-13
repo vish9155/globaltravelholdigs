@@ -100,54 +100,126 @@ export let createUser = async (req, resp, next) => {
       maxAge: 5 * 24 * 60 * 60 * 1000
     });
 
-    let link = `http://192.168.1.88:5000/user/verify?token=${token}`
+    let link = `${process.env.CLIENT_URL}/user/verify?token=${token}`;
+
     await transport.sendMail({
       from: `"Global Travel Holdings" <${process.env.USER_EMAIL}>`,
       to: result.email,
       subject: "Verify Your Email - Global Travel Holdings",
-      text: `Please verify your email: ${link}`,
+
       html: `
-  <div style="font-family: Arial, sans-serif; background:#f4f6f9; padding:20px;">
-    
-    <div style="max-width:600px; margin:auto; background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
-      
-      <!-- Header -->
-      <div style="background:linear-gradient(135deg,#1e3c72,#2a5298); padding:20px; text-align:center; color:#fff;">
-        <h1 style="margin:0;">✈️ Global Travel Holdings</h1>
-        <p style="margin:5px 0 0;">Your Journey Starts Here</p>
-      </div>
+  <div style="margin:0;padding:0;background:#f4f7fb;font-family:Arial,sans-serif;">
 
-      <!-- Body -->
-      <div style="padding:30px; text-align:center;">
-        <h2 style="color:#333;">Verify Your Email</h2>
-        <p style="color:#555; font-size:15px;">
-          Thank you for choosing <b>Global Travel Holdings</b>.<br/>
-          Please confirm your email address to continue.
-        </p>
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;background:#f4f7fb;">
+      <tr>
+        <td align="center">
 
-        <!-- Button -->
-        <a href="${link}" 
-           style="display:inline-block; margin-top:20px; padding:12px 25px; background:#ff9800; color:#fff; text-decoration:none; border-radius:6px; font-weight:bold;">
-           Verify Email
-        </a>
+          <table width="600" cellpadding="0" cellspacing="0" 
+            style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.08);">
 
-        <p style="margin-top:20px; font-size:13px; color:#888;">
-          If the button doesn't work, copy and paste this link:<br/>
-          <a href="${link}" style="color:#2a5298;">${link}</a>
-        </p>
-      </div>
+            <!-- Header -->
+            <tr>
+              <td 
+                style="
+                  background:linear-gradient(135deg,#0f172a,#1e3a8a);
+                  padding:35px;
+                  text-align:center;
+                "
+              >
+                <h1 style="margin:0;color:#ffffff;font-size:30px;">
+                  ✈️ Global Travel Holdings
+                </h1>
 
-      <!-- Footer -->
-      <div style="background:#f1f1f1; padding:15px; text-align:center; font-size:12px; color:#777;">
-        © ${new Date().getFullYear()} Global Travel Holdings. All rights reserved.<br/>
-        Safe travels ✈️
-      </div>
+                <p style="margin-top:10px;color:#dbeafe;font-size:15px;">
+                  Explore The World With Confidence
+                </p>
+              </td>
+            </tr>
 
-    </div>
+            <!-- Body -->
+            <tr>
+              <td style="padding:45px 40px;">
+
+                <h2 style="margin-top:0;color:#111827;font-size:28px;">
+                  Verify Your Email Address
+                </h2>
+
+                <p style="color:#4b5563;font-size:16px;line-height:1.8;">
+                  Welcome to <b>Global Travel Holdings</b>.
+                  Please confirm your email address to activate your account
+                  and continue your travel journey with us.
+                </p>
+
+                <!-- Verify Button -->
+                <div style="text-align:center;margin:40px 0;">
+
+                  <a href="${link}"
+                    style="
+                      background:linear-gradient(135deg,#2563eb,#1d4ed8);
+                      color:#ffffff;
+                      text-decoration:none;
+                      padding:16px 34px;
+                      border-radius:10px;
+                      display:inline-block;
+                      font-size:16px;
+                      font-weight:bold;
+                      box-shadow:0 4px 12px rgba(37,99,235,0.3);
+                    "
+                  >
+                    Verify Email
+                  </a>
+
+                </div>
+
+                <!-- Fallback -->
+                <p style="color:#6b7280;font-size:14px;line-height:1.7;">
+                  If the button above doesn't work, copy and paste this link
+                  into your browser:
+                </p>
+
+                <p style="word-break:break-all;">
+                  <a href="${link}" style="color:#2563eb;font-size:14px;">
+                    ${link}
+                  </a>
+                </p>
+
+                <hr style="border:none;border-top:1px solid #e5e7eb;margin:35px 0;" />
+
+                <p style="color:#6b7280;font-size:14px;line-height:1.7;">
+                  If you did not create an account, you can safely ignore
+                  this email.
+                </p>
+
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td 
+                style="
+                  background:#f9fafb;
+                  padding:25px;
+                  text-align:center;
+                  font-size:13px;
+                  color:#6b7280;
+                "
+              >
+                © ${new Date().getFullYear()} Global Travel Holdings<br/>
+                Safe • Secure • Trusted Travel Experience
+              </td>
+            </tr>
+
+          </table>
+
+        </td>
+      </tr>
+    </table>
 
   </div>
   `
     });
+
+
 
 
     return resp.json({
@@ -170,38 +242,85 @@ export let verifyEmail = async (req, resp) => {
   try {
 
     let token = req.query.token;
-    if (!token) return resp.json({ message: "Token not exist", status: false })
-    jwt.verify(token, process.env.JWT_SECRET_KEY, async (error, decode) => {
-      if (error) return resp.send({ message: "Token is Invalid", error: error.message })
-      let user = await Users.findOne({ email: decode.email })
-      if (!user) return resp.status(404).send({ message: "user not found", success: false })
-      if (user.emailVerified) {
-        return resp.status(409).send({ message: "Email already verified" });
-      }
 
-      user.emailVerified = true
-      await user.save()
-      if (user.emailVerified) {
-        return resp.status(200).send({ message: "Email verified successfull", success: true })
+    if (!token) {
+      return resp.status(400).json({
+        message: "Verification token is missing",
+        status: false,
+      });
+    }
 
-      }
-      else {
-        return resp.status(403).send({ message: "email not verified", success: false })
-      }
+    // Verify JWT
+    let decode = jwt.verify(
+      token,
+      process.env.JWT_SECRET_KEY
+    );
 
+    if (!decode.email) {
+      return resp.status(401).json({
+        message: "Invalid token payload",
+        status: false
+      })
+    }
 
-    })
+    // Find User
+    let user = await Users.findOne({
+      email: decode.email,
+    });
 
+    if (!user) {
+      return resp.status(404).json({
+        message: "User not found",
+        status: false,
+      });
+    }
 
+    // Already Verified
+    if (user.emailVerified) {
+      return resp.redirect(
+        `${process.env.CLIENT_URL}/email-already-verified`
+      );
+    }
+
+    // Verify Email
+    user.emailVerified = true;
+
+    await user.save();
+
+    // Redirect Success Page
+    return resp.redirect(
+      `${process.env.CLIENT_URL}/email-verified-success`
+    );
 
   } catch (error) {
-    resp.json({
-      message: "Error in user Email Verification",
-      error: error.message,
-      status: false
-    })
+
+    // JWT Expired / Invalid
+    if (
+      error.name === "TokenExpiredError"
+    ) {
+      return resp.status(401).json({
+        message: "Verification link expired",
+        status: false,
+      });
+    }
+
+    if (
+      error.name === "JsonWebTokenError"
+    ) {
+      return resp.status(401).json({
+        message: "Invalid verification token",
+        status: false,
+      });
+    }
+
+    console.log(error);
+
+    return resp.status(500).json({
+      message: "Error in email verification",
+      status: false,
+    });
   }
-}
+};
 
 // DEVICE INFO
 let getDeviceInfo = (req) => {
@@ -1223,7 +1342,7 @@ export let phonelogin = async (req, resp) => {
     let { phone, otp, latitude, longitude, accuracy } = req.body;
 
 
- console.log(phone)
+    console.log(phone)
     let storedOtp = await getOtp("phone", phone);
     if (!storedOtp) {
       return resp.json({ message: "OTP expired", status: false });
@@ -1240,7 +1359,7 @@ export let phonelogin = async (req, resp) => {
       phone: normalizedPhone
     });
 
-   console.log(normalizedPhone)
+    console.log(normalizedPhone)
     if (!user) {
       return resp.json({ message: "User not found", status: false, user });
     }
