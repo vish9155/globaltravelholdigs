@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Toaster } from "react-hot-toast";
@@ -23,6 +23,7 @@ import ReesetPassword from './Pages/loginSystem/password/ResetPassword';
 import ProtectedRoute from './Components/ProtectedRoutes';
 import EmailVerifiedSuccess from './Pages/loginSystem/SuccessPage';
 import EmailAlreadyVerified from './Pages/loginSystem/AlreadyVerified';
+import NotFound from './Pages/ErrorPage';
 
 
 export default function App() {
@@ -95,6 +96,7 @@ export default function App() {
             <Route path='/blog' element={<BlogList />} />
             <Route path='/blog/:slug' element={<BlogDetail />} />
             <Route path='/flight-results' element={<FlightResult />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
         {/* <Marquee /> */}

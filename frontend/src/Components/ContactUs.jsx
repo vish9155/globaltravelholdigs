@@ -41,7 +41,7 @@ export default function ContactUs() {
 
             if (!result.status) {
 
-                toast.error(result.message)
+             return   toast.error(result.message)
 
             }
             toast.success(result.message)
