@@ -139,7 +139,7 @@ Experience travel like never before with our <b>cruise booking online</b> platfo
 
             </section>
              <div className='py-10 mx-auto px-3 text-center'>
-                <NavLink to="tel:9155014125" className="px-8 py-3 bg-slate-900  text-center  text-white rounded-full font-semibold hover:bg-amber-600 transition-colors shadow-lg">
+                <NavLink to="tel:+91 85888 09690" className="px-8 py-3 bg-slate-900  text-center  text-white rounded-full font-semibold hover:bg-amber-600 transition-colors shadow-lg">
                         Book Now ?
                           </NavLink>
             </div>
@@ -169,13 +169,13 @@ Experience travel like never before with our <b>cruise booking online</b> platfo
                 </div>
             </section>
              <div className='py-10 mx-auto px-3 text-center'>
-                <NavLink to="tel:9155014125" className="px-8 py-3 bg-slate-900  text-center  text-white rounded-full font-semibold hover:bg-amber-600 transition-colors shadow-lg">
+                <NavLink to="tel:+91 85888 09690" className="px-8 py-3 bg-slate-900  text-center  text-white rounded-full font-semibold hover:bg-amber-600 transition-colors shadow-lg">
                           Enquiry For Cruise Packages
                           </NavLink>
             </div>
       <CruiseDestination />
        <div className='py-10 mx-auto px-3 text-center'>
-                <NavLink to="tel:9155014125" className="px-8 py-3 bg-slate-900  text-center  text-white rounded-full font-semibold hover:bg-amber-600 transition-colors shadow-lg">
+                <NavLink to="tel:+91 85888 09690" className="px-8 py-3 bg-slate-900  text-center  text-white rounded-full font-semibold hover:bg-amber-600 transition-colors shadow-lg">
                          Book your favourite Cruise Destination
                           </NavLink>
             </div>

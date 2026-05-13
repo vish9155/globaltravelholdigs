@@ -55,7 +55,7 @@ export default function MissionVision() {
       </div>
           <p className="text-gray-600 text-sm md:text-base leading-relaxed py-20 max-w-4xl mx-auto">Start your journey with Global Travel Holdings LLC and experience a smarter way to travel. Whether you're planning ahead or booking at the last moment, we are here to support you every step of the way.</p>
           <div className="mx-auto text-center">
-            <NavLink to="tel:9155014125" className="px-8 py-3 bg-slate-900 text-white rounded-full font-semibold hover:bg-amber-600 transition-colors shadow-lg">Call-Us Now</NavLink>
+            <NavLink to="tel:+91 85888 09690" className="px-8 py-3 bg-slate-900 text-white rounded-full font-semibold hover:bg-amber-600 transition-colors shadow-lg">Call-Us Now</NavLink>
           </div>
     </section>
   );

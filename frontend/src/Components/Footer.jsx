@@ -98,8 +98,8 @@ export default function Footer() {
                             <div className="bg-white/5 p-2 rounded-lg group-hover:bg-amber-500/20 transition-colors">
                                 <Mail size={16} className="text-amber-500" />
                             </div>
-                            <NavLink to="mailto:support@gmail.com" className="text-gray-400 hover:text-white text-sm transition-colors">
-                                support@gmail.com
+                            <NavLink to="mailto:globaletravelingholdings@gmail.com" className="text-gray-400 hover:text-white text-sm transition-colors">
+                                globaletravelingholdings@gmail.com
                             </NavLink>
                         </div>
 
@@ -107,8 +107,8 @@ export default function Footer() {
                             <div className="bg-white/5 p-2 rounded-lg group-hover:bg-amber-500/20 transition-colors">
                                 <PhoneCall size={16} className="text-amber-500" />
                             </div>
-                            <NavLink to="tel:9155014125" className="text-gray-400 hover:text-white text-sm transition-colors">
-                                +91 91550 14125
+                            <NavLink to="tel:+91 85888 09690" className="text-gray-400 hover:text-white text-sm transition-colors">
+                                +91 85888 09690
                             </NavLink>
                         </div>
                     </div>
@@ -156,7 +156,7 @@ export default function Footer() {
                     <span className="absolute inset-0 rounded-full bg-green-500/50 animate-ping"></span>
                     
                     <NavLink
-                        to="https://wa.me/9155014125"
+                        to="https://wa.me/+918588809690"
                         target="_blank"
                         className="relative z-10 w-16 h-16 rounded-full bg-green-600 flex items-center justify-center shadow-[0_0_20px_rgba(22,163,74,0.5)] group-hover:scale-110 group-hover:bg-green-500 transition-all duration-300"
                     >
