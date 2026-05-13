@@ -432,6 +432,16 @@ export let login = async (req, resp) => {
       });
     }
 
+    if (!user.emailVerified) {
+
+      return resp.json({
+
+        message: "please verified email",
+
+        status: false
+      });
+    }
+
 
 
     // PASSWORD
@@ -929,6 +939,27 @@ export let emaillogin = async (req, resp) => {
     await deleteOtp("email", email);
 
     let user = await Users.findOne({ email });
+    
+   if (!user) {
+
+      return resp.json({
+
+        message: "User not found",
+
+        status: false
+      });
+    }
+
+    if (!user.emailVerified) {
+
+      return resp.json({
+
+        message: "please verified email",
+
+        status: false
+      });
+    }
+
 
     // DEVICE
     let device = getDeviceInfo(req);
@@ -1359,9 +1390,26 @@ export let phonelogin = async (req, resp) => {
       phone: normalizedPhone
     });
 
+
     console.log(normalizedPhone)
     if (!user) {
-      return resp.json({ message: "User not found", status: false, user });
+
+      return resp.json({
+
+        message: "User not found",
+
+        status: false
+      });
+    }
+
+    if (!user.emailVerified) {
+
+      return resp.json({
+
+        message: "please verified email",
+
+        status: false
+      });
     }
 
 
