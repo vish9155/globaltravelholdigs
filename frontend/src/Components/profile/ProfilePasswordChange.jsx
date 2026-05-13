@@ -24,7 +24,6 @@ export default function ChangePassword() {
         newpass: "",
         oldpass: ""
     })
-
     let forminput = (e) => {
    
            setForm({
