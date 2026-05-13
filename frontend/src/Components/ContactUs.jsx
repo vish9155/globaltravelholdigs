@@ -2,8 +2,8 @@ import { MapPin, Phone } from 'lucide-react'
 import React from 'react'
 import { useState } from 'react'
 import { FaEnvelope } from 'react-icons/fa'
-import { NavLink } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ContactUs() {
 
@@ -25,9 +25,9 @@ export default function ContactUs() {
 
     let formHandle = async (e) => {
         try {
-            setLoading(true)
-            e.preventDefault()
 
+            e.preventDefault()
+            setLoading(true)
             let data = await fetch("https://www.globaltravel-holdings.com/api/enquiry", {
                 method: "POST", credentials: "include", headers: {
 
@@ -59,7 +59,18 @@ export default function ContactUs() {
         <>
 
             <section className="relative w-full h-[70vh] md:h-[85vh] overflow-hidden">
-
+                <ToastContainer
+                    position="top-right"
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                />
                 <img
                     src="/images/banner/contact.jpg.jpeg"
                     alt="" className=' w-full h-full '
