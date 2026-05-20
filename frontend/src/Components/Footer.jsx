@@ -108,7 +108,7 @@ export default function Footer() {
                                 <PhoneCall size={15} className="text-emerald-500" />
                             </div>
                             <NavLink to="tel:9155014125" className="text-gray-300 hover:text-white text-xs font-bold uppercase tracking-wider transition-colors">
-                                +91 91550 14125
+                                +1 91550 14125
                             </NavLink>
                         </div>
                     </div>
