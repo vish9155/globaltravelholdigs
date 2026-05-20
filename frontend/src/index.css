@@ -200,3 +200,7 @@ iframe.skiptranslate {
   background: #cbd5e1;
   border-radius: 10px;
 }
+
+body{
+  @apply bg-gradient-to-r from-green-50 via-emerald-50 to-lime-50;
+}
