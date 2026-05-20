@@ -87,7 +87,7 @@ export default function Footer() {
                     <div className="space-y-5">
                         <div className="flex gap-4 items-start group">
                             <div className="mt-0.5 bg-white/20 p-2 rounded-xl group-hover:bg-emerald-500/20 border border-white/bg-white/20 transition-colors duration-300">
-                                <MapPin size={15} className="text-emerald-500" />
+                                <MapPin size={15} className="text-emerald-600" />
                             </div>
                             <p className="text-gray-300 text-xs font-bold uppercase tracking-wider leading-snug">
                                 A-16 17662 Irvine Blvd, Suite 9, <br />Tustin, CA 92780
