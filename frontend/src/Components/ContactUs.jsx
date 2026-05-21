@@ -46,14 +46,14 @@ export default function ContactUs() {
 
                         <div>
                             <p className="font-semibold flex gap-2"><Phone size={24} /> Phone</p>
-                            <NavLink to="tel:9155014125" className="text-amber-600 hover:underline">
-                                9155014125
+                            <NavLink to="tel:+1 8888434146" className="text-amber-600 hover:underline">
+                                +1 8888434146
                             </NavLink>
                         </div>
 
                       
                         <a 
-                            href="https://wa.me/919155014125" 
+                            href="https://wa.me/+1 8888434146" 
                             target="_blank" 
                             className="block mt-4 text-center bg-yellow-500 text-white py-3 rounded-xl hover:bg-yellow-600 transition"
                         >

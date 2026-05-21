@@ -8,7 +8,6 @@ export let trainroutes = [
   { "id": 7, "category": "domestic", "from": { "code": "BOS", "city": "Boston" }, "to": { "code": "MIA", "city": "Miami" }, "departureDate": "2026-05-22", "returnDate": "2026-05-26", "tripType": "RoundTrip", "price": 175.45, "currency": "USD" },
   { "id": 8, "category": "domestic", "from": { "code": "DFW", "city": "Dallas" }, "to": { "code": "PHX", "city": "Phoenix" }, "departureDate": "2026-05-24", "returnDate": "2026-05-28", "tripType": "RoundTrip", "price": 120.80, "currency": "USD" },
   { "id": 9, "category": "domestic", "from": { "code": "HNL", "city": "Honolulu" }, "to": { "code": "OGG", "city": "Maui" }, "departureDate": "2026-05-26", "returnDate": "2026-05-30", "tripType": "RoundTrip", "price": 110.25, "currency": "USD" },
-  { "id": 10, "category": "domestic", "from": { "code": "DEN", "city": "Denver" }, "to": { "code": "LAS", "city": "Las Vegas" }, "departureDate": "2026-05-28", "returnDate": "2026-06-01", "tripType": "RoundTrip", "price": 140.90, "currency": "USD" },
 
   { "id": 11, "category": "international", "from": { "code": "JFK", "city": "New York" }, "to": { "code": "LHR", "city": "London" }, "departureDate": "2026-05-10", "returnDate": "2026-05-18", "tripType": "RoundTrip", "price": 650.40, "currency": "USD" },
   { "id": 12, "category": "international", "from": { "code": "LAX", "city": "Los Angeles" }, "to": { "code": "HND", "city": "Tokyo" }, "departureDate": "2026-05-12", "returnDate": "2026-05-22", "tripType": "RoundTrip", "price": 820.75, "currency": "USD" },
@@ -19,7 +18,6 @@ export let trainroutes = [
   { "id": 17, "category": "international", "from": { "code": "LAX", "city": "Los Angeles" }, "to": { "code": "ICN", "city": "Seoul" }, "departureDate": "2026-05-22", "returnDate": "2026-06-02", "tripType": "RoundTrip", "price": 780.50, "currency": "USD" },
   { "id": 18, "category": "international", "from": { "code": "JFK", "city": "New York" }, "to": { "code": "DXB", "city": "Dubai" }, "departureDate": "2026-05-24", "returnDate": "2026-06-03", "tripType": "RoundTrip", "price": 920.10, "currency": "USD" },
   { "id": 19, "category": "international", "from": { "code": "SEA", "city": "Seattle" }, "to": { "code": "YVR", "city": "Vancouver" }, "departureDate": "2026-05-26", "returnDate": "2026-05-30", "tripType": "RoundTrip", "price": 280.45, "currency": "USD" },
-  { "id": 20, "category": "international", "from": { "code": "BOS", "city": "Boston" }, "to": { "code": "DUB", "city": "Dublin" }, "departureDate": "2026-05-28", "returnDate": "2026-06-06", "tripType": "RoundTrip", "price": 640.80, "currency": "USD" },
 
   { "id": 21, "category": "popular", "from": { "code": "JFK", "city": "New York" }, "to": { "code": "LAX", "city": "Los Angeles" }, "departureDate": "2026-06-01", "returnDate": "2026-06-06", "tripType": "RoundTrip", "price": 210.00, "currency": "USD" },
   { "id": 22, "category": "popular", "from": { "code": "JFK", "city": "New York" }, "to": { "code": "LHR", "city": "London" }, "departureDate": "2026-06-03", "returnDate": "2026-06-10", "tripType": "RoundTrip", "price": 690.00, "currency": "USD" },
@@ -30,5 +28,4 @@ export let trainroutes = [
   { "id": 27, "category": "popular", "from": { "code": "SFO", "city": "San Francisco" }, "to": { "code": "SEA", "city": "Seattle" }, "departureDate": "2026-06-13", "returnDate": "2026-06-17", "tripType": "RoundTrip", "price": 120.00, "currency": "USD" },
   { "id": 28, "category": "popular", "from": { "code": "DFW", "city": "Dallas" }, "to": { "code": "PHX", "city": "Phoenix" }, "departureDate": "2026-06-15", "returnDate": "2026-06-19", "tripType": "RoundTrip", "price": 125.00, "currency": "USD" },
   { "id": 29, "category": "popular", "from": { "code": "JFK", "city": "New York" }, "to": { "code": "CDG", "city": "Paris" }, "departureDate": "2026-06-17", "returnDate": "2026-06-26", "tripType": "RoundTrip", "price": 710.00, "currency": "USD" },
-  { "id": 30, "category": "popular", "from": { "code": "LAX", "city": "Los Angeles" }, "to": { "code": "SYD", "city": "Sydney" }, "departureDate": "2026-06-19", "returnDate": "2026-06-30", "tripType": "RoundTrip", "price": 980.00, "currency": "USD" }
 ]

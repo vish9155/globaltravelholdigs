@@ -70,9 +70,9 @@ export default function Footer() {
                             <NavLink 
                                 key={i} 
                                 to={link.path} 
-                                className="group flex items-center text-gray-300 hover:text-white text-sm font-medium tracking-wide transition-all duration-300"
+                                className="group flex items-center uppercase text-gray-300 hover:text-white text-sm font-medium tracking-wide transition-all duration-300"
                             >
-                                <span className="w-0 group-hover:w-2 h-[2px] bg-emerald-500 mr-0 group-hover:mr-2 transition-all duration-300"></span>
+                                <span className="w-0 group-hover:w-2 h-[2px]  bg-emerald-500 mr-0 group-hover:mr-2 transition-all duration-300"></span>
                                 {link.name}
                             </NavLink>
                         ))}
@@ -107,8 +107,8 @@ export default function Footer() {
                             <div className="bg-white/20 p-2 rounded-xl group-hover:bg-emerald-500/20 border border-white/bg-white/20 transition-colors duration-300">
                                 <PhoneCall size={15} className="text-emerald-500" />
                             </div>
-                            <NavLink to="tel:9155014125" className="text-gray-300 hover:text-white text-xs font-bold uppercase tracking-wider transition-colors">
-                                +1 91550 14125
+                            <NavLink to="tel:+1 8888434146" className="text-gray-300 hover:text-white text-xs font-bold uppercase tracking-wider transition-colors">
+                                +1 8888434146
                             </NavLink>
                         </div>
                     </div>
@@ -134,7 +134,7 @@ export default function Footer() {
                     <span className="absolute inset-0 rounded-full bg-emerald-500/40 animate-ping opacity-75"></span>
                     
                     <NavLink
-                        to="https://wa.me/9155014125"
+                        to="https://wa.me/+1 8888434146"
                         target="_blank"
                         className="relative z-10 w-14 h-14 rounded-full bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/20 hover:scale-110 hover:bg-emerald-600 transition-all duration-300"
                     >
