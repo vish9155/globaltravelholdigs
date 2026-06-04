@@ -1,11 +1,4 @@
 import { createClient } from "redis";
-<<<<<<< HEAD
-
-=======
-import dotenv from "dotenv";
-
-dotenv.config();
->>>>>>> d440d1e0a216ffdab56b88f8a6cc7268c5c2d00b
 
 
 // yaha par aap redis ko locally aur server dono par run kar sakte ho 
