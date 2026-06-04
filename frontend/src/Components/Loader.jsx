@@ -3,17 +3,17 @@ import { Plane } from "lucide-react";
 
 export default function Loader() {
   return (
-    <section className="w-screen h-screen flex flex-col items-center justify-center bg-gradient-to-br from-yellow-50 via-white to-yellow-100">
+    <section className="w-screen h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-50 via-white to-green-100">
 
       {/* Spinner Circle */}
       <div className="relative flex items-center justify-center">
         
         {/* Outer ring */}
-        <div className="w-20 h-20 border-4 border-yellow-300 rounded-full animate-spin border-t-yellow-600"></div>
+        <div className="w-20 h-20 border-4 border-green-300 rounded-full animate-spin border-t-green-600"></div>
 
         {/* Center icon */}
         <div className="absolute">
-          <Plane className="text-yellow-600 animate-pulse" size={28} />
+          <Plane className="text-black animate-pulse" size={28} />
         </div>
 
       </div>

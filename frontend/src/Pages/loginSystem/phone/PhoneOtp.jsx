@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useCallback } from 'react'
+=======
+import React from 'react'
+>>>>>>> d440d1e0a216ffdab56b88f8a6cc7268c5c2d00b
 import { useEffect } from 'react'
 import { useState } from 'react'
 import PhoneInput from "react-phone-number-input";
@@ -42,6 +46,7 @@ export default function PhoneOtp() {
             setLoading(false)
         }
     }
+<<<<<<< HEAD
     let googleLogin = useCallback(() => {
         window.location.href = "https://www.globaltravel-holdings.com/auth/google"
 
@@ -54,6 +59,18 @@ export default function PhoneOtp() {
     let facebookLogin = useCallback(() => {
         window.location.href = "https://www.globaltravel-holdings.com/auth/facebook"
     }, [])
+=======
+
+    let googleLogin = () => {
+        window.location.href = "https://www.globaltravel-holdings.com/auth/google"
+    }
+    let gitLogin = () => {
+        window.location.href = "https://www.globaltravel-holdings.com/auth/github"
+    }
+    let facebookLogin = () => {
+        window.location.href = "https://www.globaltravel-holdings.com/auth/facebook"
+    }
+>>>>>>> d440d1e0a216ffdab56b88f8a6cc7268c5c2d00b
 
     return (
         <>

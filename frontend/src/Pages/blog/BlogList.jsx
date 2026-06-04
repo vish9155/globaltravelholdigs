@@ -2,13 +2,19 @@ import React, { useState } from 'react'
 import { blogPosts } from '../../data/blog'
 import { NavLink } from 'react-router-dom'
 import { ArrowRight, CalendarDays, Clock, Eye, Heart } from 'lucide-react'
+<<<<<<< HEAD
 import { useEffect } from 'react'
 import { useMemo } from 'react'
+=======
+>>>>>>> d440d1e0a216ffdab56b88f8a6cc7268c5c2d00b
 
 export default function BlogList() {
 
     let [search, setSearch] = useState("")
+<<<<<<< HEAD
     let [debounce, setDebounce] = useState("")
+=======
+>>>>>>> d440d1e0a216ffdab56b88f8a6cc7268c5c2d00b
     let [currentPage, setCurrentPage] = useState(1)
     let postPerPage = 6
 
@@ -17,36 +23,18 @@ export default function BlogList() {
 
     let categories = ["All", ...new Set(blogPosts.map((item) => item.category))]
 
-    useEffect(() => {
-        let timer =
-            setTimeout(() => {
-                setDebounce(search)
-            }, 1200);
-        return () => {
-            clearTimeout(timer)
-        }
+    let blogdata = blogPosts.filter(item => {
+        let matchCate = category === 'All' || item.category === category
+        let matchSearch = item.title.toLowerCase().includes(search.toLowerCase())
+        return matchCate && matchSearch
+    })
 
-    }, [search])
-    let blogdata = useMemo(() => {
-
-        let filterdata = blogPosts.filter(item => {
-            let matchCate = category === 'All' || item.category === category
-            let matchSearch = item.title.toLowerCase().includes(debounce.toLowerCase())
-            return matchCate && matchSearch
-        })
-
-        filterdata = [...filterdata].sort((a, b) => {
-            if (select === "newest") return new Date(b.date) - new Date(a.date)
-            if (select === "oldest") return new Date(a.date) - new Date(b.date)
-            if (select === "views") return b.views - a.views
-            if (select === "likes") return b.likes - a.likes
-        })
-
-        return filterdata
-
-    },[category,debounce,select])
-
-
+    blogdata = blogdata.sort((a, b) => {
+        if (select === "newest") return new Date(b.date) - new Date(a.date)
+        if (select === "oldest") return new Date(a.date) - new Date(b.date)
+        if (select === "views") return b.views - a.views
+        if (select === "likes") return b.likes - a.likes
+    })
 
     let totalPages = Math.ceil((blogdata.length) / postPerPage)
     let start = (currentPage - 1) * postPerPage
@@ -62,7 +50,7 @@ export default function BlogList() {
 
     return (
         <>
-
+           
             <section className='w-full bg-gradient-to-r from-amber-100 to-orange-100'>
                 <div className='max-w-7xl mx-auto px-4 py-10'>
 
@@ -77,7 +65,7 @@ export default function BlogList() {
                         />
                     </div>
 
-
+                 
                     <div className='flex gap-4 overflow-x-scroll py-4'>
                         {categories.map((item, id) => (
                             <button
@@ -109,7 +97,7 @@ export default function BlogList() {
                 </div>
             </section>
 
-
+        
             <section className='max-w-7xl mx-auto px-4 py-10'>
 
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
@@ -117,7 +105,7 @@ export default function BlogList() {
                     {paginatedDots.map((item, index) => (
                         <div key={index} className='bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition group'>
 
-
+                   
                             <div className='relative overflow-hidden'>
                                 <img
                                     src={item.image}
@@ -126,7 +114,7 @@ export default function BlogList() {
                                 />
                             </div>
 
-
+                          
                             <div className='p-5'>
 
                                 <span className='text-xs text-amber-500 font-semibold'>
@@ -151,7 +139,7 @@ export default function BlogList() {
                                     <span className='flex items-center gap-1'><Heart size={14} /> {item.likes}</span>
                                 </div>
 
-
+                             
                                 <NavLink
                                     to={`/blog/${item.slug}`}
                                     className='mt-4 inline-flex items-center gap-1 text-amber-600 font-medium hover:gap-2 transition'

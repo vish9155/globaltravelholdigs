@@ -4,25 +4,14 @@ import PhoneInput from "react-phone-number-input";
 import ReactFlagsSelect from "react-flags-select";
 import { useNavigate } from "react-router-dom";
 
-let loadRazorpayScript = () => {
-    return new Promise((resolve) => {
-        let script = document.createElement("script");
-        script.src = "https://checkout.razorpay.com/v1/checkout.js";
-        script.onload = () => resolve(true);
-        script.onerror = () => resolve(false);
-        document.body.appendChild(script);
-    });
-};
-
-
 export default function PassengerForm() {
 
   let [country, setCountry] = useState("IN")
   let navigate = useNavigate()
 
   let [issuingCountry, setCountryCode] = useState("IN")
-  let offerData = useSelector((s) => s.offer.items);
-  let passengers = offerData?.passengers || [];
+  const offerData = useSelector((s) => s.offer.items);
+  const passengers = offerData?.passengers || [];
   // console.log(offerData.id, "co")
   let childLength = passengers.filter(i => i.type === "child").length;
   let adultLength = passengers.filter(i => i.type === "adult").length;
@@ -41,7 +30,7 @@ export default function PassengerForm() {
   }, [offerData]);
 
 
-  let [formData, setFormData] = useState([]);
+  const [formData, setFormData] = useState([]);
 
   useEffect(() => {
     if (!passengers.length) return;
@@ -65,14 +54,13 @@ export default function PassengerForm() {
   }, [passengers]);
 
   function handleChange(index, field, value) {
-    let updated = [...formData];
+    const updated = [...formData];
     updated[index][field] = value;
     setFormData(updated);
   }
 
   async function handleBooking() {
     try {
-
 
       let formattedData = formData.map((p) => {
         let passengers = {
@@ -107,9 +95,6 @@ export default function PassengerForm() {
         }
         return passengers;
       })
-
-       let loaded = await loadRazorpayScript();
-        if (!loaded) return alert("Razorpay SDK failed");
 
       // now create the the payment
 

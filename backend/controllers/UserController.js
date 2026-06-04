@@ -1,4 +1,3 @@
-
 import Joi from "joi";
 import Users from "../models/Users.js";
 import { UAParser } from "ua-parser-js";

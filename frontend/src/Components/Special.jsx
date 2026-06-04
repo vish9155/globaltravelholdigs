@@ -7,9 +7,9 @@ import { NavLink } from "react-router-dom";
 
 export default function PremiumSpecials() {
   return (
-    <section className="relative max-w-7xl mx-auto px-4 py-14">
+    <section className="relative max-w-7xl mx-auto px-4 py-10">
       
-      <h2 className="text-xl sm:text-2xl md:text-3xl text-fuchsia-700 text-center font-semibold py-6">
+      <h2 className="text-xl sm:text-2xl md:text-3xl text-green-700 text-center font-semibold py-6">
         Global Travel Specials – Best Deals on Flights, Hotels & Holiday Packages
       </h2>
       <p className="py-3 max-w-3xl mx-auto text-center text-base ">Discover handpicked travel deals designed for every kind of journey. From spiritual destinations across India to international getaways, explore seamless options for flights, hotels, car rentals, and complete holiday packages—all in one place.</p>
@@ -33,7 +33,7 @@ export default function PremiumSpecials() {
               </p>
             </div>
 
-            <NavLink to="/packages" className="bg-white/20 backdrop-blur px-4 py-1 rounded-full text-sm hover:bg-yellow-400 hover:text-black transition">
+            <NavLink to="/packages" className="bg-white/20 backdrop-blur px-4 py-1 rounded-full text-sm hover:bg-green-400 hover:text-black transition">
               View More →
             </NavLink>
           </div>
@@ -69,7 +69,7 @@ export default function PremiumSpecials() {
                       From Marina Bay to Universal Studios
                     </p>
 
-                    <button className="mt-4 w-fit bg-white text-black px-4 py-2 rounded-full hover:bg-yellow-400 transition transform hover:scale-105">
+                    <button className="mt-4 w-fit bg-white text-black px-4 py-2 rounded-full hover:bg-green-400 transition transform hover:scale-105">
                       View More →
                     </button>
                   </div>
@@ -94,7 +94,7 @@ export default function PremiumSpecials() {
               
             </div>
 
-            <NavLink to={'/packages'} className="bg-white/20 px-4 py-1 rounded-full hover:bg-yellow-400 hover:text-black transition">
+            <NavLink to={'/packages'} className="bg-white/20 px-4 py-1 rounded-full hover:bg-green-400 hover:text-black transition">
               View More →
             </NavLink>
           </div>

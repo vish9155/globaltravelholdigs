@@ -27,7 +27,7 @@ const BookingForm = () => {
                 setValue(opt);
                 setIsOpen(false);
               }}
-              className="px-4 py-3 text-sm font-medium hover:bg-orange-50 hover:text-orange-600 cursor-pointer transition-colors"
+              className="px-4 py-3 text-sm font-medium hover:bg-green-50 hover:text-green-600 cursor-pointer transition-colors"
             >
               {opt}
             </div>
@@ -61,12 +61,12 @@ const BookingForm = () => {
         <input 
           type="text" 
           placeholder="Going from, airport or city" 
-          className="p-5 hover:bg-gray-50 outline-none border-b border-gray-200 focus:bg-orange-50/20 transition placeholder:text-black font-medium"
+          className="p-5 hover:bg-gray-50 outline-none border-b border-gray-200 focus:bg-green-50/20 transition placeholder:text-black font-medium"
         />
         <input 
           type="text" 
           placeholder="Going to, airport or city" 
-          className="p-5 hover:bg-gray-50 outline-none focus:bg-orange-50/20 transition placeholder:text-black font-medium"
+          className="p-5 hover:bg-gray-50 outline-none focus:bg-green-50/20 transition placeholder:text-black font-medium"
         />
       </div>
 
@@ -81,8 +81,8 @@ const BookingForm = () => {
         </div>
       </div>
 
-      <button className="w-full bg-[#1a1a1a] hover:bg-black text-white py-5 rounded-full font-bold text-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98] shadow-lg shadow-black/10">
-        Check Your Price 
+      <button className="w-full  cursor-pointer bg-[#1a1a1a] hover:bg-black text-white py-5 rounded-full font-bold text-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98] shadow-lg shadow-black/10">
+        Book Now 
         <span className="text-2xl leading-none">›</span>
       </button>
 
@@ -99,10 +99,10 @@ const BookingForm = () => {
             </div>
             <div>
                 <p className="text-[12px] font-extrabold text-gray-900">Call us </p>
-                <p className="text-[10px] text-orange-600 font-bold uppercase tracking-wide">Phone-exclusive savings</p>
+                <p className="text-[10px] text-green-600 font-bold uppercase tracking-wide">Phone-exclusive savings</p>
             </div>
         </div>
-        <div className="w-11 h-11 rounded-full bg-white border border-green-200 flex items-center justify-center text-orange-600 shadow-md">
+        <div className="w-11 h-11 rounded-full bg-white border border-green-200 flex items-center justify-center text-green-600 shadow-md">
             <Phone size={18} fill="currentColor" />
         </div>
       </div>
@@ -110,4 +110,4 @@ const BookingForm = () => {
   );
 };
 
-export default BookingForm;
+export default BookingForm

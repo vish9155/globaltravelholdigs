@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react'
+=======
+import React, { useEffect, useRef, useState } from 'react'
+>>>>>>> d440d1e0a216ffdab56b88f8a6cc7268c5c2d00b
 import { useNavigate } from 'react-router-dom'
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -13,7 +17,6 @@ export default function Flights() {
 
     let [fromSearch, setFromSearch] = useState([])
     let [toSearch, setToSearch] = useState([])
-
 
     let [trip, setTrip] = useState("oneway")
     let [departDate, setDepartDate] = useState(new Date());

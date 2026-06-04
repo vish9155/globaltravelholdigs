@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useCallback } from 'react'
+=======
+import React from 'react'
+>>>>>>> d440d1e0a216ffdab56b88f8a6cc7268c5c2d00b
 import { useEffect } from 'react'
 import { useState } from 'react'
 import PhoneInput from "react-phone-number-input";
@@ -20,12 +24,17 @@ export default function PhoneLogin() {
             navigate("/")
         }
     }, [navigate])
+<<<<<<< HEAD
     let formInput =(e) => {
+=======
+    let formInput = (e) => {
+>>>>>>> d440d1e0a216ffdab56b88f8a6cc7268c5c2d00b
 
         setForm({
             ...form, [e.target.name]: e.target.value
         })
     }
+<<<<<<< HEAD
      let handleForm = async (e) => {
    
        try {
@@ -220,6 +229,46 @@ export default function PhoneLogin() {
        let facebookLogin = useCallback(() => {
            window.location.href = "https://www.globaltravel-holdings.com/auth/facebook"
        }, [])
+=======
+    let handleForm = async (e) => {
+        try {
+            e.preventDefault();
+            let payload={
+                ...form,
+                phone:value
+            }
+            setLoading(true)
+            let resp = await fetch("https://www.globaltravel-holdings.com/user/phone-login", {
+                method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
+            })
+            let data = await resp.json()
+            if (!data.status) {
+                toast.error(data.message)
+                return
+            }
+            toast.success(data.message)
+            navigate("/")
+            localStorage.setItem("login", true)
+            localStorage.setItem("role", data.user.role)
+            localStorage.setItem("userId", data.user._id)
+        } catch (error) {
+            toast.error(error.message)
+        }
+        finally {
+            setLoading(false)
+        }
+    }
+
+    let googleLogin = () => {
+        window.location.href = "https://www.globaltravel-holdings.com/auth/google"
+    }
+    let gitLogin = () => {
+        window.location.href = "https://www.globaltravel-holdings.com/auth/github"
+    }
+    let facebookLogin = () => {
+        window.location.href = "https://www.globaltravel-holdings.com/auth/facebook"
+    }
+>>>>>>> d440d1e0a216ffdab56b88f8a6cc7268c5c2d00b
 
     return (
         <>

@@ -10,7 +10,6 @@ import helmet from 'helmet'
 import rateLimit from 'express-rate-limit'
 import RedisStore from "rate-limit-redis";
 import flightRoutes from './routes/flightsRoute.js'
-
 import bookingRoutes from './routes/bookingRoutes.js'
 import dbconnect from './config/db.js'
 import { errormidd } from './middlewares/errormiddleware.js'

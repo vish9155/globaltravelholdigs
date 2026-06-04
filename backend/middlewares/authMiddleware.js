@@ -1,4 +1,3 @@
-
 import jwt from 'jsonwebtoken'
 export let authmidd=async(req,resp,next)=>{
     try {

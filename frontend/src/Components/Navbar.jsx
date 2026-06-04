@@ -87,87 +87,8 @@ export default function Navbar() {
 
   return (
     <>
-{/*
-      <div
-        id="google_translate_element"
-        style={{ visibility: "hidden", position: "absolute", zIndex: -1 }}
-      ></div>
 
-
-     <section className="w-full h-16 flex items-center justify-between px-5 bg-black/50 text-white shadow-lg top-0 z-[999] relative overflow-visible">
-
-
-        <div className="flex items-center gap-4">
-          <Menu
-            size={26}
-            className="cursor-pointer md:hidden hover:scale-110 transition"
-            onClick={() => setOpen(true)}
-          />
-
-          <h1 className="text-xl md:text-2xl font-bold tracking-wide">
-            <span className="text-cyan-400">Gl</span>
-            <span className="text-pink-400">ob</span>
-            <span className="text-orange-400">al</span>
-            <span className="text-cyan-400">Tr</span>
-            <span className="text-pink-400">av</span>
-            <span className="text-orange-400">el</span>
-          </h1>
-        </div>
-
-
-        <div className="md:flex gap-10 hidden">
-          {navbar.map((item, i) => (
-            <NavLink
-              key={i}
-              to={item.path}
-              className="text-lg font-medium tracking-wide hover:translate-x-2 transition duration-300 hover:text-yellow-400"
-            >
-              {item.title}
-            </NavLink>
-          ))}
-        </div>
-
-
-        <div className="flex items-center gap-4">
-
-
-          <div className="relative" ref={langRef}>
-            
-
-            <div className="relative z-[9999]" ref={langRef}>
-              <button
-                onClick={() => setIsLangOpen(!isLangOpen)}
-                className="flex items-center gap-1 text-sm font-bold"
-              >
-                {currentLang}
-                <ChevronDown size={14} />
-              </button>
-
-              {isLangOpen && (
-                <div className="absolute right-0 mt-2 w-44 bg-white text-black rounded-xl shadow-2xl overflow-hidden">
-                  {languages.map((lang) => (
-                    <div
-                      key={lang.code}
-                      onClick={() => handleLangChange(lang.code, lang.label)}
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm font-medium"
-                    >
-                      {lang.name}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-
-          <NavLink to={'/profile'} className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition cursor-pointer">
-            <User size={18} />
-          </NavLink>
-        </div>
-      </section>
-
-*/}
-
-<div className={`fixed inset-0 z-[9999] transition-all duration-500 ${open ? "visible" : "invisible"}`}>
+{/* <div className={`fixed inset-0 z-[9999] transition-all duration-500 ${open ? "visible" : "invisible"}`}>
   
   <div
     className={`absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-500 ${
@@ -199,7 +120,7 @@ export default function Navbar() {
           onClick={() => setOpen(false)}
           className={({ isActive }) => `
             text-lg font-semibold py-3 px-4 rounded-xl transition-all duration-200
-            ${isActive ? "bg-orange-50 text-orange-600" : "hover:bg-gray-50 hover:pl-6 text-gray-700"}
+            ${isActive ? "bg-green-50 text-green-600" : "hover:bg-gray-50 hover:pl-6 text-gray-700"}
           `}
         >
           {item.title}
@@ -213,20 +134,20 @@ export default function Navbar() {
   </div>
 </div>
 
-<section className="w-full h-20 flex items-center justify-between px-6 md:px-12  backdrop-blur-lg bg-white/35 text-black sticky top-0 z-[999] border-b border-white/10">
+<section className="w-full h-20 flex items-center justify-between px-6 md:px-12  backdrop-blur-lg bg-white text-[#111111] sticky top-0 z-[999] border-b border-white/10">
 
   <div className="flex items-center gap-6">
     <Menu
       size={28}
-      className="cursor-pointer md:hidden hover:text-orange-500 transition-colors"
+      className="cursor-pointer md:hidden hover:text-green-500 transition-colors"
       onClick={() => setOpen(true)}
     />
     <div className="flex items-center">
       <Link to="/">
       <img 
-        src="/images/Global logo final.png" 
+        src="/images/gt booking final.png" 
         alt="Logo"  
-        className="h-16 w-auto object-contain hover:scale-105 transition-transform duration-300 filter drop-shadow-[0px_4px_20px_rgba(0,31,63,0.1)]"
+        className="h-18 w-auto object-contain hover:scale-105 transition-transform duration-300 filter drop-shadow-[0px_4px_20px_rgba(0,31,63,0.1)]"
       />
       </Link>
     </div>
@@ -239,10 +160,10 @@ export default function Navbar() {
         <NavLink
           key={i}
           to={item.path}
-          className="text-[15px] font-semibold tracking-wide relative group uppercase"
+          className="text-[15px] hover:text-green-600 font-['Poppins'] font-semibold tracking-wide relative group uppercase"
         >
           {item.title}
-          <span className="absolute -bottom-2 left-1/2 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+          <span className="absolute -bottom-2 left-1/2 w-0 h-[2px] bg-green-500 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
         </NavLink>
       ))}
     </nav>
@@ -253,7 +174,7 @@ export default function Navbar() {
           onClick={() => setIsLangOpen(!isLangOpen)}
           className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded-full border border-white/10 text-xs font-bold transition"
         >
-          <span className="text-orange-500">•</span> {currentLang}
+          <span className="text-green-500">•</span> {currentLang}
           <ChevronDown size={14} className={`transition-transform ${isLangOpen ? "rotate-180" : ""}`} />
         </button>
 
@@ -263,7 +184,7 @@ export default function Navbar() {
               <div
                 key={lang.code}
                 onClick={() => handleLangChange(lang.code, lang.label)}
-                className="px-4 py-3 hover:bg-orange-50 hover:text-orange-600 cursor-pointer text-sm font-semibold transition-colors border-b last:border-0 border-gray-50"
+                className="px-4 py-3 hover:bg-green-50 hover:text-green-600 cursor-pointer text-sm font-semibold transition-colors border-b last:border-0 border-gray-50"
               >
                 {lang.name}
               </div>
@@ -274,13 +195,135 @@ export default function Navbar() {
 
       <NavLink
         to="/profile"
-        className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white shadow-lg shadow-orange-500/20 hover:scale-110 active:scale-95 transition-all"
+        className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white shadow-lg shadow-green-500/20 hover:scale-110 active:scale-95 transition-all"
       >
         <User size={20} strokeWidth={2.5} />
       </NavLink>
     </div>
   </div>
+</section> */}
+
+
+<>
+<div className={`fixed inset-0 z-[9999] transition-all duration-500 ${open ? "visible" : "invisible"}`}>
+  
+  <div
+    className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-500 ${
+      open ? "opacity-100" : "opacity-0"
+    }`}
+    onClick={() => setOpen(false)}
+  />
+
+  <div
+    className={`absolute left-0 top-0 h-full w-[280px] sm:w-[350px] bg-white text-[#111111] shadow-2xl transform transition-transform duration-500 ease-out ${
+      open ? "translate-x-0" : "-translate-x-full"
+    } flex flex-col`}
+  >
+    <div className="flex justify-between items-center p-6 border-b border-gray-100">
+      <h2 className="text-xl font-black tracking-tight text-[#111111] uppercase">Menu</h2>
+      <div 
+        className="p-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
+        onClick={() => setOpen(false)}
+      >
+        <X size={22} className="text-gray-500 hover:text-[#111111] hover:rotate-90 transition-all duration-300" />
+      </div>
+    </div>
+
+    <nav className="flex flex-col gap-1.5 p-5">
+      {navbar.map((item, i) => (
+        <NavLink
+          key={i}
+          to={item.path}
+          onClick={() => setOpen(false)}
+          className={({ isActive }) => `
+            text-base font-bold py-3 px-4 rounded-xl transition-all duration-200 uppercase tracking-wide
+            ${isActive ? "bg-emerald-50 text-emerald-600" : "hover:bg-gray-50 hover:pl-6 text-gray-700 hover:text-[#111111]"}
+          `}
+        >
+          {item.title}
+        </NavLink>
+      ))}
+    </nav>
+
+    <div className="mt-auto p-6 border-t border-gray-100 bg-gray-50/50">
+        <p className="text-[10px] text-gray-400 uppercase tracking-widest font-black">Global Logo © 2026</p>
+    </div>
+  </div>
+</div>
+
+<section className="w-full h-20 flex items-center justify-between px-6 md:px-12 bg-white/90 backdrop-blur-md text-[#111111] sticky top-0 z-[999] border-b border-gray-100 shadow-sm">
+
+  <div className="flex items-center gap-5">
+    <Menu
+      size={26}
+      className="cursor-pointer md:hidden text-[#111111] hover:text-emerald-500 transition-colors"
+      onClick={() => setOpen(true)}
+    />
+    <div className="flex items-center">
+      <Link to="/">
+        <img 
+          src="/images/New Folder/dsbsvd.png" 
+          alt="Logo"  
+          className="h-18 w-auto object-contain  transition-transform duration-300"
+        />
+      </Link>
+    </div>
+  </div>
+
+  <div className="flex items-center gap-8">
+
+    <nav className="hidden md:flex gap-8 items-center">
+      {navbar.map((item, i) => (
+        <NavLink
+          key={i}
+          to={item.path}
+          className={({ isActive }) => `
+            text-[14px] font-['Poppins'] font-bold tracking-wider relative group uppercase transition-colors duration-200
+            ${isActive ? "text-emerald-600" : "text-[#111111] hover:text-emerald-600"}
+          `}
+        >
+          {item.title}
+          <span className="absolute -bottom-1.5 left-1/2 w-0 h-[2px] bg-emerald-500 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+        </NavLink>
+      ))}
+    </nav>
+
+    <div className="flex items-center gap-4">
+      
+      <div className="relative" ref={langRef}>
+        <button
+          onClick={() => setIsLangOpen(!isLangOpen)}
+          className="flex items-center gap-2 px-4 py-2 bg-gray-50 hover:bg-gray-100 rounded-full border border-gray-200 text-xs font-black text-gray-700 uppercase tracking-wider transition-all duration-200"
+        >
+          <span className="text-emerald-500 text-sm animate-pulse">•</span> {currentLang}
+          <ChevronDown size={14} className={`text-gray-500 transition-transform duration-300 ${isLangOpen ? "rotate-180" : ""}`} />
+        </button>
+
+        {isLangOpen && (
+          <div className="absolute right-0 mt-3 w-48 bg-white text-[#111111] rounded-2xl shadow-xl border border-gray-100 overflow-hidden animate-in fade-in zoom-in duration-200 z-[1000]">
+            {languages.map((lang) => (
+              <div
+                key={lang.code}
+                onClick={() => handleLangChange(lang.code, lang.label)}
+                className="px-4 py-3.5 hover:bg-emerald-50 hover:text-emerald-600 cursor-pointer text-xs font-bold uppercase tracking-wide transition-colors border-b last:border-0 border-gray-50"
+              >
+                {lang.name}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <NavLink
+        to="/profile"
+        className="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 hover:bg-emerald-600 hover:scale-105 active:scale-95 transition-all duration-200"
+      >
+        <User size={18} strokeWidth={2.5} />
+      </NavLink>
+    </div>
+  </div>
 </section>
+</>
     </>
   );
 }

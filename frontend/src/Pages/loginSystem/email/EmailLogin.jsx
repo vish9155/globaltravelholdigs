@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useCallback } from 'react'
+=======
+import React from 'react'
+>>>>>>> d440d1e0a216ffdab56b88f8a6cc7268c5c2d00b
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -8,7 +12,11 @@ export default function EmailLogin() {
 
     let [form, setForm] = useState({
         email: "",
+<<<<<<< HEAD
         otp: "",
+=======
+        otp:"",
+>>>>>>> d440d1e0a216ffdab56b88f8a6cc7268c5c2d00b
 
     })
     let navigate = useNavigate()
@@ -18,7 +26,11 @@ export default function EmailLogin() {
             navigate("/")
         }
     }, [navigate])
+<<<<<<< HEAD
     let formInput =(e) => {
+=======
+    let formInput = (e) => {
+>>>>>>> d440d1e0a216ffdab56b88f8a6cc7268c5c2d00b
 
         setForm({
             ...form, [e.target.name]: e.target.value
@@ -252,7 +264,11 @@ export default function EmailLogin() {
                                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
                             />
                         </div>
+<<<<<<< HEAD
                         <div className="mb-4">
+=======
+                       <div className="mb-4">
+>>>>>>> d440d1e0a216ffdab56b88f8a6cc7268c5c2d00b
                             <label className="block ms-2 text-sm font-medium text-gray-700 mb-1">
                                 Otp
                             </label>

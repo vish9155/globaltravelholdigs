@@ -125,7 +125,6 @@ export default function ContactUs() {
 
                     </div>
 
-
                     <div className="mt-6 rounded-xl overflow-hidden">
                         <iframe
                             title="map"
@@ -185,7 +184,6 @@ export default function ContactUs() {
 
             </section>
 
-
             <style>
                 {`
                 .animate-fadeIn {
@@ -200,4 +198,3 @@ export default function ContactUs() {
         </>
     )
 }
-
