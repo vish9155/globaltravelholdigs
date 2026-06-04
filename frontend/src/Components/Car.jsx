@@ -166,7 +166,7 @@ Getting around your destination should be convenient and stress-free. With Globa
             <li>Choose the right vehicle based on your travel needs</li>
             <li>Compare rental policies and fuel options</li>
             <li>Check pickup and drop-off locations carefully</li>
-            <li>Look for seasonal offers and discount</li>
+            <li>Look for seasonal offers and discounts</li>
           </ul>
         </div>
       </section>
