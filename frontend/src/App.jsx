@@ -1,9 +1,5 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react'
-<<<<<<< HEAD
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-=======
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
->>>>>>> d440d1e0a216ffdab56b88f8a6cc7268c5c2d00b
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Toaster } from "react-hot-toast";
@@ -25,12 +21,9 @@ import FacebookSuccess from './Pages/loginSystem/facebook/FacebookSuccess';
 import ForgotPassword from './Pages/loginSystem/password/ForgotPassword';
 import ReesetPassword from './Pages/loginSystem/password/ResetPassword';
 import ProtectedRoute from './Components/ProtectedRoutes';
-<<<<<<< HEAD
 import EmailVerifiedSuccess from './Pages/loginSystem/SuccessPage';
 import EmailAlreadyVerified from './Pages/loginSystem/AlreadyVerified';
 import NotFound from './Pages/ErrorPage';
-=======
->>>>>>> d440d1e0a216ffdab56b88f8a6cc7268c5c2d00b
 
 
 export default function App() {
