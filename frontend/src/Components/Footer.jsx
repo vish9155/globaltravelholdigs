@@ -107,8 +107,8 @@ export default function Footer() {
                             <div className="bg-white/20 p-2 rounded-xl group-hover:bg-emerald-500/20 border border-white/bg-white/20 transition-colors duration-300">
                                 <PhoneCall size={15} className="text-emerald-500" />
                             </div>
-                            <NavLink to="tel:+1 8888434146" className="text-gray-300 hover:text-white text-xs font-bold uppercase tracking-wider transition-colors">
-                                +1 8888434146
+                            <NavLink to="tel:" className="text-gray-300 hover:text-white text-xs font-bold uppercase tracking-wider transition-colors">
+                                
                             </NavLink>
                         </div>
                     </div>
@@ -134,7 +134,7 @@ export default function Footer() {
                     <span className="absolute inset-0 rounded-full bg-emerald-500/40 animate-ping opacity-75"></span>
                     
                     <NavLink
-                        to="https://wa.me/+1 8888434146"
+                        to="https://wa.me/"
                         target="_blank"
                         className="relative z-10 w-14 h-14 rounded-full bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/20 hover:scale-110 hover:bg-emerald-600 transition-all duration-300"
                     >
