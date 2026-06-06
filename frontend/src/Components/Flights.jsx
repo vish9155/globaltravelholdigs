@@ -212,7 +212,7 @@ export default function Flights() {
                             </div>
 
 
-                            <div className='flex items-center gap-2 border p-3 rounded-xl'>
+                            <div className='flex items-center gap-2 border p-3 rounded-xl z-[880px]'>
                                 <Calendar size={18} />
                                 <DatePicker
                                     selected={departDate}
