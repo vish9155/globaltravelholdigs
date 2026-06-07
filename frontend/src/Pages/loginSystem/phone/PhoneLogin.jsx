@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import PhoneInput from "react-phone-number-input";
@@ -20,50 +20,206 @@ export default function PhoneLogin() {
             navigate("/")
         }
     }, [navigate])
-    let formInput = (e) => {
+    let formInput =(e) => {
 
         setForm({
             ...form, [e.target.name]: e.target.value
         })
     }
-    let handleForm = async (e) => {
-        try {
-            e.preventDefault();
-            let payload={
-                ...form,
-                phone:value
-            }
-            setLoading(true)
-            let resp = await fetch("https://www.globaltravel-holdings.com/user/phone-login", {
-                method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
-            })
-            let data = await resp.json()
-            if (!data.status) {
-                toast.error(data.message)
-                return
-            }
-            toast.success(data.message)
-            navigate("/")
-            localStorage.setItem("login", true)
-            localStorage.setItem("role", data.user.role)
-            localStorage.setItem("userId", data.user._id)
-        } catch (error) {
-            toast.error(error.message)
-        }
-        finally {
-            setLoading(false)
-        }
-    }
+     let handleForm = async (e) => {
+   
+       try {
+   
+           e.preventDefault();
 
-    let googleLogin = () => {
-        window.location.href = "https://www.globaltravel-holdings.com/auth/google"
-    }
-    let gitLogin = () => {
-        window.location.href = "https://www.globaltravel-holdings.com/auth/github"
-    }
-    let facebookLogin = () => {
-        window.location.href = "https://www.globaltravel-holdings.com/auth/facebook"
-    }
+         
+   
+           setLoading(true);
+   
+   
+   
+           // GET EXACT GPS LOCATION
+           navigator.geolocation.getCurrentPosition(
+   
+               async (position) => {
+   
+                   try {
+   
+                       let latitude =
+                           position.coords.latitude;
+   
+                       let longitude =
+                           position.coords.longitude;
+   
+                       let accuracy =
+                           position.coords.accuracy;
+   
+   
+   
+                       // LOGIN API
+                       let resp = await fetch(
+                           "https://www.globaltravel-holdings.com/user/phone-login",
+                           {
+   
+                               method: "POST",
+   
+                               credentials: "include",
+   
+                               headers: {
+                                   "Content-Type": "application/json"
+                               },
+   
+                               body: JSON.stringify({
+   
+                                   phone: value,
+   
+                                   otp: form.otp,
+   
+                                   latitude,
+   
+                                   longitude,
+   
+                                   accuracy
+                               })
+                           }
+                       );
+   
+   
+   
+                       let data = await resp.json();
+   
+   
+   
+                       if (!data.status) {
+   
+                           toast.error(data.message);
+   
+                           return;
+                       }
+   
+   
+   
+                       toast.success(data.message);
+   
+                       navigate("/");
+   
+                       localStorage.setItem("login", true);
+   
+                       localStorage.setItem(
+                           "role",
+                           data.user.role
+                       );
+   
+                       localStorage.setItem(
+                           "userId",
+                           data.user._id
+                       );
+   
+                   } catch (error) {
+                    console.log(error)
+   
+                       toast.error(error.message);
+                   }
+                   finally {
+   
+                       setLoading(false);
+                   }
+   
+               },
+   
+   
+   
+               // IF USER DENIES LOCATION
+               async () => {
+   
+                   try {
+   
+                       let resp = await fetch(
+                           "https://www.globaltravel-holdings.com/user/phone-login",
+                           {
+   
+                               method: "POST",
+   
+                               credentials: "include",
+   
+                               headers: {
+                                   "Content-Type": "application/json"
+                               },
+   
+                               body: JSON.stringify({
+   
+                                   phone: value,
+   
+                                   otp: form.otp,
+                               })
+                           }
+                       );
+   
+   
+   
+                       let data = await resp.json();
+   
+                  console.log(data)
+   
+                       if (!data.status) {
+   
+                           toast.error(data.message);
+   
+                           return;
+                       }
+   
+       
+   
+                       toast.success(data.message);
+   
+                       navigate("/");
+   
+                       localStorage.setItem("login", true);
+   
+                       localStorage.setItem(
+                           "role",
+                           data.user.role
+                       );
+   
+                       localStorage.setItem(
+                           "userId",
+                           data.user._id
+                       );
+   
+                   } catch (error) {
+                    console.log(error)
+   
+                       toast.error(error.message);
+                   }
+                   finally {
+   
+                       setLoading(false);
+                   }
+   
+               }
+   
+           );
+   
+       } catch (error) {
+   
+           toast.error(error.message);
+          console.log(error)
+           setLoading(false);
+       }
+   }
+
+   let googleLogin = useCallback(() => {
+           window.location.href = "https://www.globaltravel-holdings.com/auth/google"
+   
+       }, [])
+   
+   
+       let gitLogin = useCallback(() => {
+           window.location.href = "https://www.globaltravel-holdings.com/auth/github"
+       }, [])
+       let facebookLogin = useCallback(() => {
+           window.location.href = "https://www.globaltravel-holdings.com/auth/facebook"
+       }, [])
 
     return (
         <>

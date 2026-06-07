@@ -1,5 +1,3 @@
-import dotenv from 'dotenv'
-dotenv.config()
 import Razorpay from "razorpay"
 
 let razorpay=new Razorpay({

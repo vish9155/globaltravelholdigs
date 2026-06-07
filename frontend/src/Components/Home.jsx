@@ -8,7 +8,6 @@ import Testimonials from './Testimonials'
 import Faq from './Faq'
 import BookingForm from './HomeFlightSearch'
 
-
 export default function Home() {
     const videoRef = useRef(null)
 
@@ -47,7 +46,6 @@ export default function Home() {
 
                     </div>
                     <div>
-
                     </div>
 
                 </div>

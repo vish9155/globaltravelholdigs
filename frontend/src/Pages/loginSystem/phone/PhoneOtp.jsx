@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import PhoneInput from "react-phone-number-input";
@@ -42,16 +42,18 @@ export default function PhoneOtp() {
             setLoading(false)
         }
     }
-
-    let googleLogin = () => {
+    let googleLogin = useCallback(() => {
         window.location.href = "https://www.globaltravel-holdings.com/auth/google"
-    }
-    let gitLogin = () => {
+
+    }, [])
+
+
+    let gitLogin = useCallback(() => {
         window.location.href = "https://www.globaltravel-holdings.com/auth/github"
-    }
-    let facebookLogin = () => {
+    }, [])
+    let facebookLogin = useCallback(() => {
         window.location.href = "https://www.globaltravel-holdings.com/auth/facebook"
-    }
+    }, [])
 
     return (
         <>

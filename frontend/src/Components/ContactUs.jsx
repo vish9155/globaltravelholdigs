@@ -1,9 +1,61 @@
 import { MapPin, Phone } from 'lucide-react'
 import React from 'react'
+import { useState } from 'react'
 import { FaEnvelope } from 'react-icons/fa'
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ContactUs() {
+
+    let [input, setInput] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        message: ""
+    })
+
+    let [loading, setLoading] = useState(false)
+
+    let formInput = (e) => {
+
+        setInput({
+            ...input, [e.target.name]: e.target.value
+        })
+    }
+
+    let formHandle = async (e) => {
+        try {
+
+            e.preventDefault()
+            setLoading(true)
+            let data = await fetch("https://www.globaltravel-holdings.com/enquiry/user", {
+                method: "POST", credentials: "include", headers: {
+
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(input)
+            })
+
+            let result = await data.json()
+
+            if (!result.status) {
+
+             return   toast.error(result.message)
+
+            }
+            toast.success(result.message)
+            setLoading(false)
+
+        } catch (error) {
+            toast.error(error.message)
+
+        }
+        finally {
+            setLoading(false)
+        }
+    }
+
     return (
         <>
 
@@ -76,7 +128,8 @@ export default function ContactUs() {
                         Send Message
                     </h2>
 
-                    <form className="space-y-6">
+                    <form className="space-y-6" onSubmit={formHandle}>
+
 
 
                         <div className="relative">

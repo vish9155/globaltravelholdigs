@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { data, NavLink, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function LoginPage() {
-    const [showPass, setShowPass] = useState(false);
+    let [showPass, setShowPass] = useState(false);
     let [form, setForm] = useState({
         email: "",
         password: ""
@@ -40,13 +40,13 @@ export default function LoginPage() {
 
                 try {
 
-                    const latitude =
+                    let latitude =
                         position.coords.latitude;
 
-                    const longitude =
+                    let longitude =
                         position.coords.longitude;
 
-                    const accuracy =
+                    let accuracy =
                         position.coords.accuracy;
 
 
@@ -201,15 +201,18 @@ export default function LoginPage() {
     }
 }
 
-    let googleLogin = () => {
-        window.location.href="https://www.globaltravel-holdings.com/auth/google"
-    }
-    let gitLogin = () => {
-        window.location.href="https://www.globaltravel-holdings.com/auth/github"
-    }
-    let facebookLogin = () => {
-        window.location.href="https://www.globaltravel-holdings.com/auth/facebook"
-    }
+   let googleLogin = useCallback(() => {
+           window.location.href = "https://www.globaltravel-holdings.com/auth/google"
+   
+       }, [])
+   
+   
+       let gitLogin = useCallback(() => {
+           window.location.href = "https://www.globaltravel-holdings.com/auth/github"
+       }, [])
+       let facebookLogin = useCallback(() => {
+           window.location.href = "https://www.globaltravel-holdings.com/auth/facebook"
+       }, [])
 
     return (
         <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-white to-purple-100 px-4">

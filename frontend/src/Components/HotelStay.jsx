@@ -11,7 +11,6 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 import { NavLink } from 'react-router-dom';
 import { ArrowRight, HotelIcon } from 'lucide-react';
-
 export default function HotelStay() {
     let trendingDestination = [
         {

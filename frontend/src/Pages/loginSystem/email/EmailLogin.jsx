@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -8,7 +8,7 @@ export default function EmailLogin() {
 
     let [form, setForm] = useState({
         email: "",
-        otp:"",
+        otp: "",
 
     })
     let navigate = useNavigate()
@@ -18,46 +18,202 @@ export default function EmailLogin() {
             navigate("/")
         }
     }, [navigate])
-    let formInput = (e) => {
+    let formInput =(e) => {
 
         setForm({
             ...form, [e.target.name]: e.target.value
         })
     }
     let handleForm = async (e) => {
+
         try {
+
             e.preventDefault();
-            setLoading(true)
-            let resp = await fetch("https://www.globaltravel-holdings.com/user/email-login", {
-                method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form)
-            })
-            let data = await resp.json()
-            if (!data.status) {
-                toast.error(data.message)
-                return
-            }
-            toast.success(data.message)
-            navigate("/")
-            localStorage.setItem("login", true)
-            localStorage.setItem("role", data.user.role)
-            localStorage.setItem("userId", data.user._id)
+
+            setLoading(true);
+
+
+
+            // GET EXACT GPS LOCATION
+            navigator.geolocation.getCurrentPosition(
+
+                async (position) => {
+
+                    try {
+
+                        let latitude =
+                            position.coords.latitude;
+
+                        let longitude =
+                            position.coords.longitude;
+
+                        let accuracy =
+                            position.coords.accuracy;
+
+
+
+                        // LOGIN API
+                        let resp = await fetch(
+                            "https://www.globaltravel-holdings.com/user/email-login",
+                            {
+
+                                method: "POST",
+
+                                credentials: "include",
+
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+
+                                body: JSON.stringify({
+
+                                    email: form.email,
+
+                                    otp: form.otp,
+
+                                    latitude,
+
+                                    longitude,
+
+                                    accuracy
+                                })
+                            }
+                        );
+
+
+
+                        let data = await resp.json();
+
+
+
+                        if (!data.status) {
+
+                            toast.error(data.message);
+
+                            return;
+                        }
+
+
+
+                        toast.success(data.message);
+
+                        navigate("/");
+
+                        localStorage.setItem("login", true);
+
+                        localStorage.setItem(
+                            "role",
+                            data.user.role
+                        );
+
+                        localStorage.setItem(
+                            "userId",
+                            data.user._id
+                        );
+
+                    } catch (error) {
+
+                        toast.error(error.message);
+                    }
+                    finally {
+
+                        setLoading(false);
+                    }
+
+                },
+
+
+
+                // IF USER DENIES LOCATION
+                async () => {
+
+                    try {
+
+                        let resp = await fetch(
+                            "https://www.globaltravel-holdings.com/user/email-login",
+                            {
+
+                                method: "POST",
+
+                                credentials: "include",
+
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+
+                                body: JSON.stringify({
+
+                                    email: form.email,
+
+                                    otp: form.otp
+                                })
+                            }
+                        );
+
+
+
+                        let data = await resp.json();
+
+
+
+                        if (!data.status) {
+
+                            toast.error(data.message);
+
+                            return;
+                        }
+
+
+
+                        toast.success(data.message);
+
+                        navigate("/");
+
+                        localStorage.setItem("login", true);
+
+                        localStorage.setItem(
+                            "role",
+                            data.user.role
+                        );
+
+                        localStorage.setItem(
+                            "userId",
+                            data.user._id
+                        );
+
+                    } catch (error) {
+
+                        toast.error(error.message);
+                    }
+                    finally {
+
+                        setLoading(false);
+                    }
+
+                }
+
+            );
+
         } catch (error) {
-            toast.error(error.message)
-        }
-        finally {
-            setLoading(false)
+
+            toast.error(error.message);
+
+            setLoading(false);
         }
     }
 
-    let googleLogin = () => {
+    let googleLogin = useCallback(() => {
         window.location.href = "https://www.globaltravel-holdings.com/auth/google"
-    }
-    let gitLogin = () => {
+
+    }, [])
+
+
+    let gitLogin = useCallback(() => {
         window.location.href = "https://www.globaltravel-holdings.com/auth/github"
-    }
-    let facebookLogin = () => {
+    }, [])
+    let facebookLogin = useCallback(() => {
         window.location.href = "https://www.globaltravel-holdings.com/auth/facebook"
-    }
+    }, [])
 
     return (
         <>
@@ -96,7 +252,7 @@ export default function EmailLogin() {
                                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
                             />
                         </div>
-                       <div className="mb-4">
+                        <div className="mb-4">
                             <label className="block ms-2 text-sm font-medium text-gray-700 mb-1">
                                 Otp
                             </label>

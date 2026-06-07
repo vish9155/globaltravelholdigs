@@ -214,22 +214,13 @@ export let blogPosts = [
         <h2 className="text-2xl font-semibold mt-5 mb-3">Trends in Flight Pricing</h2>
 
         <p>
-          In 2026, the average flight price, for the first time, is going to see variability because of fuel costs, changes in geopolitics, and AI's voracious demand prediction.
 
         </p>
 
         <p className="font-semibold">
           Here are some of the global travel trends that are going to affect airfare:
         </p>
-
-        <ul className="list-disc pl-6">
-          <li>A demand for travel options that are eco-friendly</li>
-          <li>The emergence of remote work as a form of travel</li>
-          <li>Travel options that are going to the previously underserved and unvisited areas/cities will be in high demand
-          </li>
-          <li>The expansion and proliferation of international travel with increasingly affordable airfare
-          </li>
-        </ul>
+        
 
         <p>
           Travelers that are going to be complaining about pricing trends the least, are going to adopt travel booking options that will allow for flexibility around travel dates.

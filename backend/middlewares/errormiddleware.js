@@ -10,8 +10,6 @@ export let errormidd=(error,req,resp,next)=>{
     
 }
 
-// import dotenv from 'dotenv'
-// dotenv.config()
 // import Joi from "joi";
 // import client from '../config/redisConfig.js';
 // import { getAccessToken } from '../oAuths/amadeusToken.js';

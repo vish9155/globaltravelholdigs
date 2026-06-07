@@ -6,8 +6,8 @@ export let dedupe = async (key, fn) => {
   if (pending.has(key)) {
     return pending.get(key);
   }
-
   let promise = fn();
+  
   pending.set(key, promise);
 
   let result = await promise;

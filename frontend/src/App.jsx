@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Toaster } from "react-hot-toast";
@@ -76,8 +76,8 @@ export default function App() {
             <Route path='/login' element={<LoginPage />} />
             <Route path='/email-otp' element={<EmailOtp />} />
             <Route path='/email-login' element={<EmailLogin />} />
-             <Route path='/phone-login' element={<PhoneLogin />} />
-             <Route path='/phone-otp' element={<PhoneOtp />} />
+            <Route path='/phone-login' element={<PhoneLogin />} />
+            <Route path='/phone-otp' element={<PhoneOtp />} />
             <Route path='/google-success' element={<GoogleSuccess />} />
             <Route path='/github-success' element={<GithubSuccess />} />
              <Route path='/facebook-success' element={<FacebookSuccess />} /> 
@@ -87,6 +87,7 @@ export default function App() {
             <Route path='/blog' element={<BlogList />} />
             <Route path='/blog/:slug' element={<BlogDetail />} />
             <Route path='/flight-results' element={<FlightResult />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
         {/* <Marquee /> */}

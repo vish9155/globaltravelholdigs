@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import { blogPosts } from '../../data/blog'
 import { NavLink } from 'react-router-dom'
 import { ArrowRight, CalendarDays, Clock, Eye, Heart } from 'lucide-react'
+import { useEffect } from 'react'
+import { useMemo } from 'react'
 
 export default function BlogList() {
 
     let [search, setSearch] = useState("")
+    let [debounce, setDebounce] = useState("")
     let [currentPage, setCurrentPage] = useState(1)
     let postPerPage = 6
 
