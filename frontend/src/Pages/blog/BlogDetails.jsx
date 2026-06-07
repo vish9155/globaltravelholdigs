@@ -1,7 +1,5 @@
 import { Link, useParams } from "react-router-dom";
 
-
-
 import { useEffect } from "react";
 
 import { ArrowRight, Dot } from "lucide-react";
@@ -39,7 +37,7 @@ export default function  BlogDetails() {
 
       <div className="grid grid-cols-1  gap-10 mt-10">
           <div className="">
-        <img src={post.thumbnail} className="w-full h-full " />
+        <img src={post.image} className="w-full h-full " />
         
       </div>
       
@@ -54,7 +52,6 @@ export default function  BlogDetails() {
 
 
 
-{/* RELATED BLOGS */}
 {relatedPosts.length > 0 && (
   <div className="mt-16">
 
@@ -67,19 +64,17 @@ export default function  BlogDetails() {
       {relatedPosts.map((item, i) => (
         <div key={i} className="bg-white rounded-xl shadow-md hover:shadow-xl transition overflow-hidden group">
 
-          {/* Image */}
           <div className="overflow-hidden">
             <img
-              src={item.thumbnail}
+              src={item.image}
               alt=""
               className="w-full h-44 object-cover group-hover:scale-110 transition duration-500"
             />
           </div>
 
-          {/* Content */}
           <div className="p-4">
 
-            <span className="text-xs text-amber-500 font-semibold">
+            <span className="text-xs text-green-500 font-semibold">
               {item.category}
             </span>
 
@@ -93,7 +88,7 @@ export default function  BlogDetails() {
 
             <Link
               to={`/blog/${item.slug}`}
-              className="inline-flex items-center gap-1 mt-4 text-amber-600 font-medium hover:gap-2 transition"
+              className="inline-flex items-center gap-1 mt-4 text-green-600 font-medium hover:gap-2 transition"
             >
               Read More <ArrowRight size={16} />
             </Link>

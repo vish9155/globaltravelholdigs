@@ -21,6 +21,7 @@ import FacebookSuccess from './Pages/loginSystem/facebook/FacebookSuccess';
 import ForgotPassword from './Pages/loginSystem/password/ForgotPassword';
 import ReesetPassword from './Pages/loginSystem/password/ResetPassword';
 import ProtectedRoute from './Components/ProtectedRoutes';
+import { motion } from 'framer-motion';
 
 
 export default function App() {
@@ -41,6 +42,7 @@ export default function App() {
   let BlogList = lazy(() => import('./Pages/blog/BlogList'))
   let FlightResult = lazy(() => import('./Components/FlightResult'))
   let Passengers = lazy(() => import('./Components/Passengers'))
+  
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
     let timer = setTimeout(() => setLoading(false), 3000);
@@ -78,7 +80,7 @@ export default function App() {
              <Route path='/phone-otp' element={<PhoneOtp />} />
             <Route path='/google-success' element={<GoogleSuccess />} />
             <Route path='/github-success' element={<GithubSuccess />} />
-             <Route path='/facebook-success' element={<FacebookSuccess />} />
+             <Route path='/facebook-success' element={<FacebookSuccess />} /> 
              <Route path='/forgot' element={<ForgotPassword />} />
              <Route path='/reset-password' element={<ReesetPassword />} />
              

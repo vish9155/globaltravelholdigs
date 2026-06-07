@@ -42,7 +42,7 @@ export default function BlogList() {
     return (
         <>
            
-            <section className='w-full bg-gradient-to-r from-amber-100 to-orange-100'>
+            <section className='w-full bg-gradient-to-r from-green-100 to-orange-100'>
                 <div className='max-w-7xl mx-auto px-4 py-10'>
 
                     <h2 className='text-center text-3xl font-bold mb-6'>Our Latest Blogs</h2>
@@ -52,7 +52,7 @@ export default function BlogList() {
                             type="text"
                             placeholder='Search Latest Blog'
                             onChange={(e) => setSearch(e.target.value)}
-                            className='w-full px-5 py-3 rounded-xl border focus:ring-2 focus:ring-amber-400 outline-none shadow-sm'
+                            className='w-full px-5 py-3 rounded-xl border focus:ring-2 focus:ring-green-400 outline-none shadow-sm'
                         />
                     </div>
 
@@ -64,8 +64,8 @@ export default function BlogList() {
                                 onClick={() => setCategory(item)}
                                 className={`px-5 py-2 rounded-full text-sm transition 
                                 ${category === item
-                                        ? "bg-amber-600 text-white"
-                                        : "bg-white hover:bg-amber-200"}`}
+                                        ? "bg-green-600 text-white"
+                                        : "bg-white hover:bg-green-200"}`}
                             >
                                 {item}
                             </button>
@@ -74,7 +74,7 @@ export default function BlogList() {
 
                     <div className='flex justify-center py-4'>
                         <select
-                            className='px-4 py-2 rounded-lg border focus:ring-2 focus:ring-amber-400'
+                            className='px-4 py-2 rounded-lg border focus:ring-2 focus:ring-green-400'
                             onChange={(e) => setSelect(e.target.value)}
                             value={select}
                         >
@@ -108,7 +108,7 @@ export default function BlogList() {
                           
                             <div className='p-5'>
 
-                                <span className='text-xs text-amber-500 font-semibold'>
+                                <span className='text-xs text-green-500 font-semibold'>
                                     {item.category}
                                 </span>
 
@@ -133,7 +133,7 @@ export default function BlogList() {
                              
                                 <NavLink
                                     to={`/blog/${item.slug}`}
-                                    className='mt-4 inline-flex items-center gap-1 text-amber-600 font-medium hover:gap-2 transition'
+                                    className='mt-4 inline-flex items-center gap-1 text-green-600 font-medium hover:gap-2 transition'
                                 >
                                     Read More <ArrowRight size={16} />
                                 </NavLink>
@@ -157,7 +157,7 @@ export default function BlogList() {
                     </span>
 
                     <button
-                        className='px-5 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600'
+                        className='px-5 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600'
                         onClick={next}
                     >
                         Next

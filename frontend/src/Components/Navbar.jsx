@@ -270,9 +270,9 @@ export default function Navbar() {
     </div>
   </div>
 
-  <div className="flex items-center gap-8">
+  <div className="flex items-center gap-10 tracking-[1.5px]">
 
-    <nav className="hidden md:flex gap-8 items-center">
+    <nav className="hidden md:flex gap-10 items-center tracking-[1.5px]">
       {navbar.map((item, i) => (
         <NavLink
           key={i}

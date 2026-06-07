@@ -101,7 +101,7 @@ export default function Faq() {
               }}
               className={`px-5 py-3 rounded-2xl text-sm font-semibold transition-all duration-300 ${
                 item.key === tab
-                  ? "bg-green-600 text-white shadow-lg scale-105"
+                  ? "bg-gradient-to-r from-green-500 to-gray-500 hover:scale-105 hover:shadow-2xl transition-all duration-300 text-white"
                   : "bg-slate-50 text-slate-600 hover:bg-slate-100"
               }`}
             >

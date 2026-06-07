@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
@@ -7,6 +6,7 @@ import HotelStay from './HotelStay';
 import Property from './Property';
 import Testimonials from './Testimonials';
 import { NavLink } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function Hotels() {
 
@@ -29,12 +29,22 @@ export default function Hotels() {
         <>
 
             <section className='w-full h-[70vh] md:h-[85vh] relative z-50'>
-                <img
-                    src="/images/banner/hotels.jpg.jpeg"
-                    className='absolute w-full h-full  brightness-75'
-                    alt=""
-                />
+                <motion.div
+                    initial={{ opacity: 0, scale: 1.15 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                    className='absolute inset-0'
+                >
+                    <img
+                        src="/images/banner/hotels.jpg.jpeg"
+                        className='absolute w-full h-full  brightness-75'
+                        alt=""
+                    />
 
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
+
+
+                </motion.div>
 
                 {/* <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent'></div> */}
 
@@ -147,9 +157,23 @@ export default function Hotels() {
                     </div>
                 </div>
             </section>
- <section className='max-w-7xl mx-auto px-3 py-10'>
-                <h2 className='text-xl font-semibold'>Trending Destination</h2>
-                <p className='text-gray-600 pb-6'>Most popular choices for travelers from Usa</p>
+            <section className='relative max-w-7xl mx-auto px-3 py-10'>
+                <div className='flex flex-col items-center text-center mb-12'>
+                    <div className="flex items-center gap-3 ">
+                        <span className="h-[2px] w-10 bg-green-600 rounded-full"></span>
+                        <h2 className='text-xl text-green-600 font-semibold tracking-[0.26em] '>Trending Destination</h2>
+                        <span className='h-[2px] w-10 bg-green-600 rounded-full'></span>
+                    </div>
+
+
+                    <span className='text-gray-600 pb-6 leading-tight font-extrabold text-3xl'>Most popular choices for
+                        <span className='text-green-600'> travelers from Usa</span>
+                    </span>
+
+                </div>
+
+
+
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
 
 
@@ -219,91 +243,142 @@ export default function Hotels() {
 
                         </div>
                     </div>
-                    {/* <div className='overflow-hidden rounded-xl  md:col-span-3'>
-      <img 
-        src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb"
-        className='w-full h-full object-cover hover:scale-110 brightness-75 cursor-pointer transition duration-500'
-        alt=""
-      />
-    </div> */}
+
 
                 </div>
 
             </section>
+
             <div className='py-10 mx-auto px-3 text-center'>
-                <NavLink to="tel:9155014125" className="px-8 py-3 bg-slate-900  text-center  text-white rounded-full font-semibold hover:bg-amber-600 transition-colors shadow-lg">
-                              Book Now Your favourite Hotels 
-                          </NavLink>
+                <NavLink to="tel:+1 8888434146" className="px-8 py-3 /90  bg-black text-center  text-white rounded-full font-semibold hover:bg-green-600 transition-colors shadow-lg">
+                    Book Now Your favourite Hotels
+                </NavLink>
             </div>
-                <section className='grid grid-cols-1 md:grid-cols-3 gap-6 gap-y-10 max-w-7xl mx-auto px-3 py-10'>
-                <div  className='shadow-2xl z-50 rounded-2xl  shadow-gray-600 p-6' >
-<h2 className='text-xl sm:text-2xl md:text-2xl '>Find the Best Hotel Deals for Every Stay</h2>
-                <p className='py-3 text-base pl-3'>Explore a wide selection of properties across top destinations. Whether you're searching for cheap hotel deals or premium stays, our platform allows you to compare prices, amenities, and locations to make the right choice.</p>
-                </div>
-                <div  className='shadow-2xl z-50 rounded-2xl  shadow-gray-600 p-6' >
-<h2 className='text-xl sm:text-2xl md:text-2xl '>Book Hotels Online with Ease & Flexibility</h2>
-                <p className='py-3 text-base pl-3'>Our system makes it easy to book hotels online with just a few clicks. Filter your search based on price, location, ratings, and facilities to find accommodations that suit your travel needs.</p>
-                </div>
-                <div className='shadow-2xl z-50 rounded-2xl  shadow-gray-600 p-6'>
- <h2 className='text-xl sm:text-2xl md:text-2xl '>Budget to Luxury Hotels Booking Options</h2>
-                <p className='pl-3 py-3 text-base'>We offer everything from budget hotels worldwide to premium and luxury hotels booking options. Whether you're traveling for business, family vacations, or leisure, you’ll find the right stay for every occasion.</p>
-                </div>
-                <div className='shadow-2xl z-50 rounded-2xl  shadow-gray-600 p-6'>
- <h2 className='text-xl sm:text-2xl md:text-2xl '>Secure & Hassle-Free Hotel Reservations</h2>
-                <p className='pl-3 py-3 text-base'>Enjoy a smooth and secure booking process with instant confirmations. Our platform ensures transparency in pricing and a reliable experience for every reservation.</p>
-                </div>
-               
-               <div className='shadow-2xl z-50 rounded-2xl  shadow-gray-600 p-6'>
-                <h2 className='text-xl sm:text-2xl md:text-2xl '>Book Your Stay with Confidence</h2>
-                <p className='py-3 pl-3 text-base'>Plan your stay with Global Travel Holdings LLC and enjoy a seamless hotel booking experience. Whether you're looking for comfort, luxury, or affordability, we help you find the perfect place to stay anywhere in the world.</p>
-               </div>
-              <div className='shadow-2xl z-50 rounded-2xl  shadow-gray-600 p-6'>
-<h1 className='text-xl sm:text-2xl md:text-2xl'>Book Hotels Online at Best Prices Worldwide</h1>
-                <p className='py-3 pl-3 text-base'>Finding the right place to stay should be simple and stress-free. With Global Travel Holdings LLC, our <b>hotel booking online</b> platform helps you discover and reserve the perfect accommodation for any trip. From short stays to long vacations, we provide reliable options that match your comfort and budget.</p>
-              </div>
 
-            </section>
-            <section className='py-20'>
+
+            <div className="grid grid-cols-1 max-w-7xl mx-auto md:grid-cols-2 xl:grid-cols-3 gap-8">
+
+                {[
+                    {
+                        title: "Find the Best Hotel Deals for Every Stay",
+                        desc: "Explore a wide selection of properties across top destinations. Whether you're searching for cheap hotel deals or premium stays, our platform allows you to compare prices, amenities, and locations to make the right choice."
+                        // icon: "✈️",
+                    },
+                    {
+                        title: "Book Hotels Online with Ease & Flexibility",
+                        desc: "Our system makes it easy to book hotels online with just a few clicks. Filter your search based on price, location, ratings, and facilities to find accommodations that suit your travel needs."
+                    },
+                    {
+                        title: "Budget to Luxury Hotels Booking Options",
+                        desc: "We offer everything from budget hotels worldwide to premium and luxury hotels booking options. Whether you're traveling for business, family vacations, or leisure, you’ll find the right stay for every occasion."
+                        // icon: "🔒",
+                    },
+                    {
+                        title: "Secure & Hassle-Free Hotel Reservations",
+                        desc: "Enjoy a smooth and secure booking process with instant confirmations. Our platform ensures transparency in pricing and a reliable experience for every reservation.",
+                        // icon: "💸",
+                    },
+                    {
+                        title: "Book Your Stay with Confidence",
+                        desc: "Plan your stay with Global Travel Holdings LLC and enjoy a seamless hotel booking experience. Whether you're looking for comfort, luxury, or affordability, we help you find the perfect place to stay anywhere in the world.",
+                        // icon: "📞",
+                    },
+                    {
+                        title: "Book Hotels Online at Best Prices Worldwide",
+                        desc: "Finding the right place to stay should be simple and stress-free. With Global Travel Holdings LLC, our hotel booking online platform helps you discover and reserve the perfect accommodation for any trip. From short stays to long vacations, we provide reliable options that match your comfort and budget.",
+                        // icon: "⚡",
+                    },
+                ].map((item, i) => (
+                    <div
+                        key={i}
+                        className="group bg-white rounded-3xl border border-gray-100 p-7 shadow-xl shadow-black/5 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+                    >
+                        {/* <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-3xl mb-6 shadow-lg">
+                    {item.icon}
+                </div> */}
+
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-green-500 transition">
+                            {item.title}
+                        </h3>
+
+                        <p className="text-gray-600 leading-relaxed text-[16px]">
+                            {item.desc}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+
+            <section className='py-10'>
                 <HotelStay />
-            <div className='py-10 mx-auto px-3 text-center'>
-                <NavLink to="/contact-us" className="px-8 py-3 bg-slate-900  text-center  text-white rounded-full font-semibold hover:bg-amber-600 transition-colors shadow-lg">
-                              Book Hotels Now
-                          </NavLink>
-            </div>
+                <div className='py-10 mx-auto px-3 text-center'>
+                    <NavLink to="/contact-us" className="px-8 py-3 bg-black text-center  text-white rounded-full font-semibold hover:bg-green-600 transition-colors shadow-lg">
+                        Book Hotels Now
+                    </NavLink>
+                </div>
             </section>
 
 
-           
+
             <Testimonials />
             <Property />
             <div className='py-10 mx-auto px-3 text-center'>
-                <NavLink to="tel:9155014125" className="px-8 py-3 bg-slate-900  text-center  text-white rounded-full font-semibold hover:bg-amber-600 transition-colors shadow-lg">
-                            Booking Enquiry 
-                          </NavLink>
+                <NavLink to="tel:+1 8888434146" className="px-8 py-3 bg-gray-800  text-center  text-white rounded-full font-semibold hover:bg-green-600 transition-colors shadow-lg">
+                    Booking Enquiry
+                </NavLink>
             </div>
-        
-            <section className='grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto px-3 py-10'>
-                <div className='shadow-2xl z-50 rounded-2xl  shadow-gray-600 p-6' >
-                      <h2 className='text-xl sm:text-2xl md:text-2xl '>Why Choose Global Travel Holdings LLC for Hotel Booking</h2>
-                <ul className='pl-10 list-disc leading-relaxed p-6'>
-                    <li>Wide range of hotels across global destinations</li>
-                    <li>Easy comparison of prices and amenities</li>
-                    <li>Secure booking and payment system</li>
-                    <li>Flexible options for every budget</li>
-                    <li>Dedicated customer support</li>
-                </ul>
-                
+            <section className="max-w-7xl mx-auto px-4 py-14">
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                    {/* Card 1 */}
+                    <div className="rounded-2xl border border-gray-200 p-8 shadow-lg transition duration-300 bg-white">
+
+                        <h2 className="text-2xl md:text-3xl font-semibold text-green-600 leading-snug mb-6">
+                            Why Choose Global Travel Holdings LLC for Hotel Booking
+                        </h2>
+
+                        <ul className="space-y-4 text-gray-700 leading-7 list-disc pl-6">
+
+                            <li>Wide range of hotels across global destinations</li>
+
+                            <li>Easy comparison of prices and amenities</li>
+
+                            <li>Secure booking and payment system</li>
+
+                            <li>Flexible options for every budget</li>
+
+                            <li>Dedicated customer support</li>
+
+                        </ul>
+
+                    </div>
+
+                    {/* Card 2 */}
+                    <div className="rounded-2xl border border-gray-200 p-8 shadow-lg transition duration-300 bg-white ">
+
+                        <h2 className="text-2xl md:text-3xl font-semibold text-green-600 leading-snug mb-6">
+                            Tips to Get the Best Hotel Deals
+                        </h2>
+
+                        <ul className="space-y-4 text-gray-700 leading-7 list-disc pl-6">
+
+                            <li>Book early to secure better prices</li>
+
+                            <li>Choose flexible dates for more options</li>
+
+                            <li>Compare hotel ratings and guest reviews</li>
+
+                            <li>Look for seasonal discounts and offers</li>
+
+                            <li>Select the right location based on your itinerary</li>
+
+                        </ul>
+
+                    </div>
+
                 </div>
-                <div className='shadow-2xl z-50 rounded-2xl  shadow-gray-600 p-6'>
-<h2 className='text-xl sm:text-2xl md:text-2xl '>Tips to Get the Best Hotel Deals</h2>
-                <ul className='pl-10 list-disc leading-relaxed py-4'>
-                    <li>Book early to secure better prices</li>
-                    <li>Choose flexible dates for more options</li>
-                    <li>Compare hotel ratings and guest reviews</li>
-                    <li>Look for seasonal discounts and offers</li>
-                    <li>Select the right location based on your itinerary</li>
-                </ul>
-                </div>
+
             </section>
         </>
     )

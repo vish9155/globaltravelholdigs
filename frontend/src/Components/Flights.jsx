@@ -424,7 +424,6 @@ export default function Flights() {
                     </select>
                 </div>
 
-                {/* BUTTON */}
                 <button className="bg-green-400 hover:bg-green-500 transition-all rounded-2xl py-4 px-6 font-bold text-lg text-white shadow-lg hover:shadow-green-300/50">
                     Search Flights
                 </button>

@@ -22,7 +22,7 @@ export default function Home() {
         <>
             <section className="relative w-full min-h-screen overflow-hidden">
                 <video
-                    src="/video/Home-Page-Video.mp4"
+                    src="/video/Home Page Video.mp4"
                     ref={videoRef}
                     loop
                     muted

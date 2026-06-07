@@ -1118,10 +1118,10 @@ export let forgotPassOtp = async (req, resp) => {
 export let resetPass = async (req, resp) => {
     try {
         let { email, newpassword, otp } = req.body;
-      
+
 
         let storedOtp = await getOtp("email", email)
-    
+
         if (!storedOtp) {
             return resp.json({ message: "OTP expired", status: false });
         }
@@ -1225,56 +1225,56 @@ export let restpass = async (req, resp) => {
                 status: false
             })
         }
-            let { confirmpass, newpass, oldpass } = req.body;
-            let { error } = passwordValidator.validate({ confirmpass, newpass, oldpass })
-            if (error) {
-                return resp.status(400).json({
-                    message: error.details[0].message,
-                    status: false
-                });
-            }
+        let { confirmpass, newpass, oldpass } = req.body;
+        let { error } = passwordValidator.validate({ confirmpass, newpass, oldpass })
+        if (error) {
+            return resp.status(400).json({
+                message: error.details[0].message,
+                status: false
+            });
+        }
 
-            let user = await Users.findById(req.params.id)
-            if (!user) {
-                return resp.json({
-                    message: "user not found",
-                    status: false,
-                })
-            }
-
-            let isMatch = await bcrypt.compare(oldpass, user.password);
-            if (!isMatch) {
-                return resp.send({
-                    message: "current password is invalid",
-                    status: false,
-                })
-            }
-
-            let isSame = await bcrypt.compare(newpass, user.password)
-
-            if (isSame) {
-                return resp.send({
-                    message: "New password is not same old password",
-                    status: false
-                })
-            }
-
-            if (newpass !== confirmpass) {
-                return resp.send({
-                    message: "New password and confirm password can't match"
-                })
-            }
-
-            let hash = await bcrypt.hash(newpass, 10);
-            user.password = hash;
-            await user.save()
-
-            resp.json({
-                message: "password reset successfulll",
-                status: true
+        let user = await Users.findById(req.params.id)
+        if (!user) {
+            return resp.json({
+                message: "user not found",
+                status: false,
             })
+        }
 
-        
+        let isMatch = await bcrypt.compare(oldpass, user.password);
+        if (!isMatch) {
+            return resp.send({
+                message: "current password is invalid",
+                status: false,
+            })
+        }
+
+        let isSame = await bcrypt.compare(newpass, user.password)
+
+        if (isSame) {
+            return resp.send({
+                message: "New password is not same old password",
+                status: false
+            })
+        }
+
+        if (newpass !== confirmpass) {
+            return resp.send({
+                message: "New password and confirm password can't match"
+            })
+        }
+
+        let hash = await bcrypt.hash(newpass, 10);
+        user.password = hash;
+        await user.save()
+
+        resp.json({
+            message: "password reset successfulll",
+            status: true
+        })
+
+
     } catch (error) {
         resp.json({
             messsage: "error in user password reset in profile ",
@@ -1391,7 +1391,7 @@ export let imageUpload = async (req, resp) => {
 
         user.avatar = req.file.path;
         user.avatarPublicId = req.file.filename;
-      await user.save()
+        await user.save()
         resp.status(200).send({
             message: "Image uploaded successfully",
             status: true,

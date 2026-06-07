@@ -225,69 +225,69 @@ export default function FlightResult() {
                 layovers: []
               })
             }
-            className="text-sm text-blue-600"
+            className="text-sm text-green-600"
           >
             Clear
           </button>
         </div>
 
         {/* Airlines */}
-            <div className="mb-6">
-  <h3 className="font-semibold mb-3 text-gray-800">
-    Airlines
-  </h3>
+        <div className="mb-6">
+          <h3 className="font-semibold mb-3 text-gray-800">
+            Airlines
+          </h3>
 
-  {/* Scroll Container */}
-  <div className="max-h-60 overflow-y-auto pr-2 space-y-2 custom-scroll">
-    {visibleAirline.map((item, i) => (
-      <label
-        key={i}
-        className="flex items-center justify-between gap-2 px-3 py-2 rounded-lg cursor-pointer hover:bg-gray-100 transition"
-      >
-        <div className="flex items-center gap-3">
-          <input
-            type="checkbox"
-            checked={filters.airlines.includes(item)}
-            onChange={(e) => {
-              const updated = e.target.checked
-                ? [...filters.airlines, item]
-                : filters.airlines.filter((x) => x !== item);
+          {/* Scroll Container */}
+          <div className="max-h-60 overflow-y-auto pr-2 space-y-2 custom-scroll">
+            {visibleAirline.map((item, i) => (
+              <label
+                key={i}
+                className="flex items-center justify-between gap-2 px-3 py-2 rounded-lg cursor-pointer hover:bg-gray-100 transition"
+              >
+                <div className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    checked={filters.airlines.includes(item)}
+                    onChange={(e) => {
+                      const updated = e.target.checked
+                        ? [...filters.airlines, item]
+                        : filters.airlines.filter((x) => x !== item);
 
-              setFilters((prev) => ({
-                ...prev,
-                airlines: updated,
-              }));
-            }}
-            className="w-4 h-4 accent-blue-600 cursor-pointer"
-          />
+                      setFilters((prev) => ({
+                        ...prev,
+                        airlines: updated,
+                      }));
+                    }}
+                    className="w-4 h-4 accent-green-600 cursor-pointer"
+                  />
 
-          <span className="text-sm text-gray-700">
-            {item}
-          </span>
+                  <span className="text-sm text-gray-700">
+                    {item}
+                  </span>
+                </div>
+
+                {/* Optional badge */}
+                {filters.airlines.includes(item) && (
+                  <span className="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full">
+                    Selected
+                  </span>
+                )}
+              </label>
+            ))}
+          </div>
+
+          {/* Load More / Less */}
+          {airlines.length > 12 && (
+            <button
+              onClick={() => setAirlineShow(!airlineShow)}
+              className="mt-3 text-sm font-medium text-green-600 hover:text-green-800 transition"
+            >
+              {airlineShow
+                ? "Show Less"
+                : `Load More (${airlines.length - 12})`}
+            </button>
+          )}
         </div>
-
-        {/* Optional badge */}
-        {filters.airlines.includes(item) && (
-          <span className="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full">
-            Selected
-          </span>
-        )}
-      </label>
-    ))}
-  </div>
-
-  {/* Load More / Less */}
-  {airlines.length > 12 && (
-    <button
-      onClick={() => setAirlineShow(!airlineShow)}
-      className="mt-3 text-sm font-medium text-blue-600 hover:text-blue-800 transition"
-    >
-      {airlineShow
-        ? "Show Less"
-        : `Load More (${airlines.length - 12})`}
-    </button>
-  )}
-</div>
 
         <div className="mb-6">
           <h3 className="font-semibold mb-3">
@@ -302,7 +302,7 @@ export default function FlightResult() {
               >
                 <input
                   type="checkbox"
-                  className="accent-blue-600"
+                  className="accent-green-600"
                   checked={filters.cabin_class.includes(item?.toLowerCase())}
                   onChange={(e) => {
                     let updated =
@@ -368,7 +368,7 @@ export default function FlightResult() {
                   ),
                 }))
               }
-              className="w-full accent-yellow-500 cursor-pointer"
+              className="w-full accent-green-500 cursor-pointer"
             />
           </div>
 
@@ -393,7 +393,7 @@ export default function FlightResult() {
                   ),
                 }))
               }
-              className="w-full accent-yellow-500 cursor-pointer"
+              className="w-full accent-green-500 cursor-pointer"
             />
           </div>
         </div>
@@ -436,7 +436,7 @@ export default function FlightResult() {
                 key={i}
                 className={`cursor-pointer border rounded-2xl p-3 transition-all shadow-sm hover:shadow-md
         ${filters.time.includes(item.value)
-                    ? "border-yellow-500 bg-yellow-50"
+                    ? "border-green-500 bg-green-50"
                     : "border-gray-200 bg-white"
                   }`}
               >
@@ -490,7 +490,7 @@ export default function FlightResult() {
               >
                 <input
                   type="checkbox"
-                  className="accent-blue-600"
+                  className="accent-green-600"
                   onChange={(e) => {
                     let updated =
                       e.target.checked
@@ -565,7 +565,7 @@ export default function FlightResult() {
                 )
               }
               className="
-      text-blue-600
+      text-green-600
       text-sm
       mt-2
       font-medium
@@ -648,62 +648,62 @@ export default function FlightResult() {
             </div>
 
             {/* Airlines */}
-          <div className="mb-6">
-  <h3 className="font-semibold mb-3 text-gray-800">
-    Airlines
-  </h3>
+            <div className="mb-6">
+              <h3 className="font-semibold mb-3 text-gray-800">
+                Airlines
+              </h3>
 
-  {/* Scroll Container */}
-  <div className="max-h-50 overflow-y-auto pr-2 space-y-2 custom-scroll">
-    {visibleAirline.map((item, i) => (
-      <label
-        key={i}
-        className="flex items-center justify-between gap-2 px-3 py-2 rounded-lg cursor-pointer hover:bg-gray-100 transition"
-      >
-        <div className="flex items-center gap-3">
-          <input
-            type="checkbox"
-            checked={filters.airlines.includes(item)}
-            onChange={(e) => {
-              const updated = e.target.checked
-                ? [...filters.airlines, item]
-                : filters.airlines.filter((x) => x !== item);
+              {/* Scroll Container */}
+              <div className="max-h-50 overflow-y-auto pr-2 space-y-2 custom-scroll">
+                {visibleAirline.map((item, i) => (
+                  <label
+                    key={i}
+                    className="flex items-center justify-between gap-2 px-3 py-2 rounded-lg cursor-pointer hover:bg-gray-100 transition"
+                  >
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="checkbox"
+                        checked={filters.airlines.includes(item)}
+                        onChange={(e) => {
+                          const updated = e.target.checked
+                            ? [...filters.airlines, item]
+                            : filters.airlines.filter((x) => x !== item);
 
-              setFilters((prev) => ({
-                ...prev,
-                airlines: updated,
-              }));
-            }}
-            className="w-4 h-4 accent-blue-600 cursor-pointer"
-          />
+                          setFilters((prev) => ({
+                            ...prev,
+                            airlines: updated,
+                          }));
+                        }}
+                        className="w-4 h-4 accent-green-600 cursor-pointer"
+                      />
 
-          <span className="text-sm text-gray-700">
-            {item}
-          </span>
-        </div>
+                      <span className="text-sm text-gray-700">
+                        {item}
+                      </span>
+                    </div>
 
-        {/* Optional badge */}
-        {filters.airlines.includes(item) && (
-          <span className="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full">
-            Selected
-          </span>
-        )}
-      </label>
-    ))}
-  </div>
+                    {/* Optional badge */}
+                    {filters.airlines.includes(item) && (
+                      <span className="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full">
+                        Selected
+                      </span>
+                    )}
+                  </label>
+                ))}
+              </div>
 
-  {/* Load More / Less */}
-  {airlines.length > 12 && (
-    <button
-      onClick={() => setAirlineShow(!airlineShow)}
-      className="mt-3 text-sm font-medium text-blue-600 hover:text-blue-800 transition"
-    >
-      {airlineShow
-        ? "Show Less"
-        : `Load More (${airlines.length - 12})`}
-    </button>
-  )}
-</div>
+              {/* Load More / Less */}
+              {airlines.length > 12 && (
+                <button
+                  onClick={() => setAirlineShow(!airlineShow)}
+                  className="mt-3 text-sm font-medium text-green-600 hover:text-green-800 transition"
+                >
+                  {airlineShow
+                    ? "Show Less"
+                    : `Load More (${airlines.length - 12})`}
+                </button>
+              )}
+            </div>
             <div className="mb-6">
               <h3 className="font-semibold mb-3">
                 Cabin Class
@@ -717,7 +717,7 @@ export default function FlightResult() {
                   >
                     <input
                       type="checkbox"
-                      className="accent-blue-600"
+                      className="accent-green-600"
                       checked={filters.cabin_class.includes(item?.toLowerCase())}
                       onChange={(e) => {
                         let updated =
@@ -783,7 +783,7 @@ export default function FlightResult() {
                       ),
                     }))
                   }
-                  className="w-full accent-yellow-500 cursor-pointer"
+                  className="w-full accent-green-500 cursor-pointer"
                 />
               </div>
 
@@ -808,7 +808,7 @@ export default function FlightResult() {
                       ),
                     }))
                   }
-                  className="w-full accent-yellow-500 cursor-pointer"
+                  className="w-full accent-green-500 cursor-pointer"
                 />
               </div>
             </div>
@@ -851,7 +851,7 @@ export default function FlightResult() {
                     key={i}
                     className={`cursor-pointer border rounded-2xl p-3 transition-all shadow-sm hover:shadow-md
         ${filters.time.includes(item.value)
-                        ? "border-yellow-500 bg-yellow-50"
+                        ? "border-green-500 bg-green-50"
                         : "border-gray-200 bg-white"
                       }`}
                   >
@@ -905,7 +905,7 @@ export default function FlightResult() {
                   >
                     <input
                       type="checkbox"
-                      className="accent-blue-600"
+                      className="accent-green-600"
                       onChange={(e) => {
                         let updated =
                           e.target.checked
@@ -980,7 +980,7 @@ export default function FlightResult() {
                     )
                   }
                   className="
-      text-blue-600
+      text-green-600
       text-sm
       mt-2
       font-medium
@@ -1031,7 +1031,7 @@ export default function FlightResult() {
 
             <button
               onClick={() => setOpenFilter(false)}
-              className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 py-3 rounded-xl font-semibold mt-4 shadow"
+              className="w-full bg-gradient-to-r from-green-400 to-green-500 py-3 rounded-xl font-semibold mt-4 shadow"
             >
               Apply Filters
             </button>

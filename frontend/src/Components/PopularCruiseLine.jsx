@@ -1,4 +1,5 @@
-import { DollarSign, Star } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { DollarSign, MapPin, Ship, Star } from 'lucide-react'
 import React, { useState } from 'react'
 
 export default function PopularCruiseLine() {
@@ -161,41 +162,203 @@ export default function PopularCruiseLine() {
   }
 ]
 let [show,setShow]=useState(false)
-let filterdata=show?popularcruiseline:popularcruiseline.slice(0,5)
+let filterdata=show?popularcruiseline:popularcruiseline.slice(0,6)
+
+
+ const fadeUp = {
+  hidden: { opacity: 0, y: 60 },
+  visible: (i = 1) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.12,
+      duration: 0.7,
+      ease: "easeOut",
+    },
+  }),
+};
+
+
+
   return (
    <>
-   <section className='max-w-7xl mx-auto px-3 py-10'>
-    <h2 className='text-center text-2xl md:text-4xl font-semibold py-5'>Cruise Deals You'll Love</h2>
-    <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+  <section className='max-w-7xl mx-auto px-3 py-14'>
+
+
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+      className='text-center'
+    >
+      <h2 className='text-3xl md:text-5xl font-bold py-3 bg-gradient-to-r from-gray-600 to-green-700 bg-clip-text text-transparent'>
+        Cruise Deals You'll Love
+      </h2>
+
+      <p className='text-gray-500 max-w-2xl mx-auto text-sm md:text-base'>
+        Explore luxury cruise experiences with world-class comfort,
+        entertainment, and breathtaking destinations.
+      </p>
+    </motion.div>
+
+
+    <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 pt-12'>
+
       {
       filterdata.map((item,id)=>(
-        <div className='relative overflow-hidden group border' key={id}>
-            <img src={item.image} className='w-[403px] h-[220px] border' alt="" />
-            <div className='p-3'>
-                <h2 className='text-2xl font-semibold text-center'>{item.name}</h2>
-                <p className='text-xs sm:text-base text-justify py-2'>
-                   {item.description}
-                </p>
-                <hr className='text-gary-400' />
-                <div className='p-2  flex items-center justify-around'>
-                   <span className='flex items-center gap-2 text-gray-600 '><Star className='text-yellow-300' size={18}/> {item.rating}</span>
-                   <span className='text-gray-600'>{item.duration}</span>
-                   <span className=" flex items-center gap-0.2 text-green-600"><DollarSign size={18} /> {item.priceFrom}</span>
-                </div>
-         <span className='text-gray-600 text-sm flex items-center gap-2'><h2 className='text-base font-semibold text-black'>Destination:-</h2>{item.destinations.join(",")}</span>
-            <span className='text-gray-600 text-sm flex items-center gap-2'><h2 className='text-base font-semibold text-black'>DeparturePorts:-</h2>{item.departurePorts.join(",")}</span>
-            <span className='text-gray-600 text-sm flex items-center gap-1'><h2 className='text-base font-semibold text-black'>Highlights:-</h2>{item.highlights.join(",")}</span>
-              <span className='text-gray-600 text-sm flex items-center gap-1'><h2 className='text-base font-semibold text-black'>BestFor:-</h2>{item.bestFor}</span>
+
+        <motion.div
+          key={id}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          custom={id}
+          whileHover={{ y: -12 }}
+          className='relative overflow-hidden rounded-3xl bg-white border border-gray-100 shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_70px_rgba(0,0,0,0.18)] transition-all duration-500 group'
+        >
+
+
+          <div className='overflow-hidden relative'>
+
+            <img
+              src={item.image}
+              className='w-full h-[240px] object-cover group-hover:scale-110 transition-transform duration-700'
+              alt=""
+            />
+
+
+            <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent'></div>
+
+
+            <div className='absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 shadow-lg'>
+              <Star className='text-yellow-400 fill-yellow-400' size={16}/>
+              <span className='text-sm font-semibold'>
+                {item.rating}
+              </span>
             </div>
 
-        </div>
+            <div className='absolute bottom-4 left-4 text-white'>
+              <h2 className='text-2xl font-bold leading-tight'>
+                {item.name}
+              </h2>
+            </div>
+
+          </div>
+
+
+          <div className='p-5'>
+
+            <p className='text-sm sm:text-base text-gray-600 leading-relaxed'>
+              {item.description}
+            </p>
+
+
+            <div className='grid grid-cols-2 gap-3 py-5'>
+
+              <div className='bg-gray-50 rounded-xl p-3 text-center'>
+                <p className='text-xs text-gray-500'>Duration</p>
+                <h3 className='font-semibold text-gray-800'>
+                  {item.duration}
+                </h3>
+              </div>
+
+              <div className='bg-green-50 rounded-xl p-3 text-center'>
+                <p className='text-xs text-gray-500'>Starting From</p>
+
+                <h3 className='font-semibold text-green-600 flex justify-center items-center'>
+                  <DollarSign size={16}/>
+                  {item.priceFrom}
+                </h3>
+              </div>
+
+            </div>
+
+
+            <div className='space-y-3'>
+
+              <div className='flex items-start gap-3'>
+                <Ship className='text-cyan-600 mt-1' size={18}/>
+                <div>
+                  <h3 className='font-semibold text-gray-800'>
+                    Destination
+                  </h3>
+
+                  <p className='text-sm text-gray-600'>
+                    {item.destinations.join(", ")}
+                  </p>
+                </div>
+              </div>
+
+
+              <div className='flex items-start gap-3'>
+                <MapPin className='text-red-500 mt-1' size={18}/>
+                <div>
+                  <h3 className='font-semibold text-gray-800'>
+                    Departure Ports
+                  </h3>
+
+                  <p className='text-sm text-gray-600'>
+                    {item.departurePorts.join(", ")}
+                  </p>
+                </div>
+              </div>
+
+
+              <div>
+                <h3 className='font-semibold text-gray-800 pb-2'>
+                  Highlights
+                </h3>
+
+                <div className='flex flex-wrap gap-2'>
+                  {
+                    item.highlights.map((highlight,index)=>(
+                      <span
+                        key={index}
+                        className='px-3 py-1 bg-cyan-50 text-green-700 rounded-full text-xs font-medium'
+                      >
+                        {highlight}
+                      </span>
+                    ))
+                  }
+                </div>
+              </div>
+
+
+              <div className='pt-3'>
+                <span className='inline-block px-4 py-2 rounded-full bg-gradient-to-r from-green-400 to-gray-500 text-white text-sm font-semibold shadow-md'>
+                  Best For : {item.bestFor}
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </motion.div>
+
       ))
       }
-     
+
     </div>
-     <div className='pt-6 mx-auto flex items-center justify-center'>
-        <button className='p-3 px-8 text-center bg-amber-300 rounded-lg ' onClick={()=>setShow(!show)}>{show?'Show Less':"Show More"}</button>
-      </div>
+
+
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className='pt-10 mx-auto flex items-center justify-center'
+    >
+      <button
+        className='px-10 py-3 rounded-full bg-gradient-to-r from-green-600 to-gray-700 text-white font-semibold shadow-xl hover:scale-105 hover:shadow-2xl transition-all duration-300'
+        onClick={()=>setShow(!show)}
+      >
+        {show ? 'Show Less' : "Show More"}
+      </button>
+    </motion.div>
+
    </section>
    </>
   )

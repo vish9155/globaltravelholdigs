@@ -202,5 +202,5 @@ iframe.skiptranslate {
 }
 
 body{
-  @apply bg-gradient-to-r from-green-50 via-emerald-50 to-lime-50;
-}
+  @apply bg-gradient-to-r from-green-100 via-white to-gray-200;
+}       

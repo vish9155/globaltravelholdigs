@@ -37,7 +37,7 @@ export default function EmailOtp() {
             }
             toast.success(data.message)
             navigate("/email-login")
-           
+
         } catch (error) {
             toast.error(error.message)
         }

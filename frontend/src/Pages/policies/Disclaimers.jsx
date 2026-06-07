@@ -2,15 +2,15 @@ import React from "react";
 
 export default function Disclaimer() {
   return (
-    <section className="bg-gradient-to-b from-yellow-50 via-white to-yellow-50 min-h-screen py-10 sm:py-14">
+    <section className="bg-gradient-to-b from-green-50 via-white to-green-50 min-h-screen py-10 sm:py-14">
       <div className="max-w-5xl mx-auto px-4">
         
         {/* Header */}
-        <div className="relative overflow-hidden rounded-3xl border border-yellow-200 bg-white shadow-xl">
-          <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/10 to-amber-500/10"></div>
+        <div className="relative overflow-hidden rounded-3xl border border-green-200 bg-white shadow-xl">
+          <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-gray-500/10"></div>
 
           <div className="relative px-6 py-10 sm:px-10 sm:py-14">
-            <p className="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold px-4 py-1 rounded-full">
+            <p className="inline-block bg-green-100 text-green-800 text-sm font-semibold px-4 py-1 rounded-full">
               Global Travel Legal
             </p>
 
@@ -95,7 +95,7 @@ export default function Disclaimer() {
           {/* Right */}
           <div className="space-y-6">
 
-            <div className="bg-white border border-yellow-200 rounded-2xl p-6 shadow-sm">
+            <div className="bg-white border border-green-200 rounded-2xl p-6 shadow-sm">
               <h3 className="font-bold text-lg">Contact Information</h3>
               <p className="text-sm text-gray-600 mt-2">
                 If you have any questions regarding this disclaimer, please contact us:
@@ -108,7 +108,7 @@ export default function Disclaimer() {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-yellow-500 to-amber-500 text-white rounded-2xl p-6 shadow-lg">
+            <div className="bg-gradient-to-br from-green-500 to-gray-400 text-white rounded-2xl p-6 shadow-lg">
               <h3 className="font-bold text-lg">Updates</h3>
               <p className="mt-2 text-sm">
                This disclaimer may be updated without prior notice..

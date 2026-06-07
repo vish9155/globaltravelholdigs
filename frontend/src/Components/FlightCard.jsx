@@ -1,5 +1,5 @@
 import React from "react";
-import {NavLink, useNavigate} from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import {
   Wifi,
   Briefcase,
@@ -28,7 +28,7 @@ export default function FlightCard({ item }) {
 
 
   if (!slices.length) return null;
-let offerId=item.id
+  let offerId = item.id
   let isRoundTrip = slices.length === 2;
 
   let firstSlice = slices[0];
@@ -39,7 +39,7 @@ let offerId=item.id
 
   let airlineName = item?.owner?.name || "Airline";
   let airlineCode = item?.owner?.iata_code || "XX";
-   let navigate=useNavigate()
+  let navigate = useNavigate()
   let airlineLogo =
     item?.owner?.logo_symbol_url ||
     `https://images.kiwi.com/airlines/64/${airlineCode}.png`;
@@ -72,13 +72,13 @@ let offerId=item.id
     (b) => b.type === "carry_on"
   );
 
-    let handleSelect = () => {
-  //  pura item (offer) save karo
-  localStorage.setItem("selectedOffer", JSON.stringify(item));
+  let handleSelect = () => {
+    //  pura item (offer) save karo
+    localStorage.setItem("selectedOffer", JSON.stringify(item));
 
-  //  navigate karo
-  navigate(`/passengers/${offerId}`);
-};
+    //  navigate karo
+    navigate(`/passengers/${offerId}`);
+  };
 
   let renderSlice = (slice, label) => {
     let segment = slice?.segments?.[0];
@@ -116,7 +116,7 @@ let offerId=item.id
         ?.cabin_class_marketing_name || "Economy";
 
     let segments = slice?.segments || [];
- 
+
     let layovers =
       segments.length > 1
         ? segments
@@ -132,7 +132,7 @@ let offerId=item.id
     return (
       <div className="mb-6">
         {isRoundTrip && (
-          <p className="text-sm font-semibold text-blue-600 mb-3">
+          <p className="text-sm font-semibold text-green-600 mb-3">
             {label}
           </p>
         )}
@@ -163,15 +163,15 @@ let offerId=item.id
 
               <div className="flex-1 h-[2px] bg-gradient-to-r from-slate-300 to-slate-400 relative">
                 {/* LAYOVERS */}
-            {layovers.length > 0 && (
+                {layovers.length > 0 && (
 
-              <p className="text-xs text-orange-500 mt-1 text-center  absolute -top-2 left-1/2 -translate-x-1/2 bg-white">
+                  <p className="text-xs text-green-500 mt-1 text-center  absolute -top-2 left-1/2 -translate-x-1/2 bg-white">
 
-                via {layovers.join(", ")}
-              </p>
-            )}
-                 
-                
+                    via {layovers.join(", ")}
+                  </p>
+                )}
+
+
               </div>
 
               <div className="w-3 h-3 rounded-full bg-slate-400" />
@@ -180,13 +180,12 @@ let offerId=item.id
             <p className="text-center text-xs mt-4 font-medium text-slate-500">
               {duration}
             </p>
-           
+
             <p className="text-center text-xs text-slate-500">
               {fareBrand}
             </p>
           </div>
 
-          {/* Arrival */}
           <div className="text-center">
             <h3 className="text-2xl font-bold">
               {arrivalTime.toLocaleTimeString([], {
@@ -217,9 +216,7 @@ let offerId=item.id
   return (
     <div className="bg-white rounded-3xl border border-slate-200 shadow-md hover:shadow-xl transition p-6">
       <div className="flex flex-col lg:flex-row gap-6">
-        {/* LEFT */}
         <div className="flex-1">
-          {/* Airline Header */}
           <div className="flex items-center gap-4 mb-6">
             <img
               src={airlineLogo}
@@ -239,7 +236,7 @@ let offerId=item.id
 
             <div className="ml-auto flex gap-2">
               {isRoundTrip ? (
-                <span className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full flex items-center gap-1">
+                <span className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full flex items-center gap-1">
                   <ArrowRightLeft size={14} />
                   Round Trip
                 </span>
@@ -257,7 +254,6 @@ let offerId=item.id
             </div>
           </div>
 
-          {/* Oneway / Roundtrip Rendering */}
           {renderSlice(firstSlice, "Departure Flight")}
 
           {isRoundTrip &&
@@ -266,7 +262,6 @@ let offerId=item.id
               "Return Flight"
             )}
 
-          {/* Features */}
           <div className="flex flex-wrap gap-3 mt-4">
             {wifiAvailable && (
               <span className="text-xs bg-slate-100 px-3 py-2 rounded-xl flex items-center gap-2">
@@ -301,8 +296,7 @@ let offerId=item.id
           </p>
         </div>
 
-        {/* RIGHT PRICE BOX */}
-        <div className="w-full lg:w-72 bg-gradient-to-br from-blue-50 to-slate-100 rounded-3xl border p-6 flex flex-col justify-center text-center">
+        <div className="w-full lg:w-72 bg-gradient-to-br from-green-50 to-slate-100 rounded-3xl border p-6 flex flex-col justify-center text-center">
           <p className="text-sm text-slate-500">
             Total Price
           </p>
@@ -315,7 +309,7 @@ let offerId=item.id
             taxes included
           </p>
 
-          <button onClick={handleSelect} className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-2xl font-semibold shadow-lg hover:scale-[1.02] transition">
+          <button onClick={handleSelect} className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-3 rounded-2xl font-semibold shadow-lg hover:scale-[1.02] transition">
             Select Flight
           </button>
         </div>

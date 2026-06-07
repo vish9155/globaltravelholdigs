@@ -1,102 +1,146 @@
 import React from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react'
 
-// Import Swiper styles
 import 'swiper/css'
-import 'swiper/css/pagination'
+// import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
-// import required modules
+import { Navigation, Pagination, Autoplay } from 'swiper/modules'
+import { NavLink } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
 
-import { NavLink } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
 export default function Property() {
-    let property = [
-        {
+
+    const property = [
+        {   
             img: "/images/hotels/Hotels.jpg.jpeg",
             title: "Hotels"
         },
         {
             img: "/images/hotels/Resorts.jpg.jpeg",
-            title: "Resort"
+            title: "Resorts"
         },
         {
             img: "/images/hotels/Villas.jpg.jpeg",
-            title:"Villas"
-
+            title: "Villas"
         },
         {
             img: "/images/hotels/Cottages.jpg.jpeg",
-            title: "Cottage"
+            title: "Cottages"
         },
         {
             img: "/images/hotels/Guest Houses.jpg.jpeg",
-            title: "Guest House"
+            title: "Guest Houses"
         },
         {
             img: "/images/hotels/Apartments.jpg.jpeg",
-            title:"Appartments"
-
+            title: "Apartments"
         },
         {
             img: "/images/hotels/Resort Villages.jpg.jpeg",
             title: "Resort Villages"
         },
-       
-    ];
+    ]
+
     return (
-        <>
-            <section className=' backdrop-blur-md'>
-                <div className='max-w-7xl mx-auto px-3 py-10 '>
-                    <h2 className='p-3 text-lg sm:text-xl md:text-2xl'>Browse by property type</h2>
-                    <div className='p-3'>
+        <section className="bg-gray-50 py-14">
 
-                        <Swiper
-                            slidesPerView={4}
-                            spaceBetween={30}
-                            navigation={true}
-                            pagination={{ clickable: true }}
-                            autoplay={{ delay: 2500, disableOnInteraction: false }}
-                            breakpoints={{
-                                0: { slidesPerView: 1, spaceBetween: 12 },
-                                640: { slidesPerView: 2, spaceBetween: 16 },
-                                768: { slidesPerView: 3, spaceBetween: 20 },
-                                1080: { slidesPerView: 4, spaceBetween: 24 },
-                            }}
-                            modules={[Navigation, Pagination, Autoplay]}
-                            className="mySwiper"
-                        >
-                            {
-                                property.map((item, id) => (
-                                    <SwiperSlide key={id} className="relative overflow-hidden group rounded border">
+            <div className="max-w-7xl mx-auto px-4">
 
-                                        <img
-                                            src={item.img}
-                                            alt={item.title}
-                                            className="h-[280px] w-[290px] object-cover transition duration-500 group-hover:scale-110 brightness-75 border"
-                                        />
-                                        <h2 className='absolute bottom-2 left-2 text-base text-white font-semibold'>{item.title}</h2>
-                                        <NavLink
-                                            to="#"
-                                            className="absolute bottom-2 right-0 px-3 py-2  bg-yellow-500 text-black  rounded-full flex items-center gap-1 transform  text-xs"
-                                        >
+                <div className="text-center mb-10">
 
-                                            <ArrowRight size={20} />
-                                        </NavLink>
-                                 
-                                       
+                    <h2 className="text-3xl md:text-4xl font-bold text-green-700">
+                        Browse by Property Type
+                    </h2>
 
-                                    </SwiperSlide>
-                                ))
-                            }
+                    <p className="text-gray-600 mt-3 font-semibold text-lg max-w-2xl mx-auto">
+                        Discover hotels, resorts, villas, cottages, and more for your perfect stay.
+                    </p>
 
-
-                        </Swiper>
-
-                    </div>
                 </div>
-            </section>
-        </>
+
+                <Swiper
+                    slidesPerView={4}
+                    spaceBetween={24}
+                    navigation={true}
+                    // pagination={{ clickable: true }}
+                    autoplay={{
+                        delay: 2500,
+                        disableOnInteraction: false,
+                    }}
+                    breakpoints={{
+                        0: {
+                            slidesPerView: 1,
+                            spaceBetween: 16,
+                        },
+                        640: {
+                            slidesPerView: 2,
+                            spaceBetween: 18,
+                        },
+                        768: {
+                            slidesPerView: 3,
+                            spaceBetween: 20,
+                        },
+                        1024: {
+                            slidesPerView: 4,
+                            spaceBetween: 24,
+                        },
+                    }}
+                    modules={[Navigation, Pagination, Autoplay]}
+                    className="pb-12"
+                >
+
+                    {property.map((item, id) => (
+
+                        <SwiperSlide key={id}>
+
+                            <div className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-2xl transition duration-500 bg-white">
+
+                                <div className="overflow-hidden">
+
+                                    <img
+                                        src={item.img}
+                                        alt={item.title}
+                                        className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                                    />
+
+                                </div>
+
+                                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition duration-500"></div>
+
+                                <div className="absolute bottom-0 left-0 w-full p-5 flex items-center justify-between">
+
+                                    <div>
+
+                                        <h3 className="text-xl font-semibold text-white">
+                                            {item.title}
+                                        </h3>
+
+                                        <p className="text-sm text-gray-200 mt-1">
+                                            Explore stays
+                                        </p>
+
+                                    </div>
+
+                                    <NavLink
+                                        to="#"
+                                        className="w-11 h-11 rounded-full bg-white text-black flex items-center justify-center hover:bg-green-600 hover:text-white transition duration-300"
+                                    >
+                                        <ArrowRight size={20} />
+                                    </NavLink>
+
+                                </div>
+
+                            </div>
+
+                        </SwiperSlide>
+
+                    ))}
+
+                </Swiper>
+
+            </div>
+
+        </section>
     )
 }
