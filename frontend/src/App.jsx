@@ -22,6 +22,7 @@ import ForgotPassword from './Pages/loginSystem/password/ForgotPassword';
 import ReesetPassword from './Pages/loginSystem/password/ResetPassword';
 import ProtectedRoute from './Components/ProtectedRoutes';
 import { motion } from 'framer-motion';
+import NotFound from './Pages/ErrorPage';
 
 
 export default function App() {
