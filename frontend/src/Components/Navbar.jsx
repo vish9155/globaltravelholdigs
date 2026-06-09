@@ -33,7 +33,8 @@ export default function Navbar() {
   // Language Change
   let handleLangChange = (langCode, label) => {
     document.cookie = `googtrans=/en/${langCode}; path=/`;
-    document.cookie = `googtrans=/en/${langCode}; domain=.localhost; path=/`;
+    // document.cookie = `googtrans=/en/${langCode}; domain=.localhost; path=/`;
+    document.cookie = `googtrans=/en/${langCode}; path=/; domain=${window.location.hostname}`;
     setCurrentLang(label);
     window.location.reload();
   };
