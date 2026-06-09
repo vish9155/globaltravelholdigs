@@ -9,11 +9,11 @@ export default function Navbar() {
   let [currentLang, setCurrentLang] = useState("EN");
   let langRef = useRef(null);
 
-  let languages = [
+   const languages = [
     { name: "English", code: "en", label: "EN" },
     { name: "Hindi", code: "hi", label: "HI" },
     { name: "Spanish", code: "es", label: "ES" },
-    { name: "Chinese (Simplified)", code: "zh-CN", label: "ZH" },
+    { name: "Chinese", code: "zh-CN", label: "ZH" },
     { name: "Arabic", code: "ar", label: "AR" },
     { name: "French", code: "fr", label: "FR" },
     { name: "Russian", code: "ru", label: "RU" },
@@ -21,7 +21,7 @@ export default function Navbar() {
     { name: "German", code: "de", label: "DE" },
   ];
 
-  let navbar = [
+  const navbar = [
     { title: "Home", path: "/" },
     { title: "Flights", path: "/flights" },
     { title: "Hotels", path: "/hotels" },
@@ -30,45 +30,46 @@ export default function Navbar() {
     { title: "Packages", path: "/packages" },
   ];
 
-  // Language Change
-  let handleLangChange = (langCode, label) => {
- 
-  document.cookie = `googtrans=/en/${langCode}; path=/`;
+  // ✅ LANGUAGE CHANGE FIXED
+  const handleLangChange = (langCode, label) => {
+    document.cookie = `googtrans=/en/${langCode}; path=/`;
+    setCurrentLang(label);
+    setIsLangOpen(false);
 
-  setCurrentLang(label);
+    // 🔥 reload hata diya — translate automatically apply ho jayega
+    window.location.href = window.location.href;
+  };
 
-  setTimeout(() => {
-    window.location.reload();
-  }, 300);
-};
-  // Google Script Load
+  // ✅ LOAD GOOGLE TRANSLATE SCRIPT
   useEffect(() => {
-   if (!window.googleTranslateElementInit) {
-    let addScript = document.createElement("script");
-    addScript.src =
-      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-    addScript.async = true;
-    document.body.appendChild(addScript);
+    if (!window.googleTranslateElementInit) {
+      const script = document.createElement("script");
+      script.src =
+        "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      script.async = true;
+      document.body.appendChild(script);
 
-    window.googleTranslateElementInit = () => {
-      new window.google.translate.TranslateElement(
-        {
-          pageLanguage: "en",
-          includedLanguages: "en,hi,es,zh-CN,ar,fr,ru,pt,de",
-          autoDisplay: false,
-        },
-        "google_translate_element"
-      );
-    };
-  }
+      window.googleTranslateElementInit = () => {
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "en,hi,es,zh-CN,ar,fr,ru,pt,de",
+            autoDisplay: false,
+          },
+          "google_translate_element"
+        );
+      };
+    }
 
-    let match = document.cookie.match(/googtrans=\/en\/(\w+)/);
+    // ✅ cookie se current lang set
+    const match = document.cookie.match(/googtrans=\/en\/(\w+)/);
     if (match) {
-      let lang = languages.find((l) => l.code === match[1]);
+      const lang = languages.find((l) => l.code === match[1]);
       if (lang) setCurrentLang(lang.label);
     }
 
-    let handleClickOutside = (e) => {
+    // ✅ outside click close
+    const handleClickOutside = (e) => {
       if (langRef.current && !langRef.current.contains(e.target)) {
         setIsLangOpen(false);
       }
@@ -79,25 +80,24 @@ export default function Navbar() {
       document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-
-
-  
-
+  // ✅ REMOVE GOOGLE TOP BAR
   useEffect(() => {
-  const observer = new MutationObserver(() => {
-    const frame = document.querySelector(".goog-te-banner-frame");
-    if (frame) frame.remove();
-  });
+    const observer = new MutationObserver(() => {
+      const frame = document.querySelector(".goog-te-banner-frame");
+      if (frame) frame.remove();
+    });
 
-  observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.body, { childList: true, subtree: true });
 
-  return () => observer.disconnect();
-}, []);
+    return () => observer.disconnect();
+  }, []);
+
 
   return (
     <>
+      <div id="google_translate_element" style={{ display: "none" }} />
 
-<>
+
 <div className={`fixed inset-0 z-[9999] transition-all duration-500 ${open ? "visible" : "invisible"}`}>
   
   <div
@@ -217,6 +217,6 @@ export default function Navbar() {
   </div>
 </section>
 </>
-    </>
+    
   );
 }
