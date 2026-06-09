@@ -32,15 +32,18 @@ export default function Navbar() {
 
   // Language Change
   let handleLangChange = (langCode, label) => {
-    document.cookie = `googtrans=/en/${langCode}; path=/`;
-    // document.cookie = `googtrans=/en/${langCode}; domain=.localhost; path=/`;
-    document.cookie = `googtrans=/en/${langCode}; path=/; domain=${window.location.hostname}`;
-    setCurrentLang(label);
-    window.location.reload();
-  };
+ 
+  document.cookie = `googtrans=/en/${langCode}; path=/`;
 
+  setCurrentLang(label);
+
+  setTimeout(() => {
+    window.location.reload();
+  }, 300);
+};
   // Google Script Load
   useEffect(() => {
+   if (!window.googleTranslateElementInit) {
     let addScript = document.createElement("script");
     addScript.src =
       "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
@@ -57,6 +60,7 @@ export default function Navbar() {
         "google_translate_element"
       );
     };
+  }
 
     let match = document.cookie.match(/googtrans=\/en\/(\w+)/);
     if (match) {
@@ -74,6 +78,10 @@ export default function Navbar() {
     return () =>
       document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+
+
+  
 
   useEffect(() => {
   const observer = new MutationObserver(() => {
