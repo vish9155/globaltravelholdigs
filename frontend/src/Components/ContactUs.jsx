@@ -76,7 +76,7 @@ export default function ContactUs() {
 
                 <div className="bg-white/70 backdrop-blur-2xl p-8 rounded-3xl shadow-2xl h-[400px] border border-gray-200">
 
-                    <h2 className="text-2xl font-bold mb-6">Contact Info</h2>
+                    <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
 
                     <div className="space-y-6 text-gray-700">
 
