@@ -2,9 +2,9 @@ import { MapPin, Phone } from 'lucide-react'
 import React from 'react'
 import { useState } from 'react'
 import { FaEnvelope } from 'react-icons/fa'
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom'
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css"
 
 export default function ContactUs() {
 
@@ -65,15 +65,11 @@ export default function ContactUs() {
                     src="/images/banner/contact.jpg.jpeg"
                     alt="" className=' w-full h-full object-cover'
                 />
-  {/* <div className="absolute inset-0 bg-black/30"></div> */}
+  
     <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
 
 
-                {/* <div className="relative z-10 flex items-center justify-center h-full text-center">
-                    <h1 className="text-white text-4xl md:text-6xl font-extrabold tracking-wide animate-fadeIn">
-                        Let’s Connect
-                    </h1>
-                </div> */}
+              
             </section>
 
             <section className="max-w-7xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10">
