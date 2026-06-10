@@ -30,17 +30,14 @@ export default function Navbar() {
     { title: "Packages", path: "/packages" },
   ];
 
-  // ✅ LANGUAGE CHANGE FIXED
   const handleLangChange = (langCode, label) => {
     document.cookie = `googtrans=/en/${langCode}; path=/`;
     setCurrentLang(label);
     setIsLangOpen(false);
 
-    // 🔥 reload hata diya — translate automatically apply ho jayega
     window.location.href = window.location.href;
   };
 
-  // ✅ LOAD GOOGLE TRANSLATE SCRIPT
   useEffect(() => {
     if (!window.googleTranslateElementInit) {
       const script = document.createElement("script");
@@ -61,14 +58,12 @@ export default function Navbar() {
       };
     }
 
-    // ✅ cookie se current lang set
     const match = document.cookie.match(/googtrans=\/en\/(\w+)/);
     if (match) {
       const lang = languages.find((l) => l.code === match[1]);
       if (lang) setCurrentLang(lang.label);
     }
 
-    // ✅ outside click close
     const handleClickOutside = (e) => {
       if (langRef.current && !langRef.current.contains(e.target)) {
         setIsLangOpen(false);
@@ -80,7 +75,6 @@ export default function Navbar() {
       document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // ✅ REMOVE GOOGLE TOP BAR
   useEffect(() => {
     const observer = new MutationObserver(() => {
       const frame = document.querySelector(".goog-te-banner-frame");

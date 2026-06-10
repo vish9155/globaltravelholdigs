@@ -2,7 +2,7 @@ import { MapPin, Phone } from 'lucide-react'
 import React from 'react'
 import { useState } from 'react'
 import { FaEnvelope } from 'react-icons/fa'
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

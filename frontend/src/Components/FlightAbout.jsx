@@ -27,7 +27,6 @@ export default function FlightAbout() {
                         {
                             title: "Book Flights Online at Best Prices Worldwide",
                             desc: "Booking flights should be simple, fast, and reliable. At Global Travel Holdings LLC, our flight booking online platform is designed to help you find the right flights at the best available prices without any hassle. Whether you're planning a business trip or a vacation, we make it easy to compare options and book with confidence"
-                            // icon: "✈️",
                         },
                         {
                             title: "Find Cheap Flight Tickets for Every Destination",
@@ -36,22 +35,18 @@ export default function FlightAbout() {
                         {
                             title: "Domestic & International Flight Booking Made Easy",
                             desc: "From short domestic routes to long-haul international journeys, we provide a seamless domestic flight booking and book international flights experience. Choose from multiple airlines, flexible timings, and convenient routes—all in one place."
-                            // icon: "🔒",
                         },
                         {
                             title: "Get the Best Flight Deals & Offers",
                             desc: "We help travelers find the best flight deals by offering competitive pricing and smart search options. Whether you’re booking in advance or looking for last-minute tickets, our platform ensures value for every trip.",
-                            // icon: "💸",
                         },
                         {
                             title: "Simple & Secure Airline Ticket Booking",
                             desc: "Our system is built for fast and secure airline ticket booking. With an easy-to-use interface and safe payment options, you can complete your booking in just a few steps.",
-                            // icon: "📞",
                         },
                         {
                             title: "Start Your Journey Today",
                             desc: "Search, compare, and book your flights with ease through Global Travel Holdings LLC. Whether you're traveling locally or internationally, our platform ensures a smooth and reliable booking experience from start to finish.",
-                            // icon: "⚡",
                         },
                     ].map((item, i) => (
                         <div
