@@ -138,7 +138,7 @@ export default function Navbar() {
   </div>
 </div>
 
-<section className="w-full h-20 flex items-center justify-between px-6 md:px-12 bg-white/90 backdrop-blur-md text-[#111111] sticky top-0 z-[999] border-b border-gray-100 shadow-sm">
+<section className="w-full h-[95px] flex items-center justify-between px-6 md:px-12 bg-white/90 backdrop-blur-md text-[#111111] sticky top-0 z-[999] border-b border-gray-100 shadow-sm">
 
   <div className="flex items-center gap-5">
     <Menu
@@ -149,9 +149,9 @@ export default function Navbar() {
     <div className="flex items-center">
       <Link to="/">
         <img 
-          src="/images/gtb logo 2.png" 
+          src="/images/logo/gtb logo 2 (1).png" 
           alt="Logo"  
-          className="h-18 w-auto object-contain md:pl-20 transition-transform duration-300"
+          className="h-24 w-auto object-contain md:pl-[120px] transition-transform p-2 duration-300"
         />
       </Link>
     </div>
