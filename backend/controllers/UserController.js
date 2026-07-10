@@ -1859,11 +1859,7 @@ export let resetPass = async (req, resp) => {
       return resp.json({ message: "OTP expired", status: false });
     }
 
-    let storedOtp = await getOtp("email", email)
-
-    if (!storedOtp) {
-      return resp.json({ message: "OTP expired", status: false });
-    }
+     
 
     if (storedOtp !== otp) {
       return resp.json({ message: "Invalid OTP", status: false });

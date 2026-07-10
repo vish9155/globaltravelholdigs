@@ -149,9 +149,9 @@ export default function Navbar() {
     <div className="flex items-center">
       <Link to="/">
         <img 
-          src="/images/New Folder/dsbsvd.png" 
+          src="/images/gtb logo 2.png" 
           alt="Logo"  
-          className="h-18 w-auto object-contain  transition-transform duration-300"
+          className="h-18 w-auto object-contain md:pl-20 transition-transform duration-300"
         />
       </Link>
     </div>

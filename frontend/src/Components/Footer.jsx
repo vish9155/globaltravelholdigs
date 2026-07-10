@@ -63,7 +63,7 @@ export default function Footer() {
           >
 
             <img
-              src="/images/New Folder/fbh.png"
+              src="/images/gtb logo 2.png"
               alt="logofooter"
               className="h-25 w-[150px] object-contain transition-transform duration-500 group-hover:scale-105"
             />

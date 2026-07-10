@@ -27,18 +27,18 @@ export default function Faq() {
   );
 
   return (
-    <div className="min-h-screen bg-[#fafaf9] text-slate-900 font-sans selection:bg-amber-100">
+    <div className="min-h-screen bg-[#fafaf9] text-slate-900 font-sans ">
       
       <section className="relative overflow-hidden bg-white border-b border-slate-100">
         <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20"></div>
         
         <header className="relative max-w-5xl mx-auto text-center py-20 px-6">
-          <h2 className='text-xl sm:text-2xl md:text-4xl text-fuchsia-700 text-center font-semibold py-5'>24/7 Customer Support for Your Travel Needs</h2>
-          {/* <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold tracking-widest uppercase bg-amber-50 text-amber-700 rounded-full border border-amber-100">
+          <h2 className='text-xl sm:text-2xl md:text-4xl text-green-700 text-center font-semibold py-5'>24/7 Customer Support for Your Travel Needs</h2>
+          {/* <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold tracking-widest uppercase bg-green-50 text-green-700 rounded-full border border-green-100">
             Customer Support
           </span> */}
           <h1 className="text-5xl md:text-4xl font-extrabold mb-6 tracking-tight text-slate-900">
-            How can we <span className="text-amber-600">help you Today?</span>
+            How can we <span className="text-green-600">help you Today?</span>
           </h1>
           <p className="max-w-2xl mx-auto text-slate-500 text-lg leading-relaxed">
            Find quick answers and reliable support for your travel plans. Browse our help center, explore common topics, or connect with our team for assistance with flight bookings, hotel reservations, cancellations, refunds, and more.
@@ -49,7 +49,7 @@ export default function Faq() {
               type="text" 
               placeholder="Search for questions (e.g. 'refund policy')..." 
               onChange={(e) => setSearch(e.target.value)} 
-              className="w-full bg-white shadow-2xl shadow-slate-200/50 outline-none border border-slate-200 focus:border-amber-400 p-5 pl-8 rounded-2xl transition-all duration-300 text-slate-700 placeholder:text-slate-400" 
+              className="w-full bg-white shadow-2xl shadow-slate-200/50 outline-none border border-slate-200 focus:border-green-400 p-5 pl-8 rounded-2xl transition-all duration-300 text-slate-700 placeholder:text-slate-400" 
             />
           </div>
         </header>
@@ -101,18 +101,18 @@ export default function Faq() {
                 <div 
                   key={id} 
                   className={`group transition-all duration-500 rounded-2xl border ${
-                    isOpen ? "border-amber-200 bg-amber-50/30" : "border-slate-200 bg-white hover:border-amber-200"
+                    isOpen ? "border-green-200 bg-green-50/30" : "border-slate-200 bg-white hover:border-green-200"
                   }`}
                 >
                   <button 
                     className="flex items-center justify-between p-6 w-full text-left focus:outline-none" 
                     onClick={() => setOpen(isOpen ? null : id)}
                   >
-                    <h3 className={`font-semibold text-lg transition-colors ${isOpen ? "text-amber-900" : "text-slate-700"}`}>
+                    <h3 className={`font-semibold text-lg transition-colors ${isOpen ? "text-green-900" : "text-slate-700"}`}>
                       {item.question}
                     </h3>
                     <div className={`flex-shrink-0 ml-4 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-500 ${
-                      isOpen ? "bg-amber-500 text-white rotate-45" : "bg-slate-100 text-slate-400 group-hover:bg-amber-100 group-hover:text-amber-600"
+                      isOpen ? "bg-green-500 text-white rotate-45" : "bg-slate-100 text-slate-400 group-hover:bg-green-100 group-hover:text-green-600"
                     }`}>
                       <FaPlus className="text-xs" />
                     </div>
@@ -124,7 +124,7 @@ export default function Faq() {
                     }`}
                   >
                     <div className="px-6 pb-8 text-slate-600 leading-relaxed text-base">
-                      <div className="pt-2 border-t border-amber-100/50">
+                      <div className="pt-2 border-t border-green-100/50">
                         {item.answer}
                       </div>
                     </div>
@@ -139,7 +139,7 @@ export default function Faq() {
       {/* Footer Decoration */}
       <div className="max-w-lg mx-auto text-center pb-20">
           <p className="text-slate-400 text-sm mb-4">Still need help?</p>
-          <NavLink to="/contact-us" className="px-8 py-3 bg-slate-900 text-white rounded-full font-semibold hover:bg-amber-600 transition-colors shadow-lg">
+          <NavLink to="/contact-us" className="px-8 py-3 bg-slate-900 text-white rounded-full font-semibold hover:bg-green-600 transition-colors shadow-lg">
               Contact Concierge Support
           </NavLink>
       </div>
