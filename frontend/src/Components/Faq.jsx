@@ -33,7 +33,7 @@ export default function Faq() {
         <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20"></div>
         
         <header className="relative max-w-5xl mx-auto text-center py-20 px-6">
-          <h2 className='text-xl sm:text-2xl md:text-4xl text-green-700 text-center font-semibold py-5'>24/7 Customer Support for Your Travel Needs</h2>
+          {/* <h2 className='text-xl sm:text-2xl md:text-4xl text-green-700 text-center font-semibold py-5'>24/7 Customer Support for Your Travel Needs</h2> */}
           {/* <span className="inline-block px-4 py-1.5 mb-6 text-xs font-semibold tracking-widest uppercase bg-green-50 text-green-700 rounded-full border border-green-100">
             Customer Support
           </span> */}

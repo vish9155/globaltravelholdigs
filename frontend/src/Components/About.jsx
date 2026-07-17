@@ -78,7 +78,7 @@ export default function About() {
 
             {/* INTRO TEXT */}
 
-            <motion.div
+            {/* <motion.div
                 initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
@@ -96,7 +96,7 @@ export default function About() {
 
 
 
-            </motion.div>
+            </motion.div> */}
 
             {/* FIRST SECTION */}
 

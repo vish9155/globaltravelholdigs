@@ -30,7 +30,7 @@ export default function Testimonials() {
         <h2 className='text-3xl md:text-5xl font-black text-white mb-6 uppercase tracking-tight'>
           Why Customers Love <span className="text-emerald-500">Global Travel</span>
         </h2>
-
+{/* 
         <div className='max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center mt-8 bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/5 shadow-xl'>
           {[
             { num: "140+", label: "Years Legacy" },
@@ -43,7 +43,7 @@ export default function Testimonials() {
               <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">{item.label}</p>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
 
       <div className='flex justify-center flex-wrap gap-2.5 mb-12 px-4'>

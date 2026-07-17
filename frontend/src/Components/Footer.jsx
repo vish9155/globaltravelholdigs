@@ -117,18 +117,18 @@ export default function Footer() {
           <div className="space-y-4 ">
 
             {[
-              "Home",
-              "Blog",
-              "Flights",
-              "Cars",
-              "Hotels",
-              "Cruise",
-              "Packages",
+              {name:"Home",path:"/"},
+              {name:"About us",path:"/about-us"},
+              {name:"Flights",path:"/flights"},
+              {name:"Cars",path:"/cars"},
+              {name:"Hotels",path:"/hotels"},
+              {name:"Cruise",path:"/cruise"},
+              {name:"Packages",path:"/packages"},
             ].map((item, i) => (
 
               <NavLink
                 key={i}
-                to={`/${item.toLowerCase()}`}
+                to={item.path}
                 className="group flex items-center gap-2 text-gray-300 font-semibold font-['Poppins'] hover:text-white transition-all duration-300 text-md"
               >
 
@@ -136,7 +136,7 @@ export default function Footer() {
 
                   <span className="w-0 group-hover:w-3 h-[2px] bg-emerald-500 transition-all duration-300"></span>
 
-                  {item}
+                  {item.name}
 
                 </span> 
 
@@ -169,13 +169,15 @@ export default function Footer() {
           <div className="space-y-4">
 
             {[
-              { name: "About Us", path: "/about-us" },
+              
               { name: "Privacy Policy", path: "/privacy-policy" },
               { name: "Terms & Conditions", path: "/terms-conditions" },
               { name: "Refund Policy", path: "/refund-policy" },
               { name: "Contact Us", path: "/contact-us" },
               { name: "Disclaimer", path: "/disclaimer" },
               { name: "Services", path: "/services" },
+              { name: "Blog", path: "/blog" },
+
             ].map((link, i) => (
 
               <NavLink
@@ -289,32 +291,34 @@ export default function Footer() {
             <Copyright size={13} className="text-emerald-500" />
 
             <span className="text-md">
-              2026 Global Travel LLC. Luxury Travel Redefined.
+              © 2026 Global Travel Holdings LLC. All Rights Reserved.
             </span>
 
           </div>
 
           <div className="flex gap-6">
 
+              <NavLink
+              to="/privacy-policy"
+              className="hover:text-emerald-400 transition"
+            >
+              Privacy Policy
+            </NavLink>
+
             <NavLink
               to="/terms-conditions"
               className="hover:text-emerald-400 transition"
             >
-              Terms
+              Terms & Conditions
             </NavLink>
 
-            <NavLink
-              to="/privacy-policy"
-              className="hover:text-emerald-400 transition"
-            >
-              Privacy
-            </NavLink>
+          
 
             <NavLink
               to="/refund-policy"
               className="hover:text-emerald-400 transition"
             >
-              Refund
+              Refund Policy
             </NavLink>
 
           </div>
@@ -331,7 +335,7 @@ export default function Footer() {
           <span className="absolute inset-0 rounded-full bg-emerald-500/40 animate-ping opacity-70"></span>
 
           <NavLink
-            to="https://wa.me/18888434146"
+            to="https://wa.me/+1 8888434146"
             target="_blank"
             className="relative z-10 w-16 h-16 rounded-full bg-gradient-to-r from-green-600 to-emerald-500 flex items-center justify-center shadow-[0_10px_30px_rgba(16,185,129,0.4)] hover:scale-110 transition-all duration-300"
           >
