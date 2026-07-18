@@ -89,8 +89,8 @@ export default function ContactUs() {
 
                         <div>
                             <p className="font-semibold flex gap-2"><FaEnvelope className='text-lg' /> Email</p>
-                            <NavLink to="mailto:support@gmail.com" className="text-green-600 hover:underline">
-                                support@gmail.com
+                            <NavLink to="mailto:info@risezonic.com" className="text-green-600 hover:underline">
+                                info@risezonic.com
                             </NavLink>
                         </div>
 

@@ -8,6 +8,7 @@ import {
     BadgeCheck,
     Plane
 } from "lucide-react";
+import { FaWhatsapp } from 'react-icons/fa';
 
 export default function WhyChosseus() {
 
@@ -50,7 +51,7 @@ export default function WhyChosseus() {
                             Why Choose Global Travel Holdings LLC
                         </p>
 
-                       
+
 
                         <p className='text-gray-600 mt-8 text-lg leading-relaxed'>
                             Choosing the right travel agency for flights and hotels can make a big difference in your overall experience. At Global Travel Holdings LLC, we prioritize trust, simplicity, and support.
@@ -86,19 +87,15 @@ export default function WhyChosseus() {
 
                         </div>
 
-
                         <div className='mt-10 space-y-6 text-gray-600 leading-relaxed text-lg'>
 
                             <p>
-                              What truly sets Global Travel apart is its focus on personalization and luxury. Whether you’re traveling for business or leisure, the services are tailored to your needs—offering curated itineraries, premium accommodations, and exclusive deals. The intuitive booking system makes planning quick and easy, while maintaining a high-end feel throughout the process.
+                                What truly sets Global Travel apart is its focus on personalization and luxury. Whether you’re traveling for business or leisure, the services are tailored to your needs—offering curated itineraries, premium accommodations, and exclusive deals. The intuitive booking system makes planning quick and easy, while maintaining a high-end feel throughout the process.
                             </p>
 
                             <p>
                                 In addition, Global Travel provides reliable 24/7 customer support, so you’re always backed up no matter where you are. From last-minute changes to travel assistance, their team ensures peace of mind at every step. Combining affordability with quality, Global Travel delivers exceptional value, making it a trusted choice for modern travelers.
                             </p>
-
-                           
-
                         </div>
 
 
@@ -111,14 +108,61 @@ export default function WhyChosseus() {
                                 Search Flights
                             </NavLink>
 
-                            <Link
-                                to="https://wa.me/919711110975"
+                            {/* <a
+                                href="https://wa.me/919711110975"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className='border border-black text-black hover:bg-black hover:text-white px-8 py-4 rounded-full font-semibold hover:scale-105 transition-all duration-300'
+                                className="border border-black text-black hover:bg-black hover:text-white px-8 py-4 rounded-full font-semibold hover:scale-105 transition-all duration-300"
                             >
                                 Chat On WhatsApp
-                            </Link>
+                            </a> */}
+
+                            <motion.a
+                                href="https://wa.me/919711110975"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="
+          group
+          relative
+          flex
+          items-center
+          gap-3
+          bg-green-500
+          text-white
+          rounded-full
+          px-5
+          py-4
+          shadow-[0_10px_30px_rgba(34,197,94,0.5)]
+          overflow-hidden
+        "
+                                animate={{
+                                    y: [0, -6, 0],
+                                }}
+                                transition={{
+                                    duration: 2,
+                                    repeat: Infinity,
+                                    ease: "easeInOut",
+                                }}
+                                whileHover={{
+                                    scale: 1.05,
+                                }}
+                                whileTap={{
+                                    scale: 0.95,
+                                }}
+                            >
+                                <FaWhatsapp className="text-3xl shrink-0" />
+
+                                <span
+                                    className="
+            hidden
+            md:block
+            font-medium
+            whitespace-nowrap
+          "
+                                >
+                                    Chat With Us
+                                </span>
+                            </motion.a>
 
                         </div>
 
@@ -141,7 +185,7 @@ export default function WhyChosseus() {
 
                             <img
                                 src="/images/Why chose global travel.jpg.jpeg"
-                                className='w-[750px] border h-[750px] object-cover group-hover:scale-110 transition-all duration-700'
+                                className='w-full  h-full object-cover group-hover:scale-110 transition-all duration-700'
                                 alt=""
                             />
 

@@ -1,28 +1,28 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { Toaster } from "react-hot-toast";
+import AOS from "aos"
+import "aos/dist/aos.css"
+import { Toaster } from "react-hot-toast"
 import Navbar from './Components/Navbar'
 import Footer from './Components/Footer'
 import HomePage from './Pages/HomePage'
 import Loader from './Components/Loader'
 import Marquee from './Components/Marquee'
-import ProfilePage from './Pages/loginSystem/ProfilePage';
-import SingupPage from './Pages/loginSystem/SingupPage';
-import LoginPage from './Pages/loginSystem/LoginPage';
-import GoogleSuccess from './Pages/loginSystem/google/GoogleSuccess';
-import GithubSuccess from './Pages/loginSystem/github/GithubSuccess';
-import EmailOtp from './Pages/loginSystem/email/EmailOtp';
-import EmailLogin from './Pages/loginSystem/email/EmailLogin';
-import PhoneOtp from './Pages/loginSystem/phone/PhoneOtp';
-import PhoneLogin from './Pages/loginSystem/phone/PhoneLogin';
-import FacebookSuccess from './Pages/loginSystem/facebook/FacebookSuccess';
-import ForgotPassword from './Pages/loginSystem/password/ForgotPassword';
-import ReesetPassword from './Pages/loginSystem/password/ResetPassword';
-import ProtectedRoute from './Components/ProtectedRoutes';
-import { motion } from 'framer-motion';
-import NotFound from './Pages/ErrorPage';
+import ProfilePage from './Pages/loginSystem/ProfilePage'
+import SingupPage from './Pages/loginSystem/SingupPage'
+import LoginPage from './Pages/loginSystem/LoginPage'
+import GoogleSuccess from './Pages/loginSystem/google/GoogleSuccess'
+import GithubSuccess from './Pages/loginSystem/github/GithubSuccess'
+import EmailOtp from './Pages/loginSystem/email/EmailOtp'
+import EmailLogin from './Pages/loginSystem/email/EmailLogin'
+import PhoneOtp from './Pages/loginSystem/phone/PhoneOtp'
+import PhoneLogin from './Pages/loginSystem/phone/PhoneLogin'
+import FacebookSuccess from './Pages/loginSystem/facebook/FacebookSuccess'
+import ForgotPassword from './Pages/loginSystem/password/ForgotPassword'
+import ReesetPassword from './Pages/loginSystem/password/ResetPassword'
+import ProtectedRoute from './Components/ProtectedRoutes'
+import { motion } from 'framer-motion'
+import NotFound from './Pages/ErrorPage'
 
 
 export default function App() {
@@ -43,12 +43,12 @@ export default function App() {
   let BlogList = lazy(() => import('./Pages/blog/BlogList'))
   let FlightResult = lazy(() => import('./Components/FlightResult'))
   let Passengers = lazy(() => import('./Components/Passengers'))
-  
+
   useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
-    let timer = setTimeout(() => setLoading(false), 3000);
-    return () => clearTimeout(timer);
-  }, []);
+    AOS.init({ duration: 1000, once: true })
+    let timer = setTimeout(() => setLoading(false), 3000)
+    return () => clearTimeout(timer)
+  }, [])
   if (loading) return <Loader />
 
   return (
@@ -81,10 +81,10 @@ export default function App() {
             <Route path='/phone-otp' element={<PhoneOtp />} />
             <Route path='/google-success' element={<GoogleSuccess />} />
             <Route path='/github-success' element={<GithubSuccess />} />
-             <Route path='/facebook-success' element={<FacebookSuccess />} /> 
-             <Route path='/forgot' element={<ForgotPassword />} />
-             <Route path='/reset-password' element={<ReesetPassword />} />
-             
+            <Route path='/facebook-success' element={<FacebookSuccess />} />
+            <Route path='/forgot' element={<ForgotPassword />} />
+            <Route path='/reset-password' element={<ReesetPassword />} />
+
             <Route path='/blog' element={<BlogList />} />
             <Route path='/blog/:slug' element={<BlogDetail />} />
             <Route path='/flight-results' element={<FlightResult />} />

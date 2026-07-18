@@ -249,10 +249,10 @@ export default function Footer() {
               </div>
 
               <NavLink
-                to="mailto:support@gmail.com"
+                to="mailto:info@risezonic.com"
                 className="text-gray-100 hover:text-white transition-colors duration-300 text-md"
               >
-                support@gmail.com
+                info@risezonic.com
               </NavLink>
 
             </div>
@@ -328,21 +328,58 @@ export default function Footer() {
       </div>
 
 
-      <div className="fixed bottom-7 right-7 z-50">
+      <div className="fixed bottom-16  right-7 z-50">
 
         <div className="relative group">
 
           <span className="absolute inset-0 rounded-full bg-emerald-500/40 animate-ping opacity-70"></span>
 
-          <NavLink
-            to="https://wa.me/+1 8888434146"
-            target="_blank"
-            className="relative z-10 w-16 h-16 rounded-full bg-gradient-to-r from-green-600 to-emerald-500 flex items-center justify-center shadow-[0_10px_30px_rgba(16,185,129,0.4)] hover:scale-110 transition-all duration-300"
-          >
+          <motion.a
+        href="https://wa.me/919711110975"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="
+          group
+          relative
+          flex
+          items-center
+          gap-3
+          bg-green-500
+          text-white
+          rounded-full
+          px-5
+          py-4
+          shadow-[0_10px_30px_rgba(34,197,94,0.5)]
+          overflow-hidden
+        "
+        animate={{
+          y: [0, -6, 0],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        whileHover={{
+          scale: 1.05,
+        }}
+        whileTap={{
+          scale: 0.95,
+        }}
+      >
+        <FaWhatsapp className="text-3xl shrink-0" />
 
-            <FaWhatsapp className="text-3xl text-white" />
-
-          </NavLink>
+        <span
+          className="
+            hidden
+            md:block
+            font-medium
+            whitespace-nowrap
+          "
+        >
+          Chat With Us
+        </span>
+      </motion.a>
 
         </div>
 
