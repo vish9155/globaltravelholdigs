@@ -166,7 +166,7 @@ export default function PrivacyPolicy() {
                 <div className="rounded-xl bg-gray-50 p-4 border border-gray-200">
                   <p className="text-xs text-gray-500">Email</p>
                   <p className="text-sm sm:text-base font-medium text-gray-800 break-all">
-                    info@risezonic.com
+                    Info@globaltravelbooking.com
                   </p>
                 </div>
 

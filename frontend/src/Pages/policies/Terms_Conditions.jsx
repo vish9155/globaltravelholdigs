@@ -4,8 +4,7 @@ export default function TermsConditions() {
   return (
     <section className="bg-gradient-to-b from-green-50 via-white to-green-50 min-h-screen py-10 sm:py-14">
       <div className="max-w-5xl mx-auto px-4">
-        
-        {/* Header */}
+
         <div className="relative overflow-hidden rounded-3xl border border-green-200 bg-white shadow-xl">
           <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-gray-500/10"></div>
 
@@ -15,7 +14,7 @@ export default function TermsConditions() {
             </p>
 
             <h1 className="mt-4 text-3xl sm:text-4xl font-bold text-gray-900">
-           Terms & Conditions - Global Travel
+              Terms & Conditions - Global Travel
             </h1>
 
             <p className="mt-4 text-gray-600 text-sm sm:text-base leading-7">
@@ -32,23 +31,21 @@ export default function TermsConditions() {
           </div>
         </div>
 
-        {/* Content */}
         <div className="mt-8 grid lg:grid-cols-3 gap-6">
-          
-          {/* Left */}
+
           <div className="lg:col-span-2 space-y-6">
 
             <div className="bg-white border rounded-2xl p-6 shadow-sm">
               <h2 className="text-xl font-bold">1. Eligibility</h2>
               <p className="mt-3 text-gray-600 text-sm leading-7">
-              You must be at least 18 years old and capable of entering into legally binding agreements to use our services.
+                You must be at least 18 years old and capable of entering into legally binding agreements to use our services.
               </p>
             </div>
 
             <div className="bg-white border rounded-2xl p-6 shadow-sm">
               <h2 className="text-xl font-bold">2. Service Scope</h2>
               <p className="mt-3 text-gray-600 text-sm leading-7">
-               We provide booking facilitation services for:
+                We provide booking facilitation services for:
               </p>
               <ul className="pl-8 list-disc">
                 <li>	Flights</li>
@@ -62,11 +59,11 @@ export default function TermsConditions() {
 
             <div className="bg-white border rounded-2xl p-6 shadow-sm">
               <h2 className="text-xl font-bold">3.Pricing & Availability</h2>
-            <ul className="pl-8 list-disc">
-              <li>	Prices are subject to change without notice</li>
-              <li>Availability is not guaranteed until booking confirmation</li>
-              <li>Additional charges may apply based on service providers</li>
-            </ul>
+              <ul className="pl-8 list-disc">
+                <li>	Prices are subject to change without notice</li>
+                <li>Availability is not guaranteed until booking confirmation</li>
+                <li>Additional charges may apply based on service providers</li>
+              </ul>
             </div>
 
             <div className="bg-white border rounded-2xl p-6 shadow-sm">
@@ -80,17 +77,17 @@ export default function TermsConditions() {
 
             <div className="bg-white border rounded-2xl p-6 shadow-sm">
               <h2 className="text-xl font-bold">5. Payment Terms</h2>
-             <ul className="pl-8 list-disc">
-              <li>	Payments must be completed at the time of booking</li>
-              <li>We use secure third-party payment gateways</li>
-              <li>Failure in payment may result in booking cancellation</li>
-             </ul>
+              <ul className="pl-8 list-disc">
+                <li>	Payments must be completed at the time of booking</li>
+                <li>We use secure third-party payment gateways</li>
+                <li>Failure in payment may result in booking cancellation</li>
+              </ul>
             </div>
 
             <div className="bg-white border rounded-2xl p-6 shadow-sm">
               <h2 className="text-xl font-bold">6. Prohibited Activities</h2>
               <p className="mt-3 text-gray-600 text-sm leading-7">
-               Users must not:
+                Users must not:
               </p>
               <ul className="pl-8 list-disc">
                 <li>	Provide false information</li>
@@ -102,19 +99,18 @@ export default function TermsConditions() {
             <div className="bg-white border rounded-2xl p-6 shadow-sm">
               <h2 className="text-xl font-bold">7. Force Majeure</h2>
               <p className="mt-3 text-gray-600 text-sm leading-7">
-               We are not responsible for disruptions caused by events beyond our control, including natural disasters, pandemics, or government restrictions.
+                We are not responsible for disruptions caused by events beyond our control, including natural disasters, pandemics, or government restrictions.
               </p>Governing Law
             </div>
-             <div className="bg-white border rounded-2xl p-6 shadow-sm">
+            <div className="bg-white border rounded-2xl p-6 shadow-sm">
               <h2 className="text-xl font-bold">7. Governing Law</h2>
               <p className="mt-3 text-gray-600 text-sm leading-7">
-               These terms are governed by the laws of the United States.
+                These terms are governed by the laws of the United States.
               </p>
             </div>
 
           </div>
 
-          {/* Right */}
           <div className="space-y-6">
 
             <div className="bg-white border border-green-200 rounded-2xl p-6 shadow-sm">
@@ -124,11 +120,11 @@ export default function TermsConditions() {
               </p>
 
               <div className="mt-4 space-y-3 text-sm">
-                <p><b>Email:</b>info@risezonic.com</p>
+                <p><b>Email:</b>Info@globaltravelbooking.com</p>
                 <p><b>Phone:</b> +91 98765 43210</p>
                 <p><b>Address:</b> Global Travel Holdings LLC
-16192 Coastal Highway, Lewes, Delaware, USA
-</p>
+                  16192 Coastal Highway, Lewes, Delaware, USA
+                </p>
               </div>
             </div>
 
@@ -144,5 +140,5 @@ export default function TermsConditions() {
         </div>
       </div>
     </section>
-  );
+  )
 }

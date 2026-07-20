@@ -223,24 +223,29 @@ export default function Footer() {
           <div className="space-y-6">
 
 
-            <div className="flex gap-4 group">
+            <div className="flex items-start gap-4 group">
 
-              <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-emerald-500/20 transition-all duration-300">
+              <div className="w-12 h-12 flex-shrink-0 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-emerald-500/20 transition-all duration-300">
 
                 <MapPin size={18} className="text-emerald-500" />
 
               </div>
 
               <p className="text-gray-4300 text-md leading-relaxed">
-                A-16 17662 Irvine Blvd,
+                16192 Coastal Highway,
                 <br />
-                Suite 9, Tustin, CA 92780
+                Lewes, Delaware 19958, County of Sussex, USA<br/>
+              <br/>
+              Gurugram Office:  07th Floor, Gate No 3 & 4, Ambience Island, DLF Phase 3, NH-8, Gurugram, Haryana 122002
+
               </p>
+
+              
 
             </div>
 
 
-            <div className="flex gap-4 items-center group">
+            <div className="flex gap-2 items-center group">
 
               <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-emerald-500/20 transition-all duration-300">
 
@@ -249,16 +254,16 @@ export default function Footer() {
               </div>
 
               <NavLink
-                to="mailto:info@risezonic.com"
+                to="mailto:Info@globaltravelbooking.com"
                 className="text-gray-100 hover:text-white transition-colors duration-300 text-md"
               >
-                info@risezonic.com
+                Info@globaltravelbooking.com
               </NavLink>
 
             </div>
 
 
-            <div className="flex gap-4 items-center group">
+            <div className="flex gap-2 items-center group">
 
               <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-emerald-500/20 transition-all duration-300">
 
@@ -267,10 +272,10 @@ export default function Footer() {
               </div>
 
               <NavLink
-                to="tel:+18888434146"
+                to="tel:+91 8588809690"
                 className="text-gray-100 hover:text-white transition-colors duration-300 text-md"
               >
-                +1 8888434146
+                +91  8588809690
               </NavLink>
 
             </div>
@@ -284,7 +289,7 @@ export default function Footer() {
 
       <div className="border-t border-white/10 bg-black/40 backdrop-blur-xl relative z-10">
 
-        <div className="max-w-7xl mx-auto py-5 px-6 flex flex-col md:flex-row justify-between items-center gap-4  tracking-wider text-gray-200">
+        <div className="max-w-7xl mx-auto py-5 px-20 flex flex-col md:flex-row justify-between items-center gap-4  tracking-wider text-gray-200">
 
           <div className="flex items-center gap-2">
 
@@ -318,7 +323,6 @@ export default function Footer() {
               to="/refund-policy"
               className="hover:text-emerald-400 transition"
             >
-              Refund Policy
             </NavLink>
 
           </div>
@@ -328,7 +332,7 @@ export default function Footer() {
       </div>
 
 
-      <div className="fixed bottom-16  right-7 z-50">
+      <div className="fixed bottom-6  right-7 z-50">
 
         <div className="relative group">
 

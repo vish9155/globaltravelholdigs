@@ -102,7 +102,7 @@ export default function Disclaimer() {
               </p>
 
               <div className="mt-4 space-y-3 text-sm">
-                <p><b>Email:</b>info@risezonic.com</p>
+                <p><b>Email:</b>Info@globaltravelbooking.com</p>
                 <p><b>Phone:</b> +91 98765 43210</p>
                 <p><b>Address:</b> Global Travel Holdings LLC,16192 Coastal Highway, Lewes, Delaware, USA</p>
               </div>

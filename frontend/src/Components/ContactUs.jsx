@@ -41,7 +41,7 @@ export default function ContactUs() {
 
             if (!result.status) {
 
-             return   toast.error(result.message)
+                return toast.error(result.message)
 
             }
             toast.success(result.message)
@@ -65,16 +65,16 @@ export default function ContactUs() {
                     src="/images/banner/contact.jpg.jpeg"
                     alt="" className=' w-full h-full object-cover'
                 />
-  
-    <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
+
+                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
 
 
-              
+
             </section>
 
             <section className="max-w-7xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10">
 
-                <div className="bg-white/70 backdrop-blur-2xl p-8 rounded-3xl shadow-2xl h-[400px] border border-gray-200">
+                <div className="bg-white/70 backdrop-blur-2xl p-8 rounded-3xl shadow-2xl h-[500px] border border-gray-200">
 
                     <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
 
@@ -83,27 +83,37 @@ export default function ContactUs() {
                         <div>
                             <p className="font-semibold flex gap-2"><MapPin size={24} /> Address</p>
                             <p className="text-sm">
-                                7260 W Azure Dr, Las Vegas, USA
+                                16192 Coastal Highway,
+                                Lewes, Delaware 19958, County of Sussex, USA<br /><br />
+                                <b>Gurugram Office:</b>
+                                 07th Floor, Gate No 3 & 4, Ambience Island, DLF Phase 3, NH-8, Gurugram, Haryana 122002
                             </p>
                         </div>
 
                         <div>
                             <p className="font-semibold flex gap-2"><FaEnvelope className='text-lg' /> Email</p>
-                            <NavLink to="mailto:info@risezonic.com" className="text-green-600 hover:underline">
-                                info@risezonic.com
+                            <NavLink to="mailto:Info@globaltravelbooking.com" className="text-green-600 hover:underline">
+                                Info@globaltravelbooking.com
+                            </NavLink><br />
+                            <NavLink to="mailto:support@globaltravelbooking.com" className="text-green-600 hover:underline">
+                                support@globaltravelbooking.com
+                            </NavLink><br />
+                            <NavLink to="mailto:hr@globaltravelbooking.com" className="text-green-600 hover:underline">
+                                hr@globaltravelbooking.com
                             </NavLink>
+
                         </div>
 
                         <div>
                             <p className="font-semibold flex gap-2"><Phone size={24} /> Phone</p>
-                            <NavLink to="tel:+1 8888434146" className="text-green-600 hover:underline">
-                                +1 8888434146
+                            <NavLink to="tel:+91 8588809690" className="text-green-600 hover:underline">
+                                +91 8588809690
                             </NavLink>
                         </div>
 
 
                         <Link
-                            to="https://wa.me/+1 8888434146"
+                            to="https://wa.me/+91 8588809690"
                             target="_blank"
                             className="block text-center w-full py-3 rounded-xl bg-gradient-to-r from-green-500 to-gray-500 text-white font-semibold text-lg shadow-lg hover:scale-105 transition-all duration-300"
                         >
@@ -169,7 +179,7 @@ export default function ContactUs() {
             <div className="mt-6 mb-10 p-3 bg-white rounded-4xl md:rounded-2xl max-w-7xl mx-auto overflow-hidden">
                 <iframe
                     title="map"
-                    src="https://maps.google.com/maps?q=las%20vegas&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3110.957783804235!2d-75.21442312425764!3d38.76467227175275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b8b90d93fd3829%3A0x2b879eb839193dd6!2s16192%20Coastal%20Hwy%2C%20Lewes%2C%20DE%2019958%2C%20USA!5e0!3m2!1sen!2sin!4v1784524183087!5m2!1sen!2sin"
                     className="w-full h-[400px] border-none"
                 ></iframe>
             </div>

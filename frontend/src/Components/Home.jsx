@@ -36,7 +36,7 @@ export default function Home() {
 
                     <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6">
 
-                        <h1 style={{ textShadow: "6px 6px 20px rgba(0,0,0,0.8)" }} className="text-white font-bold text-xl sm:text-2xl md:text-4xl lg:text-4xl leading-snug text-center lg:text-left max-w-xl">
+                        <h1 style={{ textShadow: "6px 6px 20px rgba(0,0,0,0.8)" }} className="text-white font-['Poppins'] font-bold text-xl sm:text-2xl md:text-4xl lg:text-4xl leading-snug text-center lg:text-left max-w-xl">
                             Book Flights, Hotels & Holiday Packages Worldwide
                         </h1>
 
