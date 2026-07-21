@@ -250,7 +250,7 @@ export default function Hotels() {
             </section>
 
             <div className='py-10 mx-auto px-3 text-center'>
-                <NavLink to="tel:+1 8888434146" className="px-8 py-3 /90  bg-black text-center  text-white rounded-full font-semibold hover:bg-green-600 transition-colors shadow-lg">
+                <NavLink to="tel:+91 8588809690" className="px-8 py-3 /90  bg-black text-center  text-white rounded-full font-semibold hover:bg-green-600 transition-colors shadow-lg">
                     Book Now Your favourite Hotels
                 </NavLink>
             </div>
@@ -323,7 +323,7 @@ export default function Hotels() {
             <Testimonials />
             <Property />
             <div className='py-10 mx-auto px-3 text-center'>
-                <NavLink to="tel:+1 8888434146" className="px-8 py-3 bg-gray-800  text-center  text-white rounded-full font-semibold hover:bg-green-600 transition-colors shadow-lg">
+                <NavLink to="tel:+91 8588809690" className="px-8 py-3 bg-gray-800  text-center  text-white rounded-full font-semibold hover:bg-green-600 transition-colors shadow-lg">
                     Booking Enquiry
                 </NavLink>
             </div>

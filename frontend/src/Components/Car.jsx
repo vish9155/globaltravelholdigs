@@ -253,7 +253,7 @@ export default function Car() {
   className='py-10 mx-auto px-3 text-center'
 >
   <NavLink
-    to="tel:+1 8888434146"
+    to="tel:+91 8588809690"
     className="px-8 py-3  text-center text-white rounded-full font-semibold bg-gradient-to-r from-green-700 to-gray-400 transition-colors shadow-lg "
   >
     Book your car

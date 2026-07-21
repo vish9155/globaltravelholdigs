@@ -155,7 +155,7 @@ export default function MissionVision() {
               </NavLink>
 
               <Link
-                to="tel:+18888434146"
+                to="tel:91 8588809690"
                 className="border border-white text-white hover:bg-white hover:text-black px-8 py-4 rounded-full font-semibold hover:scale-105 transition-all duration-300"
               >
                 Call Us Now

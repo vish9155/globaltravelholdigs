@@ -56,39 +56,11 @@ export default function Home() {
                 <TrendingDestination />
             </section>
 
-            {/* <section className='max-w-7xl mx-auto px-3 py-14'>
-
-                <div className='gap-2 items-center '>
-                    <span className="h-[2px] w-8 bg-green-600/80"></span>
-                    <span className='text-green-600/80 font-bold tracking-[0.2em] uppercase text-md'>Your Trusted Travel Booking Platform for<br /> </span>
-                    <h2 className='text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight'>
-                        Flights <span className="text-green-600/80">& Hotels</span>
-                    </h2>
-                </div>
-
-
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mt-8'>
-                    <div className='order-1 md:order-1'>
-                        <h3 className='text-lg sm:text-xl font-semibold  text-center'>Explore the World with Global Travel Holdings LLC</h3>
-                        <div className='p-3'>
-                            <p className='text-sm sm:text-base text-justify p-2'>Global Travel Holdings LLC is a trusted platform built to make travel simple, reliable, and enjoyable. Whether you're planning a quick getaway or a long international journey, we provide a smooth and secure booking experience designed around your needs.</p>
-                            <p className='text-sm sm:text-base text-justify p-2'>We focus on delivering value, transparency, and convenience at every step—helping you find the right options without confusion or stress. With a commitment to quality service and customer satisfaction, we aim to make every trip comfortable and memorable.</p>
-                            <p className='text-sm sm:text-base text-justify p-2'>From personalized travel planning to dedicated support, Global Travel Holdings LLC ensures you can explore new destinations with confidence and peace of mind.</p>
-                        </div>
-                        <div className='mx-auto py-5 max-w-5xl text-center'>
-                            <NavLink to={"/about-us"} className={'p-3  px-8 text-white bg-green-800/80 rounded-full  '}>About More</NavLink>
-                        </div>
-                    </div>
-                    <div className='order-2 md:order-2 relative group overflow-hidden rounded-xl bg-white/5 border-white/5 backdrop-blur-md'>
-                        <img src="/images/About us Intro.jpg.jpeg" className='h-full w-full group-hover:scale-110 transition-all duration-300 ease-in-out cursor-pointer' alt="" />
-                    </div>
-                </div>
-            </section>
-             */}
+           
 
           <section className="relative overflow-hidden">
 
-    {/* Background */}
+
     <div className="absolute inset-0 bg-[#eef6e8]"></div>
 
     <div
@@ -105,22 +77,7 @@ export default function Home() {
 
     <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-lime-200/20 blur-3xl rounded-full"></div>
 
-    {/* <svg
-        className="absolute top-20 left-0 w-full h-[250px] opacity-20"
-        viewBox="0 0 1440 320"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-    >
-        <path
-            d="M0 180C220 70 380 260 620 170C850 80 1020 240 1240 140C1320 100 1380 110 1440 150"
-            stroke="#16a34a"
-            strokeWidth="3"
-            strokeDasharray="10 10"
-            fill="none"
-        />
-    </svg> */}
-
-    {/* Palm Leaf */}
+   
     <div className="absolute top-0 right-0 opacity-80">
         <img
             src="https://pngimg.com/d/palm_tree_PNG2494.png"
